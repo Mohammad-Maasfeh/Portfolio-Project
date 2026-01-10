@@ -286,3 +286,7 @@ h2 {
 @media (max-width: 480px) {
     .cert-grid { column-count: 1; }
 }
+.navbar a.active {
+    color: #38bdf8;
+    border-bottom: 2px solid #38bdf8;
+}
