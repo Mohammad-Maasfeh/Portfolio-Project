@@ -1,0 +1,288 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #0f172a;
+    color: #e5e7eb;
+    line-height: 1.6;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(2, 6, 23, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #38bdf8;
+}
+
+.logo {
+    color: #38bdf8;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #38bdf8;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin: 10px 0;
+}
+
+.hero-text {
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* BUTTONS */
+.btn {
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.25s ease;
+}
+
+.btn:hover {
+    background: #0ea5e9;
+    transform: translateY(-2px);
+}
+
+.btn.outline {
+    background: transparent;
+    border: 2px solid #38bdf8;
+    color: #38bdf8;
+}
+
+.btn.outline:hover {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 10%;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* PROJECTS */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.project-card,
+.edu-card,
+.event-card {
+    background: #020617;
+    padding: 20px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card hover lift */
+.project-card:hover,
+.edu-card:hover,
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* EVENTS */
+.event-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.event-card img {
+    width: 200px;
+    border-radius: 12px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Image hover zoom */
+.event-card img:hover,
+.profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
+}
+
+/* SKILLS */
+.skills ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.skills li {
+    background: #020617;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.skills li:hover {
+    transform: translateY(-4px);
+    background: #020617;
+}
+
+/* CONTACT */
+.contact {
+    background: #020617;
+    text-align: center;
+    padding: 40px;
+}
+
+/* ANIMATIONS (SCROLL) */
+.fade-in,
+.slide-up {
+    opacity: 0;
+}
+
+.show.fade-in {
+    animation: fadeIn 1.4s ease forwards;
+}
+
+.show.slide-up {
+    animation: slideUp 1.1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .event-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar ul {
+        display: none;
+    }
+}
+/* CERTIFICATES & VOLUNTEERING */
+.cert-desc {
+    max-width: 700px;
+    margin-bottom: 30px;
+    color: #cbd5f5;
+}
+
+.cert-grid {
+    column-count: 4;
+    column-gap: 20px;
+}
+
+.cert-grid img {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: #020617;
+    padding: 8px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Hover effect */
+.cert-grid img:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.35);
+}
+
+/* Priority emphasis (first certificates) */
+.cert-grid img:nth-child(-n+3) {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .cert-grid { column-count: 3; }
+}
+
+@media (max-width: 768px) {
+    .cert-grid { column-count: 2; }
+}
+
+@media (max-width: 480px) {
+    .cert-grid { column-count: 1; }
+}
