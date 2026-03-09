@@ -1,302 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mohammad Maasfeh | Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohammad Maasfeh | Computer Engineer & AI Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#060a10; --surface:#0c1220; --border:rgba(255,255,255,0.06);
+      --border-hi:rgba(79,247,192,0.22); --accent:#4ff7c0; --accent2:#7b8ef5;
+      --accent3:#f59e4f; --text:#e2e8f4; --sub:#94a3b8; --muted:#4a5568;
+      --card:rgba(12,18,32,0.85); --fh:'Syne',sans-serif; --fb:'Inter',sans-serif;
+      --r:12px; --glow:0 0 50px rgba(79,247,192,0.1); --ease:cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;cursor:none}
+
+    /* CURSOR */
+    #cur{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
+    #cur-ring{width:36px;height:36px;border:1px solid rgba(79,247,192,.45);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:left .12s var(--ease),top .12s var(--ease),width .22s,height .22s,border-color .22s}
+    body.ch #cur{width:20px;height:20px}
+    body.ch #cur-ring{width:56px;height:56px;border-color:var(--accent)}
+
+    /* PROGRESS */
+    #pgbar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:9997;transition:width .15s}
+
+    /* CANVAS */
+    #cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+
+    /* BLOBS */
+    .blob{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0}
+    .b1{width:600px;height:600px;background:rgba(79,247,192,.04);top:-150px;right:-100px;animation:bd 18s ease-in-out infinite alternate}
+    .b2{width:500px;height:500px;background:rgba(123,142,245,.05);bottom:5%;left:-80px;animation:bd 22s ease-in-out infinite alternate-reverse}
+    @keyframes bd{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(25px,18px)}}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:20px 7%;transition:background .4s,padding .3s,box-shadow .4s}
+    nav.sc{padding:13px 7%;background:rgba(6,10,16,.84);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 1px 0 var(--border)}
+    .nl{font-family:var(--fh);font-weight:800;font-size:1.1rem;letter-spacing:3px;text-decoration:none;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-ul{list-style:none;display:flex;align-items:center;gap:4px}
+    .nav-ul a{color:var(--sub);font-size:.76rem;text-decoration:none;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;position:relative}
+    .nav-ul a:hover,.nav-ul a.act{color:var(--accent)}
+    .nav-ul a.act::before{content:'';position:absolute;bottom:-2px;left:10px;right:10px;height:1px;background:var(--accent)}
+    .nav-cta{background:linear-gradient(135deg,var(--accent),var(--accent2))!important;color:#060a10!important;font-weight:700!important;padding:7px 16px!important;border-radius:8px!important}
+    .nav-cta.act::before{display:none}
+    .hb{display:none;flex-direction:column;gap:5px;cursor:none;z-index:600}
+    .hb span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+    .hb.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hb.open span:nth-child(2){opacity:0}
+    .hb.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mob{display:none;position:fixed;inset:0;z-index:590;background:rgba(6,10,16,.97);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:32px}
+    .mob.open{display:flex}
+    .mob a{font-family:var(--fh);font-size:1.6rem;font-weight:700;color:var(--text);text-decoration:none;transition:color .2s}
+    .mob a:hover{color:var(--accent)}
+
+    /* HERO */
+    #home{min-height:100vh;display:grid;place-items:center;padding:120px 7% 80px;position:relative;z-index:1;text-align:center}
+    .hi{display:flex;flex-direction:column;align-items:center}
+    .hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,247,192,.07);border:1px solid rgba(79,247,192,.18);color:var(--accent);font-size:.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:40px;margin-bottom:36px;animation:fu .7s ease both}
+    .bd{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
+    .av{position:relative;width:156px;height:156px;margin-bottom:36px;animation:fu .7s .08s ease both}
+    .av svg{position:absolute;inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);animation:spin 8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .av img{width:100%;height:100%;border-radius:50%;object-fit:cover;position:relative;z-index:1;border:3px solid var(--bg)}
+    .hn{font-family:var(--fh);font-size:clamp(2.6rem,6vw,4.8rem);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:16px;animation:fu .7s .15s ease both}
+    .gt{background:linear-gradient(130deg,var(--accent) 0%,var(--accent2) 50%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:sh 4s linear infinite}
+    @keyframes sh{to{background-position:200% center}}
+    .hr{font-size:1rem;color:var(--sub);letter-spacing:.5px;margin-bottom:10px;min-height:1.5em;animation:fu .7s .22s ease both}
+    .tc{color:var(--accent);animation:blink .8s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .hd{max-width:500px;color:#6b7e9e;font-size:.93rem;line-height:1.85;margin-bottom:40px;animation:fu .7s .3s ease both}
+    .hbtns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:60px;animation:fu .7s .38s ease both}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:10px;font-family:var(--fb);font-weight:500;font-size:.88rem;text-decoration:none;letter-spacing:.3px;transition:all .25s var(--ease);position:relative;overflow:hidden}
+    .btn-f{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#060a10;font-weight:700}
+    .btn-f:hover{box-shadow:0 8px 32px rgba(79,247,192,.3);transform:translateY(-2px)}
+    .btn-o{background:transparent;border:1px solid var(--border);color:var(--text)}
+    .btn-o:hover{border-color:var(--accent2);color:var(--accent2);transform:translateY(-2px)}
+    .hs{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;backdrop-filter:blur(12px);background:rgba(12,18,32,.6);animation:fu .7s .46s ease both}
+    .st{padding:18px 32px;text-align:center;border-right:1px solid var(--border);flex:1;transition:background .3s}
+    .st:last-child{border-right:none}
+    .st:hover{background:rgba(79,247,192,.04)}
+    .sn{font-family:var(--fh);font-size:1.7rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
+    .sl{color:var(--muted);font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;display:block;margin-top:2px}
+    @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .sc-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.63rem;letter-spacing:2px;text-transform:uppercase;animation:fu .7s .6s ease both}
+    .sc-mouse{width:22px;height:34px;border:1px solid var(--muted);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+    .sc-wheel{width:3px;height:6px;background:var(--accent);border-radius:2px;animation:sw 1.6s ease-in-out infinite}
+    @keyframes sw{0%{opacity:1;transform:translateY(0)}80%{opacity:0;transform:translateY(10px)}100%{opacity:0}}
+
+    /* SECTIONS */
+    section{padding:100px 7%;position:relative;z-index:1}
+    .ey{display:inline-flex;align-items:center;gap:8px;font-size:.67rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+    .ey::before{content:'';width:20px;height:1px;background:var(--accent)}
+    .st2{font-family:var(--fh);font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;line-height:1.12;margin-bottom:60px;letter-spacing:-1px}
+    .st2 em{font-style:normal;color:var(--sub);font-weight:400}
+    .r{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+    .r.in{opacity:1;transform:translateY(0)}
+
+    /* ABOUT */
+    .ag{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+    .at p{color:var(--sub);font-size:.95rem;line-height:1.9;margin-bottom:18px}
+    .at p strong{color:var(--text);font-weight:500}
+    .ah{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+    .ac{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.82rem;font-weight:500;color:var(--sub);transition:border-color .3s,color .3s}
+    .ac:hover{border-color:var(--border-hi);color:var(--text)}
+    .ec{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 36px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s}
+    .ec:hover{border-color:var(--border-hi);box-shadow:var(--glow);transform:translateY(-4px)}
+    .ec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+    .ec::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0,rgba(79,247,192,.04),transparent 70%)}
+    .el{font-family:var(--fh);font-size:2rem;font-weight:800;color:var(--accent);margin-bottom:14px}
+    .ec h3{font-family:var(--fh);font-size:1.1rem;font-weight:700;margin-bottom:6px}
+    .eu{color:var(--sub);font-size:.85rem;margin-bottom:20px}
+    .eps{display:flex;gap:8px;flex-wrap:wrap}
+    .ep{font-size:.7rem;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.5px}
+    .epg{background:rgba(79,247,192,.1);border:1px solid rgba(79,247,192,.2);color:var(--accent)}
+    .epb{background:rgba(123,142,245,.1);border:1px solid rgba(123,142,245,.2);color:var(--accent2)}
+    .epo{background:rgba(245,158,79,.1);border:1px solid rgba(245,158,79,.2);color:var(--accent3)}
+
+    /* PROJECTS */
+    .pf{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+    .fb{background:var(--card);border:1px solid var(--border);color:var(--sub);font-size:.73rem;font-weight:500;padding:7px 16px;border-radius:8px;cursor:none;letter-spacing:.5px;text-transform:uppercase;transition:all .2s}
+    .fb:hover,.fb.act{background:rgba(79,247,192,.08);border-color:var(--border-hi);color:var(--accent)}
+    .pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+    .pc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;cursor:default}
+    .pc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(79,247,192,.06) 0%,transparent 55%);opacity:0;transition:opacity .4s}
+    .pc:hover{transform:translateY(-6px);border-color:rgba(79,247,192,.18);box-shadow:var(--glow)}
+    .pc:hover::after{opacity:1}
+    .ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+    .pi{font-family:var(--fh);font-size:.66rem;font-weight:800;color:rgba(79,247,192,.25);letter-spacing:3px}
+    .pa{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;transition:all .25s}
+    .pc:hover .pa{border-color:var(--accent);color:var(--accent);transform:translate(2px,-2px)}
+    .pc h3{font-family:var(--fh);font-size:1rem;font-weight:700;margin-bottom:10px;line-height:1.3}
+    .pc p{color:var(--sub);font-size:.87rem;line-height:1.8;margin-bottom:20px}
+    .ptags{display:flex;flex-wrap:wrap;gap:6px}
+    .ptag{font-size:.67rem;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(123,142,245,.08);border:1px solid rgba(123,142,245,.15);color:var(--accent2);letter-spacing:.3px}
+
+    /* SKILLS */
+    .sc2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+    .scat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;backdrop-filter:blur(16px);transition:border-color .3s,box-shadow .3s}
+    .scat:hover{border-color:var(--border-hi);box-shadow:var(--glow)}
+    .sct{font-family:var(--fh);font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+    .sct::after{content:'';flex:1;height:1px;background:var(--border)}
+    .si{margin-bottom:16px}.si:last-child{margin-bottom:0}
+    .sr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .sname{font-size:.85rem;font-weight:500;color:var(--text)}
+    .spct{font-size:.7rem;font-weight:600;color:var(--accent);font-family:var(--fh)}
+    .str{height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden}
+    .sf{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s var(--ease)}
+
+    /* TIMELINE */
+    .tl{position:relative;padding-left:36px}
+    .tl::before{content:'';position:absolute;left:0;top:12px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent) 0%,rgba(79,247,192,.1) 80%,transparent 100%)}
+    .ti{position:relative;margin-bottom:34px}.ti:last-child{margin-bottom:0}
+    .td{position:absolute;left:-40px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(79,247,192,.1),0 0 12px rgba(79,247,192,.4);transition:box-shadow .3s}
+    .ti:hover .td{box-shadow:0 0 0 5px rgba(79,247,192,.15),0 0 20px rgba(79,247,192,.5)}
+    .tc2{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px 30px;backdrop-filter:blur(16px);transition:border-color .3s,box-shadow .3s,transform .3s}
+    .tc2:hover{border-color:rgba(79,247,192,.18);box-shadow:var(--glow);transform:translateX(4px)}
+    .tt{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+    .tc2 h3{font-family:var(--fh);font-size:1rem;font-weight:700}
+    .tbadge{font-size:.67rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:3px 10px;border-radius:6px;white-space:nowrap}
+    .tact{background:rgba(79,247,192,.1);border:1px solid rgba(79,247,192,.2);color:var(--accent)}
+    .tpast{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted)}
+    .to{color:var(--accent2);font-size:.85rem;font-weight:500;margin-bottom:12px}
+    .tc2 p{color:var(--sub);font-size:.87rem;line-height:1.8}
+
+    /* RESEARCH */
+    .rl{display:flex;flex-direction:column;gap:20px}
+    .rc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 36px;backdrop-filter:blur(16px);display:grid;grid-template-columns:64px 1fr;gap:28px;align-items:start;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s}
+    .rc:hover{border-color:rgba(123,142,245,.22);box-shadow:0 0 50px rgba(123,142,245,.1);transform:translateY(-3px)}
+    .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),transparent)}
+    .ri{width:64px;height:64px;border-radius:14px;flex-shrink:0;background:linear-gradient(135deg,rgba(123,142,245,.12),rgba(79,247,192,.06));border:1px solid rgba(123,142,245,.18);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+    .rr{display:inline-flex;align-items:center;gap:6px;background:rgba(123,142,245,.08);border:1px solid rgba(123,142,245,.15);color:var(--accent2);font-size:.68rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:4px 12px;border-radius:6px;margin-bottom:12px}
+    .rc h3{font-family:var(--fh);font-size:1.05rem;font-weight:700;margin-bottom:10px;line-height:1.4}
+    .rc p{color:var(--sub);font-size:.9rem;line-height:1.8}
+
+    /* EVENTS */
+    .eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+    .ev{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;backdrop-filter:blur(16px);transition:transform .3s,border-color .3s,box-shadow .3s}
+    .ev:hover{transform:translateY(-5px);border-color:rgba(79,247,192,.18);box-shadow:var(--glow)}
+    .ew{position:relative;overflow:hidden;height:190px}
+    .ew img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8) saturate(.85);transition:filter .4s,transform .5s}
+    .ev:hover .ew img{filter:brightness(.95) saturate(1.1);transform:scale(1.05)}
+    .eo{position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--surface),transparent)}
+    .eb{padding:22px 24px}
+    .eb h3{font-family:var(--fh);font-size:.95rem;font-weight:700;margin-bottom:8px}
+    .eb p{color:var(--sub);font-size:.85rem;line-height:1.75}
+
+    /* CERTS */
+    .cg{columns:4;column-gap:14px}
+    .cw{break-inside:avoid;margin-bottom:14px;border-radius:10px;overflow:hidden;border:1px solid var(--border);cursor:zoom-in;position:relative;transition:transform .3s,box-shadow .3s,border-color .3s}
+    .cw:hover{transform:scale(1.04);box-shadow:var(--glow);border-color:rgba(79,247,192,.2)}
+    .cw img{width:100%;display:block}
+    .cw::after{content:'🔍';position:absolute;inset:0;background:rgba(6,10,16,.4);display:flex;align-items:center;justify-content:center;font-size:1.5rem;opacity:0;transition:opacity .3s}
+    .cw:hover::after{opacity:1}
+
+    /* LIGHTBOX */
+    #lb{display:none;position:fixed;inset:0;z-index:9000;background:rgba(6,10,16,.97);backdrop-filter:blur(14px);align-items:center;justify-content:center;animation:lbi .25s ease}
+    @keyframes lbi{from{opacity:0}to{opacity:1}}
+    #lb.open{display:flex}
+    #lbimg{max-width:min(88vw,900px);max-height:88vh;border-radius:14px;box-shadow:0 0 80px rgba(0,0,0,.6);animation:lbii .3s ease}
+    @keyframes lbii{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+    #lbx{position:absolute;top:24px;right:28px;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--sub);font-size:1.3rem;display:flex;align-items:center;justify-content:center;cursor:none;transition:all .2s}
+    #lbx:hover{background:rgba(79,247,192,.1);border-color:var(--border-hi);color:var(--accent)}
+    #lbn{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;pointer-events:none}
+    .lba{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:none;pointer-events:all;transition:all .2s}
+    .lba:hover{background:rgba(79,247,192,.1);border-color:var(--border-hi);color:var(--accent)}
+
+    /* FOOTER */
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:80px 7% 40px;text-align:center;position:relative;z-index:1;overflow:hidden}
+    footer::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(79,247,192,.04),transparent 70%)}
+    .ftag{display:inline-block;background:rgba(79,247,192,.07);border:1px solid rgba(79,247,192,.15);color:var(--accent);font-size:.68rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:24px}
+    footer h2{font-family:var(--fh);font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
+    .fsub{color:var(--sub);font-size:.93rem;margin-bottom:40px;max-width:440px;margin-inline:auto}
+    .cr{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+    .cl{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);color:var(--text);text-decoration:none;padding:12px 22px;border-radius:10px;font-size:.83rem;font-weight:500;backdrop-filter:blur(12px);transition:border-color .3s,box-shadow .3s,color .3s,transform .25s}
+    .cl:hover{border-color:var(--border-hi);color:var(--accent);box-shadow:var(--glow);transform:translateY(-2px)}
+    .fd{height:1px;background:var(--border);margin-bottom:28px}
+    .fc{color:rgba(74,85,104,.45);font-size:.7rem;letter-spacing:.5px}
+
+    /* BTT */
+    #btt{position:fixed;bottom:28px;right:28px;z-index:400;width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--sub);display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:none;backdrop-filter:blur(12px);transition:all .3s;opacity:0;pointer-events:none;transform:translateY(10px)}
+    #btt.show{opacity:1;pointer-events:all;transform:translateY(0)}
+    #btt:hover{border-color:var(--border-hi);color:var(--accent);box-shadow:var(--glow)}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){.ag{grid-template-columns:1fr;gap:40px}.rc{grid-template-columns:1fr}.cg{columns:2}}
+    @media(max-width:720px){.nav-ul{display:none}.hb{display:flex}section{padding:80px 5%}.hs{flex-direction:column;width:100%;max-width:300px;gap:0;border-radius:14px}.st{border-right:none;border-bottom:1px solid var(--border)}.st:last-child{border-bottom:none}.ah{grid-template-columns:1fr}}
+    @media(max-width:480px){.cg{columns:1}.pg{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div id="pgbar"></div>
+<canvas id="cv"></canvas>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <h3 class="logo">MM</h3>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#certificates">Certificates</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#tutor">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="assets/cv.pdf" download>cv</a></li>
-    </ul>
+<div id="lb">
+  <div id="lbx">✕</div>
+  <div id="lbn"><div class="lba" id="lbprev">‹</div><div class="lba" id="lbnext">›</div></div>
+  <img id="lbimg" src="" alt="">
+</div>
+<div id="btt">↑</div>
+
+<nav id="nav">
+  <a href="#home" class="nl">MM</a>
+  <ul class="nav-ul" id="nul">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#certificates">Certs</a></li>
+    <li><a href="assets/cv.pdf" class="nav-cta" download>CV ↓</a></li>
+  </ul>
+  <div class="hb" id="hb"><span></span><span></span><span></span></div>
 </nav>
+<div class="mob" id="mob">
+  <a href="#about" onclick="cm()">About</a>
+  <a href="#projects" onclick="cm()">Projects</a>
+  <a href="#experience" onclick="cm()">Experience</a>
+  <a href="#research" onclick="cm()">Research</a>
+  <a href="#skills" onclick="cm()">Skills</a>
+  <a href="#events" onclick="cm()">Events</a>
+  <a href="#certificates" onclick="cm()">Certificates</a>
+  <a href="assets/cv.pdf" download onclick="cm()">Download CV</a>
+</div>
 
 <!-- HERO -->
-<header class="hero" id="home">
-    <img src="assets/profile.png" alt="Portrait of Mohammad Maasfeh" class="profile-img fade-in">
-    <h1 class="fade-in">Mohammad M. Maasfeh</h1>
-    <p class="subtitle fade-in">Computer Engineer | AI Enthusiast & Researcher</p>
-    <p class="hero-text fade-in">
-        Building intelligent systems, solving real-world problems,
-        and pushing the boundaries of engineering and AI.
-    </p>
-    <div class="hero-buttons fade-in">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="assets/cv.pdf" class="btn outline" download>Download cv</a>
+<section id="home">
+  <div class="hi">
+    <div class="hbadge"><div class="bd"></div>Available for Opportunities</div>
+    <div class="av">
+      <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="90" cy="90" r="85" stroke="url(#g1)" stroke-width="1.5" stroke-dasharray="8 5" opacity=".7"/>
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop stop-color="#4ff7c0"/><stop offset="1" stop-color="#7b8ef5"/></linearGradient></defs>
+      </svg>
+      <img src="assets/profile.png" alt="Mohammad Maasfeh">
     </div>
-</header>
-
-<!-- ABOUT -->
-<section class="about slide-up" id="about">
-    <h2>About Me</h2>
-    <p>
-        I am a Computer Engineering student at Qatar University with a strong academic record.
-        I am highly interested in Artificial Intelligence, software engineering, hardware systems, and intelligent systems.
-        I enjoy building practical solutions, learning through practical projects, and applying engineering concepts to real world problems.
-        Through my academic work, research involvement, and leadership experiences, I have developed a solid technical foundation along with strong problem solving and teamwork skills.
-    </p>
+    <h1 class="hn">Mohammad M.<br><span class="gt">Maasfeh</span></h1>
+    <p class="hr"><span id="typed"></span><span class="tc">|</span></p>
+    <p class="hd">Computer Engineering student at Qatar University — building AI systems, researching NLP, and engineering solutions that matter.</p>
+    <div class="hbtns">
+      <a href="#projects" class="btn btn-f">View Projects →</a>
+      <a href="assets/cv.pdf" class="btn btn-o" download>Download CV</a>
+    </div>
+    <div class="hs">
+      <div class="st"><span class="sn" data-target="3.71" data-dec="2">3.71</span><span class="sl">GPA / 4.0</span></div>
+      <div class="st"><span class="sn" data-target="5" data-suf="+">5+</span><span class="sl">Projects</span></div>
+      <div class="st"><span class="sn" data-target="20" data-suf="+">20+</span><span class="sl">Certificates</span></div>
+      <div class="st"><span class="sn" data-target="2">2</span><span class="sl">Papers</span></div>
+    </div>
+  </div>
+  <div class="sc-cue"><div class="sc-mouse"><div class="sc-wheel"></div></div>scroll</div>
 </section>
 
-<!-- EDUCATION -->
-<section class="education slide-up">
-    <h2>Education</h2>
-    <div class="edu-card">
-        <h3>B.S. in Computer Engineering</h3>
-        <p>Qatar University — Doha, Qatar</p>
-        <p><strong>Expected Graduation:</strong> May 2027</p>
-        <p><strong>GPA:</strong> 3.71 / 4.00</p>
+<!-- ABOUT -->
+<section id="about">
+  <p class="ey r">Who I Am</p>
+  <h2 class="st2 r">About <em>Me</em></h2>
+  <div class="ag">
+    <div class="at r">
+      <p>I'm a <strong>Computer Engineering student at Qatar University</strong> with a GPA of 3.71/4.00, deeply passionate about Artificial Intelligence, software systems, and hardware design.</p>
+      <p>I build things that work — from low-level CPU architecture in Logisim to production-grade AI platforms using Azure and OpenAI. Every project is an opportunity to apply rigorous engineering to real problems.</p>
+      <p>Through research, co-founding a startup, and leading in academic settings, I've developed a solid technical foundation alongside strong collaboration and leadership skills.</p>
+      <div class="ah">
+        <div class="ac r">🤖 AI & Machine Learning</div>
+        <div class="ac r">⚙️ Embedded Systems</div>
+        <div class="ac r">🔬 NLP Research</div>
+        <div class="ac r">🌐 Networking & Infra</div>
+      </div>
     </div>
+    <div class="r">
+      <div class="ec">
+        <div class="el">QU</div>
+        <h3>B.S. in Computer Engineering</h3>
+        <p class="eu">Qatar University — Doha, Qatar</p>
+        <div class="eps">
+          <span class="ep epg">Expected May 2027</span>
+          <span class="ep epb">GPA 3.71 / 4.00</span>
+          <span class="ep epo">High Achiever</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="projects slide-up" id="projects">
-    <h2>Projects</h2>
-
-    <div class="project-grid">
-
-        <div class="project-card">
-            <h3>Contract Lifecycle Management (Naja7)</h3>
-            <p>
-                AI-powered legal document analysis platform leveraging
-                Azure AI, OpenAI, and Hugging Face.
-            </p>
-            <span>AI • Azure • OpenAI • NLP</span>
-        </div>
-
-        <div class="project-card">
-            <h3>Shipment Management System</h3>
-            <p>
-                Java-based system using OOP principles to manage shipments
-                and generate reports.
-            </p>
-            <span>Java • OOP</span>
-        </div>
-
-        <div class="project-card">
-            <h3>Student Records Management System</h3>
-            <p>
-                Python system for GPA calculation, student registration,
-                and academic reporting.
-            </p>
-            <span>Python • Data Structures</span>
-        </div>
-
-        <div class="project-card">
-            <h3>CPU Design using Logisim</h3>
-            <p>
-                Designed and implemented a custom CPU using Logisim,
-                including ALU, registers, control unit, and datapath,
-                demonstrating core computer architecture concepts.
-            </p>
-            <span>Logisim • Digital Logic • Computer Architecture</span>
-        </div>
-
-        <div class="project-card">
-            <h3>Enterprise Network Design</h3>
-            <p>
-                Built a fully connected multi-floor enterprise network using Packet Tracer,
-                demonstrating how large businesses manage hundreds of devices,
-                connect to a central server room, and remain operational even
-                if routers or cables fail through redundancy.
-            </p>
-            <span>Packet Tracer • Networking • Fault Tolerance</span>
-        </div>
-
-    </div>
+<section id="projects">
+  <p class="ey r">What I've Built</p>
+  <h2 class="st2 r">Featured <em>Projects</em></h2>
+  <div class="pf r">
+    <button class="fb act" data-f="all">All</button>
+    <button class="fb" data-f="ai">AI / ML</button>
+    <button class="fb" data-f="hw">Hardware</button>
+    <button class="fb" data-f="sw">Software</button>
+    <button class="fb" data-f="net">Networking</button>
+  </div>
+  <div class="pg">
+    <div class="pc r" data-c="ai"><div class="ph"><span class="pi">01</span><div class="pa">↗</div></div><h3>Contract Lifecycle Management — Naja7</h3><p>AI-powered legal document analysis platform automating contract review, clause extraction, and risk flagging using state-of-the-art NLP.</p><div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI</span><span class="ptag">HuggingFace</span><span class="ptag">NLP</span></div></div>
+    <div class="pc r" data-c="net"><div class="ph"><span class="pi">02</span><div class="pa">↗</div></div><h3>Enterprise Network Design</h3><p>Fully redundant multi-floor enterprise network in Packet Tracer. Fault-tolerant architecture serving hundreds of devices with zero single points of failure.</p><div class="ptags"><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">Redundancy</span></div></div>
+    <div class="pc r" data-c="hw"><div class="ph"><span class="pi">03</span><div class="pa">↗</div></div><h3>Custom CPU Design (Logisim)</h3><p>Designed a fully functional CPU from scratch — ALU, register file, control unit, and datapath demonstrating deep computer architecture knowledge.</p><div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">Architecture</span></div></div>
+    <div class="pc r" data-c="sw"><div class="ph"><span class="pi">04</span><div class="pa">↗</div></div><h3>Shipment Management System</h3><p>Java-based shipment tracking and reporting platform built on solid OOP design principles — modular, maintainable, and built for extensibility.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span></div></div>
+    <div class="pc r" data-c="sw"><div class="ph"><span class="pi">05</span><div class="pa">↗</div></div><h3>Student Records Management System</h3><p>Python system for GPA calculation, student registration, and academic reporting using efficient data structures and clean architecture.</p><div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span></div></div>
+  </div>
 </section>
 
-<!-- EVENTS & HACKATHON -->
-<section class="events slide-up" id="events">
-    <h2>Events & Hackathon</h2>
-
-    <div class="event-card">
-        <img src="assets/events.png" alt="Event organization and trainer assistant">
-        <div>
-            <h3>Trainer Assistant & Event Organizer</h3>
-            <p>
-                Worked as a trainer assistant and helped organize multiple
-                large-scale events at the Sports and Events Complex,
-                contributing to logistics, coordination, and execution.
-            </p>
-        </div>
+<!-- SKILLS -->
+<section id="skills">
+  <p class="ey r">Tech Stack</p>
+  <h2 class="st2 r">Skills & <em>Tools</em></h2>
+  <div class="sc2">
+    <div class="scat r">
+      <div class="sct">Languages</div>
+      <div class="si"><div class="sr"><span class="sname">Python</span><span class="spct">90%</span></div><div class="str"><div class="sf" data-w="90"></div></div></div>
+      <div class="si"><div class="sr"><span class="sname">Java</span><span class="spct">85%</span></div><div class="str"><div class="sf" data-w="85"></div></div></div>
+      <div class="si"><div class="sr"><span class="sname">HTML & CSS</span><span class="spct">80%</span></div><div class="str"><div class="sf" data-w="80"></div></div></div>
     </div>
-
-    <div class="event-card">
-        <img src="assets/hackp1.png" alt="AIX Hackathon participation">
-        <div>
-            <h3>AIX Hackathon — QSTP</h3>
-            <p>
-                Participated in the AIX Hackathon, collaborating on AI-driven
-                solutions under real-world constraints and tight deadlines.
-            </p>
-        </div>
+    <div class="scat r">
+      <div class="sct">AI / ML</div>
+      <div class="si"><div class="sr"><span class="sname">Machine Learning</span><span class="spct">82%</span></div><div class="str"><div class="sf" data-w="82"></div></div></div>
+      <div class="si"><div class="sr"><span class="sname">NLP / LLMs</span><span class="spct">78%</span></div><div class="str"><div class="sf" data-w="78"></div></div></div>
+      <div class="si"><div class="sr"><span class="sname">Azure AI / OpenAI</span><span class="spct">75%</span></div><div class="str"><div class="sf" data-w="75"></div></div></div>
     </div>
-
-    <div class="event-card">
-        <img src="assets/hackp2.png" alt="Hackathon teamwork">
-        <div>
-            <h3>Team Collaboration</h3>
-            <p>
-                Worked in a competitive team environment focusing on innovation,
-                problem-solving, and rapid prototyping.
-            </p>
-        </div>
+    <div class="scat r">
+      <div class="sct">Tools & Systems</div>
+      <div class="si"><div class="sr"><span class="sname">Git & GitHub</span><span class="spct">88%</span></div><div class="str"><div class="sf" data-w="88"></div></div></div>
+      <div class="si"><div class="sr"><span class="sname">Logisim / Multisim</span><span class="spct">80%</span></div><div class="str"><div class="sf" data-w="80"></div></div></div>
+      <div class="si"><div class="sr"><span class="sname">Packet Tracer</span><span class="spct">83%</span></div><div class="str"><div class="sf" data-w="83"></div></div></div>
     </div>
+  </div>
 </section>
 
-<!-- CERTIFICATES -->
-<section class="certificates slide-up" id="certificates">
-    <h2>Certificates & Volunteering</h2>
-    
-    <div class="cert-grid">
-        <img src="assets/pic11.png" alt="Certificate 1">
-        <img src="assets/c1.png" alt="Certificate 2">
-        <img src="assets/c2.png" alt="Certificate 3">
-        <img src="assets/c3.png" alt="Certificate 4">
-        <img src="assets/c4.png" alt="Certificate 5">
-        <img src="assets/c5.png" alt="Certificate 6">
-        <img src="assets/c6.png" alt="Certificate 7">
-        <img src="assets/c7.png" alt="Certificate 8">
-        <img src="assets/c8.png" alt="Certificate 9">
-        <img src="assets/c9.png" alt="Certificate 10">
-        <img src="assets/c10.png" alt="Certificate 11">
-        <img src="assets/c11.png" alt="Certificate 12">
-        <img src="assets/c12.png" alt="Certificate 13">
-        <img src="assets/c13.png" alt="Certificate 14">
-        <img src="assets/c14.png" alt="Certificate 15">
-        <img src="assets/c15.png" alt="Certificate 16">
-        <img src="assets/c16.png" alt="Certificate 17">
-        <img src="assets/c17.png" alt="Certificate 18">
-        <img src="assets/c18.png" alt="Certificate 19">
-        <img src="assets/c19.png" alt="Certificate 20">
-    </div>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="ey r">Work & Leadership</p>
+  <h2 class="st2 r">Experience <em>& Roles</em></h2>
+  <div class="tl r">
+    <div class="ti"><div class="td"></div><div class="tc2"><div class="tt"><h3>Co-Founder & Systems Engineer</h3><span class="tbadge tact">Active</span></div><div class="to">VORA</div><p>Co-founded VORA and lead development of hardware and software systems. Responsible for system architecture, embedded systems design, and full-stack software integration.</p></div></div>
+    <div class="ti"><div class="td"></div><div class="tc2"><div class="tt"><h3>Instructor & Engineering Tutor</h3><span class="tbadge tact">Active</span></div><div class="to">AZER</div><p>Completed advanced technical training and transitioned to instructor. Tutoring engineering and CS students while developing advanced-level courses.</p></div></div>
+    <div class="ti"><div class="td"></div><div class="tc2"><div class="tt"><h3>Teaching Assistant — Engineering Labs</h3><span class="tbadge tact">Active</span></div><div class="to">College of Engineering, Qatar University</div><p>TA in Computer Engineering and CS labs. Providing one-on-one tutoring with personalized guidance and measurable improvements in student outcomes.</p></div></div>
+    <div class="ti"><div class="td"></div><div class="tc2"><div class="tt"><h3>Trainer Assistant & Event Organizer</h3><span class="tbadge tpast">Past</span></div><div class="to">Sports and Events Complex</div><p>Organized multiple large-scale events, managing logistics, team coordination, and operations across high-attendance environments.</p></div></div>
+  </div>
 </section>
 
 <!-- RESEARCH -->
-<section class="research slide-up" id="research">
-    <h2>Research</h2>
-    <div class="event-card">
-        <img src="assets/research.png" alt="AI research work">
-        <div>
-            <h3>AI Researcher — Conference Paper</h3>
-            <p>
-                Second author of the research paper
-                <em>“Measuring Political Stance and Consistency in Large Language Models”</em>,
-                submitted to one of the top-ranked Information Retrieval conferences worldwide.
-                Currently contributing to an extension of this research.
-            </p>
-            <p>
-                working on a new AI research project focused on Legal Document
-                Summarization.
-            </p>
-        </div>
-    </div>
+<section id="research">
+  <p class="ey r">Academic Work</p>
+  <h2 class="st2 r">Research <em>& Publications</em></h2>
+  <div class="rl">
+    <div class="rc r"><div class="ri">🔬</div><div><div class="rr">Second Author · Conference Paper</div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to one of the top-ranked Information Retrieval conferences worldwide. Investigates how LLMs express and maintain political positions, contributing key findings to AI fairness and alignment research. Currently working on an extended version.</p></div></div>
+    <div class="rc r"><div class="ri">⚖️</div><div><div class="rr">Active Project · NLP</div><h3>Legal Document Summarization with Large Language Models</h3><p>Ongoing AI research applying transformer-based LLMs to automated legal document summarization — bridging NLP research with practical legal technology to reduce manual review time.</p></div></div>
+  </div>
 </section>
 
-<!-- TUTOR -->
-<section class="tutor slide-up" id="tutor">
-    <h2>Experience</h2>
-    <div class="event-card">
-        <img src="assets/tutor.png" alt="Engineering tutoring session">
-        <div>
-            <h3>College of Engineering — Qatar University</h3>
-
-            <p>
-                Provided one-on-one tutoring sessions for engineering students,
-                supporting academic success through personalized guidance
-                and problem-solving strategies.
-            </p>
-
-            <p>
-                Worked as a TA in Computer Engineering / Science labs.
-            </p>
-
-        </div>
-    </div>
-    <!-- VORA -->
-    <div class="event-card">
-        <div>
-            <h3>Co-Founder & Systems Engineer — VORA</h3>
-            <p>
-            Co-founded VORA and actively leading the development of both hardware and software systems.
-            Responsible for system architecture, embedded systems design,
-            and full-stack software integration.
-            </p>
-        </div>
-    </div>
-    <div class="event-card">
-        <img src="assets/azer.png" alt="AZER Teaching Experience">
-        <div>
-            <h3>Instructor & Engineering Tutor — AZER</h3>
-            <p>
-            Completed advanced technical training and transitioned into an instructional role.
-            Currently tutoring engineering and computer science students
-            and developing additional advanced courses.
-            </p>
-        </div>
-    </div>
-
+<!-- EVENTS -->
+<section id="events">
+  <p class="ey r">Community & Competition</p>
+  <h2 class="st2 r">Events & <em>Hackathons</em></h2>
+  <div class="eg">
+    <div class="ev r"><div class="ew"><img src="assets/hackp1.png" alt="AIX Hackathon"><div class="eo"></div></div><div class="eb"><h3>AIX Hackathon — QSTP</h3><p>Competed at the AIX Hackathon building AI-driven solutions under real-world constraints and tight deadlines.</p></div></div>
+    <div class="ev r"><div class="ew"><img src="assets/hackp2.png" alt="Team collaboration"><div class="eo"></div></div><div class="eb"><h3>Team Innovation Sprint</h3><p>Collaborative competition focused on innovation, rapid prototyping, and cross-disciplinary problem-solving.</p></div></div>
+    <div class="ev r"><div class="ew"><img src="assets/events.png" alt="Event organizing"><div class="eo"></div></div><div class="eb"><h3>Large-Scale Event Management</h3><p>Organized and managed multiple large events — logistics, team coordination, and operational execution at scale.</p></div></div>
+  </div>
 </section>
 
-
-<!-- SKILLS -->
-<section class="skills slide-up" id="skills">
-    <h2>Skills</h2>
-    <ul>
-        <li>Java</li>
-        <li>Python</li>
-        <li>HTML & CSS</li>
-        <li>Data Structures</li>
-        <li>Machine Learning</li>
-        <li>Logisim</li>
-        <li>Packet Tracer</li>
-        <li>Git & GitHub</li>
-        <li>Multisim for circuit design</li>
-    </ul>
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <p class="ey r">Proof of Work</p>
+  <h2 class="st2 r">Certificates & <em>Volunteering</em></h2>
+  <div class="cg r" id="cg">
+    <div class="cw"><img src="assets/pic11.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c1.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c2.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c3.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c4.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c5.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c6.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c7.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c8.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c9.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c10.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c11.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c12.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c13.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c14.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c15.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c16.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c17.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c18.png" alt="Certificate"></div>
+    <div class="cw"><img src="assets/c19.png" alt="Certificate"></div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<footer class="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:mm2308642@qu.edu.qa">mm2308642@qu.edu.qa</a></p>
-    <p>
-        GitHub:
-        <a href="https://github.com/Mohammad-Maasfeh" target="_blank" rel="noopener noreferrer">
-            github.com/Mohammad-Maasfeh
-        </a>
-    </p>
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="ftag r">Open to Work</div>
+  <h2 class="r">Let's <span class="gt">Connect</span></h2>
+  <p class="fsub r">Open to internships, research collaborations, and interesting engineering challenges.</p>
+  <div class="cr r">
+    <a href="mailto:mm2308642@qu.edu.qa" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>mm2308642@qu.edu.qa</a>
+    <a href="https://github.com/Mohammad-Maasfeh" target="_blank" rel="noopener" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>github.com/Mohammad-Maasfeh</a>
+    <a href="assets/cv.pdf" download class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV</a>
+  </div>
+  <div class="fd"></div>
+  <p class="fc">© 2025 Mohammad M. Maasfeh · Computer Engineer · Qatar University</p>
 </footer>
 
-
 <script>
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-        }
-    });
-}, { threshold: 0.15 });
-
-document.querySelectorAll(".fade-in, .slide-up").forEach(el => {
-    observer.observe(el);
+/* CURSOR */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=-100,my=-100,rx=-100,ry=-100;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function ac(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ac)})();
+document.querySelectorAll('a,button,.cw,.pc,.fb,.lba,#lbx,#btt,.hb').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
 });
+
+/* PARTICLE CANVAS */
+const canvas=document.getElementById('cv'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+rsz();window.addEventListener('resize',()=>{rsz();init()});
+function init(){pts=[];const n=Math.floor(W*H/16000);for(let i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.1+.3,a:Math.random()*.45+.1})}
+init();
+function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(79,247,192,${p.a})`;ctx.fill()});
+for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<115){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(79,247,192,${.07*(1-d/115)})`;ctx.lineWidth=.5;ctx.stroke()}}
+requestAnimationFrame(draw)}
+draw();
+
+/* TYPED */
+const roles=['Computer Engineer','AI Researcher','Systems Builder','NLP Enthusiast','Co-Founder @ VORA'];
+let ri=0,ci=0,del=false;
+const tel=document.getElementById('typed');
+function type(){const w=roles[ri];tel.textContent=del?w.slice(0,ci--):w.slice(0,ci++);if(!del&&ci>w.length){del=true;setTimeout(type,1500);return}if(del&&ci<0){del=false;ri=(ri+1)%roles.length;ci=0}setTimeout(type,del?52:82)}
+type();
+
+/* SCROLL REVEAL */
+const ro=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),(i%6)*75)})},{threshold:.1});
+document.querySelectorAll('.r').forEach((el,i)=>{el.dataset.i=i;ro.observe(el)});
+
+/* SKILL BARS */
+const bo=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.sf').forEach(f=>f.style.width=f.dataset.w+'%')})},{threshold:.3});
+document.querySelectorAll('.scat').forEach(c=>bo.observe(c));
+
+/* SCROLL EVENTS */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav');
+  nav.classList.toggle('sc',scrollY>50);
+  document.getElementById('btt').classList.toggle('show',scrollY>400);
+  document.getElementById('pgbar').style.width=(scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  document.querySelectorAll('section[id]').forEach(sec=>{
+    if(scrollY>=sec.offsetTop-130&&scrollY<sec.offsetTop-130+sec.offsetHeight)
+      document.querySelectorAll('.nav-ul a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+sec.id));
+  });
+});
+
+/* HAMBURGER */
+const hb=document.getElementById('hb'),mob=document.getElementById('mob');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mob.classList.toggle('open')});
+function cm(){hb.classList.remove('open');mob.classList.remove('open')}
+
+/* BTT */
+document.getElementById('btt').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* PROJECT FILTER */
+document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fb').forEach(x=>x.classList.remove('act'));
+  b.classList.add('act');
+  const f=b.dataset.f;
+  document.querySelectorAll('.pc').forEach(c=>{
+    const show=f==='all'||c.dataset.c===f;
+    c.style.opacity=show?'1':'0.18';
+    c.style.transform=show?'':'scale(.97)';
+    c.style.pointerEvents=show?'':'none';
+    c.style.transition='opacity .3s,transform .3s';
+  });
+}));
+
+/* CARD MOUSE GLOW */
+document.querySelectorAll('.pc').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')}));
+
+/* LIGHTBOX */
+const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg');
+const imgs=[...document.querySelectorAll('.cw img')];
+let li=0;
+function openLb(i){li=i;lbimg.src=imgs[i].src;lb.classList.add('open')}
+function closeLb(){lb.classList.remove('open')}
+function lbGo(d){li=(li+d+imgs.length)%imgs.length;lbimg.src=imgs[li].src}
+imgs.forEach((img,i)=>img.parentElement.addEventListener('click',()=>openLb(i)));
+document.getElementById('lbx').addEventListener('click',closeLb);
+document.getElementById('lbprev').addEventListener('click',()=>lbGo(-1));
+document.getElementById('lbnext').addEventListener('click',()=>lbGo(1));
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbGo(-1);if(e.key==='ArrowRight')lbGo(1)});
+
+/* COUNTER ANIMATION */
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.sn[data-target]').forEach(el=>{const tgt=parseFloat(el.dataset.target),dec=parseInt(el.dataset.dec||0),suf=el.dataset.suf||'';let v=0;const inc=tgt/55;const t=setInterval(()=>{v=Math.min(v+inc,tgt);el.textContent=(dec?v.toFixed(dec):Math.round(v))+suf;if(v>=tgt)clearInterval(t)},20)});co.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll('.hs').forEach(el=>co.observe(el));
 </script>
-
-<script src="script.js"></script>
-
 </body>
 </html>
-
