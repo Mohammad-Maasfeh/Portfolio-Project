@@ -8,12 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#03060d; --bg2:#060c18; --bg3:#0a1228;
-  --ln:rgba(255,255,255,.09); --ln2:rgba(56,232,185,.3);
-  --g1:#38e8b9; --g2:#5b7fff; --g3:#ff5f7e; --g4:#ffbe4f; --g5:#a855f7;
-  --tx:#e8f4ff; --tx2:#94afc8; --tx3:#4a6480;
+  --bg:#03060d;--bg2:#060c18;--bg3:#0a1228;
+  --ln:rgba(255,255,255,.09);--ln2:rgba(56,232,185,.3);
+  --g1:#38e8b9;--g2:#5b7fff;--g3:#ff5f7e;--g4:#ffbe4f;--g5:#a855f7;
+  --tx:#e8f4ff;--tx2:#94afc8;--tx3:#4a6480;
   --card:rgba(8,14,26,.85);
-  --fD:'Syne',sans-serif; --fB:'Inter',sans-serif; --fM:'JetBrains Mono',monospace;
+  --fD:'Syne',sans-serif;--fB:'Inter',sans-serif;--fM:'JetBrains Mono',monospace;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -30,11 +30,11 @@ body.hov #dot{width:18px;height:18px;background:#fff}
 body.hov #ring{width:60px;height:60px;border-color:var(--g1)}
 body.clk #dot{transform:translate(-50%,-50%) scale(.5)}
 
-/* PROGRESS BAR */
+/* PROGRESS */
 #pgb{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--g1),var(--g2),var(--g5));background-size:200%;animation:pgs 2s linear infinite;z-index:9997;transition:width .1s}
 @keyframes pgs{to{background-position:200%}}
 
-/* CIRCUIT + MATRIX CANVASES */
+/* CANVASES */
 #cv-circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3}
 #cv-matrix{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06}
 
@@ -51,7 +51,7 @@ body.clk #dot{transform:translate(-50%,-50%) scale(.5)}
 .o3{width:500px;height:500px;background:radial-gradient(circle,rgba(168,85,247,.05),transparent 70%);top:50%;left:40%;animation:of 18s ease-in-out infinite alternate}
 @keyframes of{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,-30px) scale(1.08)}}
 
-/* FLOATING TECH SYMBOLS */
+/* FLOATING SYMBOLS */
 .tf{position:fixed;pointer-events:none;z-index:1;opacity:.055;animation:tfd linear infinite;font-family:var(--fM)}
 @keyframes tfd{0%{transform:translateY(100vh) rotate(0deg)}100%{transform:translateY(-10vh) rotate(360deg)}}
 
@@ -83,9 +83,83 @@ nav.stuck{padding:12px 6%;background:rgba(3,6,13,.94);backdrop-filter:blur(32px)
 .mobnav a:hover{color:var(--g1)}
 .mob-foot{position:absolute;bottom:36px;font-family:var(--fM);font-size:.65rem;color:var(--tx3);letter-spacing:2px}
 
-/* HERO */
-#home{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:130px 6% 80px;position:relative;z-index:1}
+/* ═══════════════════════════════════
+   HERO — 3 rows
+   Row 1: Robot (big, centred)
+   Row 2: Text left | Profile photo right
+   Row 3: Stats bar
+═══════════════════════════════════ */
+#home{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  padding:90px 6% 60px;
+  position:relative;
+  z-index:1;
+}
+
+/* ROW 1 */
+.hero-robot-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px 0 10px;
+}
+.hero-robot-stage{
+  position:relative;
+  width:540px;
+  height:560px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hrs-ring{position:absolute;border-radius:50%;border:1px solid}
+.hrs-ring1{inset:30px;border-color:rgba(56,232,185,.1);animation:prp 4s ease-in-out infinite alternate}
+.hrs-ring2{inset:5px;border-color:rgba(91,127,255,.07);animation:prp 4s ease-in-out infinite alternate-reverse}
+.hrs-spin{position:absolute;inset:18px;border-radius:50%;border:1.5px dashed rgba(56,232,185,.15);animation:sp 22s linear infinite}
+.hrs-spin::after{content:'';position:absolute;top:8px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--g1);box-shadow:0 0 16px var(--g1);transform:translateX(-50%)}
+#robot-wrap{
+  width:500px;
+  height:540px;
+  position:relative;
+  z-index:2;
+  flex-shrink:0;
+}
+#robot-wrap canvas{display:block}
+
+/* ROW 2 */
+.hero-body-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:60px;
+  padding:40px 0 44px;
+}
 .hl{display:flex;flex-direction:column;align-items:flex-start}
+
+/* Profile photo circle */
+.hr{display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+.pw{position:relative;width:290px;height:290px;display:flex;align-items:center;justify-content:center}
+.pp{width:240px;height:240px;border-radius:50%;object-fit:cover;object-position:top;position:relative;z-index:2;border:3px solid rgba(56,232,185,.25);box-shadow:0 0 60px rgba(56,232,185,.12);transition:border-color .4s,box-shadow .4s}
+.pw:hover .pp{border-color:rgba(56,232,185,.5);box-shadow:0 0 90px rgba(56,232,185,.22)}
+.pr{position:absolute;border-radius:50%;border:1px solid;animation:prp 4s ease-in-out infinite alternate}
+.pr1{inset:-10px;border-color:rgba(56,232,185,.12);animation-delay:0s}
+.pr2{inset:-24px;border-color:rgba(91,127,255,.08);animation-delay:.8s}
+@keyframes prp{0%{opacity:.5;transform:scale(1)}100%{opacity:1;transform:scale(1.02)}}
+.ps{position:absolute;inset:-18px;border-radius:50%;border:1.5px dashed rgba(56,232,185,.18);animation:sp 16s linear infinite}
+.ps::after{content:'';position:absolute;top:6px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--g1);box-shadow:0 0 12px var(--g1);transform:translateX(-50%)}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ROW 3 */
+.hero-stats-row{width:100%}
+
+/* SCROLL CUE */
+.scue{position:absolute;bottom:28px;left:6%;display:flex;align-items:center;gap:10px;color:var(--tx3);font-family:var(--fM);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;animation:fi .8s .9s ease both;z-index:1}
+.scue-ln{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--g1),transparent);animation:sla 2s ease-in-out infinite}
+@keyframes sla{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* HERO TEXT */
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .status-bar{display:inline-flex;align-items:center;gap:10px;background:rgba(56,232,185,.08);border:1px solid rgba(56,232,185,.2);border-radius:40px;padding:5px 14px 5px 6px;margin-bottom:28px;animation:fi .8s ease both}
 .status-led{width:26px;height:26px;border-radius:50%;background:rgba(56,232,185,.12);border:1px solid rgba(56,232,185,.3);display:flex;align-items:center;justify-content:center}
 .status-led::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--g1);box-shadow:0 0 8px var(--g1);animation:pulse 2s infinite}
@@ -94,64 +168,24 @@ nav.stuck{padding:12px 6%;background:rgba(3,6,13,.94);backdrop-filter:blur(32px)
 .hero-name{font-family:var(--fD);font-size:clamp(2.8rem,5vw,5.2rem);font-weight:800;line-height:.95;letter-spacing:-3px;margin-bottom:10px;animation:fi .8s .1s ease both}
 .hero-name .ln2{background:linear-gradient(125deg,var(--g1),var(--g2) 50%,var(--g5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:sh 5s linear infinite}
 @keyframes sh{to{background-position:200%}}
-/* HERO ROLE — much more visible */
 .hero-role{font-family:var(--fM);font-size:.95rem;color:var(--tx);letter-spacing:.5px;margin-bottom:26px;min-height:1.6em;animation:fi .8s .2s ease both;font-weight:400}
 .tc{color:var(--g1);animation:bl .8s step-end infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
-/* HERO BIO — more readable */
 .hero-bio{max-width:440px;color:var(--tx2);font-size:.97rem;line-height:1.95;margin-bottom:36px;animation:fi .8s .3s ease both;font-weight:400}
 .hero-bio strong{color:var(--g1);font-weight:500}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px;animation:fi .8s .4s ease both}
-.btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--bg);font-family:var(--fD);font-weight:700;font-size:.76rem;letter-spacing:1px;text-transform:uppercase;padding:13px 26px;border-radius:10px;transition:transform .25s var(--ease),box-shadow .3s;position:relative;overflow:hidden}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:0;animation:fi .8s .4s ease both}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--bg);font-family:var(--fD);font-weight:700;font-size:.76rem;letter-spacing:1px;text-transform:uppercase;padding:13px 26px;border-radius:10px;transition:transform .25s var(--ease),box-shadow .3s}
 .btn-p:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(56,232,185,.3)}
 .btn-g{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--tx);font-family:var(--fD);font-weight:600;font-size:.76rem;letter-spacing:1px;text-transform:uppercase;padding:13px 26px;border-radius:10px;transition:all .25s var(--ease)}
 .btn-g:hover{border-color:var(--g2);color:var(--g2);transform:translateY(-3px);box-shadow:0 16px 40px rgba(91,127,255,.15)}
-/* STATS — fully visible numbers + labels */
-.hero-stats{display:flex;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:visible;backdrop-filter:blur(16px);background:rgba(8,14,26,.7);animation:fi .8s .5s ease both;position:relative}
-/* Use box-shadow for rounded border instead of overflow:hidden so text never clips */
-.hero-stats::before{content:'';position:absolute;inset:0;border-radius:14px;border:1px solid rgba(255,255,255,.1);pointer-events:none;z-index:2}
-.hs{flex:1;padding:18px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.08);transition:background .3s;position:relative;overflow:visible;min-width:0}
+
+/* STATS */
+.hero-stats{display:flex;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:visible;backdrop-filter:blur(16px);background:rgba(8,14,26,.7);animation:fi .8s .5s ease both}
+.hs{flex:1;padding:18px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.08);transition:background .3s;position:relative;min-width:0}
 .hs:last-child{border-right:none}
 .hs:hover{background:rgba(56,232,185,.06)}
-/* Number: solid teal — no clip tricks, always fully visible */
-.hs-n{
-  font-family:var(--fD);
-  font-size:1.5rem;
-  font-weight:800;
-  color:var(--g1);
-  display:block;
-  line-height:1.4;
-  margin-bottom:4px;
-  overflow:visible;
-  white-space:nowrap;
-}
-/* Label: clearly visible */
-.hs-l{
-  color:var(--tx2);
-  font-family:var(--fM);
-  font-size:.58rem;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  display:block;
-  font-weight:400;
-  white-space:nowrap;
-  overflow:visible;
-}
-@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.hr{display:flex;align-items:center;justify-content:center;position:relative;animation:fi .8s .2s ease both}
-.pw{position:relative;width:340px;height:340px;display:flex;align-items:center;justify-content:center}
-.pr{position:absolute;border-radius:50%;border:1px solid;animation:prp 4s ease-in-out infinite alternate}
-.pr1{inset:-10px;border-color:rgba(56,232,185,.12);animation-delay:0s}
-.pr2{inset:-24px;border-color:rgba(91,127,255,.08);animation-delay:.8s}
-@keyframes prp{0%{opacity:.5;transform:scale(1)}100%{opacity:1;transform:scale(1.02)}}
-.ps{position:absolute;inset:-18px;border-radius:50%;border:1.5px dashed rgba(56,232,185,.18);animation:sp 16s linear infinite}
-.ps::after{content:'';position:absolute;top:6px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--g1);box-shadow:0 0 12px var(--g1);transform:translateX(-50%)}
-@keyframes sp{to{transform:rotate(360deg)}}
-.pp{width:260px;height:260px;border-radius:50%;object-fit:cover;object-position:top;position:relative;z-index:2;border:3px solid rgba(56,232,185,.25);box-shadow:0 0 70px rgba(56,232,185,.1),0 0 140px rgba(56,232,185,.04);transition:border-color .4s,box-shadow .4s}
-.pw:hover .pp{border-color:rgba(56,232,185,.5);box-shadow:0 0 90px rgba(56,232,185,.2)}
-.scue{position:absolute;bottom:28px;left:6%;display:flex;align-items:center;gap:10px;color:var(--tx3);font-family:var(--fM);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;animation:fi .8s .9s ease both;z-index:1}
-.scue-ln{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--g1),transparent);animation:sla 2s ease-in-out infinite}
-@keyframes sla{0%,100%{opacity:.4}50%{opacity:1}}
+.hs-n{font-family:var(--fD);font-size:1.5rem;font-weight:800;color:var(--g1);display:block;line-height:1.4;margin-bottom:4px;white-space:nowrap}
+.hs-l{color:var(--tx2);font-family:var(--fM);font-size:.58rem;letter-spacing:1.2px;text-transform:uppercase;display:block;font-weight:400;white-space:nowrap}
 
 /* SECTIONS */
 section{padding:110px 6%;position:relative;z-index:1}
@@ -213,8 +247,6 @@ section{padding:110px 6%;position:relative;z-index:1}
 .pc p{color:var(--tx2);font-size:.85rem;line-height:1.85;margin-bottom:18px;font-weight:400}
 .ptags{display:flex;flex-wrap:wrap;gap:5px}
 .ptag{font-family:var(--fM);font-size:.59rem;letter-spacing:.5px;padding:3px 9px;border-radius:5px;background:rgba(91,127,255,.09);border:1px solid rgba(91,127,255,.18);color:var(--g2);font-weight:400}
-
-/* UPCOMING CARDS */
 .pc.upcoming{border-color:rgba(255,190,79,.12);background:linear-gradient(135deg,rgba(8,14,26,.9),rgba(255,190,79,.025))}
 .pc.upcoming::before{background:radial-gradient(circle at var(--px,50%) var(--py,50%),rgba(255,190,79,.06),transparent 60%)}
 .pc.upcoming:hover{border-color:rgba(255,190,79,.25);box-shadow:0 32px 80px rgba(0,0,0,.4),0 0 50px rgba(255,190,79,.07)}
@@ -262,7 +294,7 @@ section{padding:110px 6%;position:relative;z-index:1}
 .ei h3{font-family:var(--fD);font-size:.9rem;font-weight:700;margin-bottom:5px;letter-spacing:-.3px;line-height:1.3;color:var(--tx)}
 .ei-org{font-family:var(--fM);font-size:.65rem;color:var(--g2);letter-spacing:.5px;margin-bottom:10px;font-weight:400}
 .ei p{color:var(--tx2);font-size:.8rem;line-height:1.8;font-weight:400}
-.ei-badge{display:inline-block;margin-top:12px;font-family:var(--fM);font-size:.57px;letter-spacing:1px;padding:3px 10px;border-radius:20px;font-size:.58rem;font-weight:400}
+.ei-badge{display:inline-block;margin-top:12px;font-family:var(--fM);font-size:.58rem;letter-spacing:1px;padding:3px 10px;border-radius:20px;font-weight:400}
 .ei-a{background:rgba(56,232,185,.12);border:1px solid rgba(56,232,185,.25);color:var(--g1)}
 .ei-p{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--tx3)}
 
@@ -302,8 +334,7 @@ section{padding:110px 6%;position:relative;z-index:1}
 #lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(3,6,13,.97);backdrop-filter:blur(24px);align-items:center;justify-content:center}
 #lb.open{display:flex;animation:lbIn .25s ease}
 @keyframes lbIn{from{opacity:0}to{opacity:1}}
-#lb-img{max-width:min(90vw,960px);max-height:90vh;border-radius:16px;box-shadow:0 40px 120px rgba(0,0,0,.8);animation:lbIm .3s var(--ease)}
-@keyframes lbIm{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+#lb-img{max-width:min(90vw,960px);max-height:90vh;border-radius:16px;box-shadow:0 40px 120px rgba(0,0,0,.8)}
 #lb-x{position:absolute;top:22px;right:26px;width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--tx2);display:flex;align-items:center;justify-content:center;cursor:none;font-size:1.3rem;transition:all .2s}
 #lb-x:hover{background:rgba(56,232,185,.1);border-color:var(--ln2);color:var(--g1)}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--tx);display:flex;align-items:center;justify-content:center;cursor:none;font-size:1.2rem;transition:all .2s}
@@ -335,9 +366,11 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .ei:nth-child(2){border-right:none}.ei:nth-child(3){border-top:1px solid rgba(255,255,255,.06)}.ei:nth-child(4){border-top:1px solid rgba(255,255,255,.06)}
 }
 @media(max-width:900px){
-  #home{grid-template-columns:1fr;padding-top:120px;text-align:center}
+  .hero-robot-stage{width:340px;height:380px}
+  #robot-wrap{width:320px;height:360px}
+  .hero-body-row{grid-template-columns:1fr;text-align:center;gap:32px}
   .hl{align-items:center}.hero-bio{max-width:520px}
-  .hr{display:none}
+  .hr{justify-content:center}
   .about-g{grid-template-columns:1fr;gap:40px}
   .sk-grid{grid-template-columns:1fr 1fr}
   .res-grid{grid-template-columns:1fr}
@@ -355,22 +388,15 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .sk-header{flex-direction:column}
 }
 @media(max-width:480px){.cert-g{columns:1}.hero-name{letter-spacing:-2px}}
+.anim-build{background:linear-gradient(125deg,var(--g1),var(--g2) 50%,var(--g5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:sh 5s linear infinite;}
 </style>
 </head>
 <body>
 
-<!-- Fixed layers -->
-<div id="dot"></div>
-<div id="ring"></div>
-<div id="pgb"></div>
-<canvas id="cv-circuit"></canvas>
-<canvas id="cv-matrix"></canvas>
+<div id="dot"></div><div id="ring"></div><div id="pgb"></div>
+<canvas id="cv-circuit"></canvas><canvas id="cv-matrix"></canvas>
 <div class="grid-bg"></div>
-<div class="orb o1"></div>
-<div class="orb o2"></div>
-<div class="orb o3"></div>
-
-<!-- Floating tech symbols -->
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 <div class="tf" style="left:4%;font-size:1.3rem;animation-duration:22s;animation-delay:0s">⬡</div>
 <div class="tf" style="left:14%;font-size:.9rem;animation-duration:18s;animation-delay:4s">01</div>
 <div class="tf" style="left:27%;font-size:1.1rem;animation-duration:25s;animation-delay:8s">λ</div>
@@ -380,7 +406,6 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 <div class="tf" style="left:81%;font-size:1rem;animation-duration:19s;animation-delay:3s">∇</div>
 <div class="tf" style="left:91%;font-size:1.3rem;animation-duration:21s;animation-delay:7s">⬡</div>
 
-<!-- Lightbox -->
 <div id="lb">
   <div id="lb-x">✕</div>
   <div class="lb-nav" id="lb-prev">‹</div>
@@ -388,15 +413,10 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <img id="lb-img" src="" alt="">
   <div id="lb-ctr"></div>
 </div>
-
 <div id="btt">↑</div>
 
-<!-- NAV -->
 <nav id="nav">
-  <a href="#home" class="logo">
-    <span class="logo-txt">MM</span>
-    <div class="logo-chip"></div>
-  </a>
+  <a href="#home" class="logo"><span class="logo-txt">MM</span><div class="logo-chip"></div></a>
   <ul class="nav-ul" id="nul">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -421,76 +441,87 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <div class="mob-foot">mm2308642@qu.edu.qa</div>
 </div>
 
-<!-- HERO -->
+<!-- ═══════════ HERO ═══════════ -->
 <section id="home">
-  <div class="hl">
-    <div class="status-bar">
-      <div class="status-led"></div>
-      <span class="status-txt">Available for opportunities</span>
+
+  <!-- ROW 1: Big robot alone, centred -->
+  <div class="hero-robot-row">
+    <div class="hero-robot-stage">
+      <div class="hrs-ring hrs-ring1"></div>
+      <div class="hrs-ring hrs-ring2"></div>
+      <div class="hrs-spin"></div>
+      <div id="robot-wrap"></div>
     </div>
-    <h1 class="hero-name">
-      Mohammad<br>
-      <span class="ln2">Maasfeh</span>
-    </h1>
-    <p class="hero-role"><span id="typed"></span><span class="tc">|</span></p>
-    <p class="hero-bio">
-      <strong>Computer Engineering student at Qatar University</strong> — building intelligent systems, authoring AI research, and engineering hardware and software products that solve real-world problems.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn-p">View Projects ↗</a>
-      <a href="assets/cv.pdf" class="btn-g" download>Download CV</a>
+  </div>
+
+  <!-- ROW 2: Text left, profile photo right -->
+  <div class="hero-body-row">
+    <div class="hl">
+      <div class="status-bar">
+        <div class="status-led"></div>
+        <span class="status-txt">Available for opportunities</span>
+      </div>
+      <h1 class="hero-name">Mohammad<br><span class="ln2">Maasfeh</span></h1>
+      <p class="hero-role"><span id="typed"></span><span class="tc">|</span></p>
+      <p class="hero-bio"><strong>Computer Engineering student at Qatar University</strong> — building intelligent systems, authoring AI research, and engineering hardware and software products that solve real-world problems.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-p">View Projects ↗</a>
+        <a href="assets/cv.pdf" class="btn-g" download>Download CV</a>
+      </div>
     </div>
+    <div class="hr">
+      <div class="pw">
+        <div class="pr pr1"></div>
+        <div class="pr pr2"></div>
+        <div class="ps"></div>
+        <img class="pp" src="assets/profile.png" alt="Mohammad Maasfeh">
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Stats full width -->
+  <div class="hero-stats-row">
     <div class="hero-stats">
       <div class="hs"><span class="hs-n" data-to="3.71" data-dec="2">0.00</span><span class="hs-l">GPA / 4.0</span></div>
-      <div class="hs"><span class="hs-n" data-to="10" data-suf="+">0+</span><span class="hs-l">Projects</span></div>
-      <div class="hs"><span class="hs-n" data-to="20" data-suf="+">0+</span><span class="hs-l">Certs</span></div>
+      <div class="hs"><span class="hs-n" data-to="10" data-suf="+">0</span><span class="hs-l">Projects</span></div>
+      <div class="hs"><span class="hs-n" data-to="20" data-suf="+">0</span><span class="hs-l">Certs</span></div>
       <div class="hs"><span class="hs-n" data-to="2">0</span><span class="hs-l">Papers</span></div>
     </div>
   </div>
-  <div class="hr">
-    <div class="pw">
-      <div class="pr pr1"></div>
-      <div class="pr pr2"></div>
-      <div class="ps"></div>
-      <img class="pp" src="assets/profile.png" alt="Mohammad Maasfeh">
-    </div>
-  </div>
+
   <div class="scue"><div class="scue-ln"></div>scroll</div>
 </section>
 
-<!-- TECH TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ti"><span class="ti-d"></span>Computer Engineering</span>
-    <span class="ti"><span class="ti-d"></span>Artificial Intelligence</span>
-    <span class="ti"><span class="ti-d"></span>Machine Learning</span>
-    <span class="ti"><span class="ti-d"></span>NLP Research</span>
-    <span class="ti"><span class="ti-d"></span>CPU Architecture</span>
-    <span class="ti"><span class="ti-d"></span>Neural Networks</span>
-    <span class="ti"><span class="ti-d"></span>Embedded Systems</span>
-    <span class="ti"><span class="ti-d"></span>Digital Logic</span>
-    <span class="ti"><span class="ti-d"></span>Large Language Models</span>
-    <span class="ti"><span class="ti-d"></span>Network Architecture</span>
-    <span class="ti"><span class="ti-d"></span>Signal Processing</span>
-    <span class="ti"><span class="ti-d"></span>Microprocessors</span>
-    <span class="ti"><span class="ti-d"></span>AI Research</span>
-    <span class="ti"><span class="ti-d"></span>Computer Engineering</span>
-    <span class="ti"><span class="ti-d"></span>Artificial Intelligence</span>
-    <span class="ti"><span class="ti-d"></span>Machine Learning</span>
-    <span class="ti"><span class="ti-d"></span>NLP Research</span>
-    <span class="ti"><span class="ti-d"></span>CPU Architecture</span>
-    <span class="ti"><span class="ti-d"></span>Neural Networks</span>
-    <span class="ti"><span class="ti-d"></span>Embedded Systems</span>
-    <span class="ti"><span class="ti-d"></span>Digital Logic</span>
-    <span class="ti"><span class="ti-d"></span>Large Language Models</span>
-    <span class="ti"><span class="ti-d"></span>Network Architecture</span>
-    <span class="ti"><span class="ti-d"></span>Signal Processing</span>
-    <span class="ti"><span class="ti-d"></span>Microprocessors</span>
-    <span class="ti"><span class="ti-d"></span>AI Research</span>
-  </div>
-</div>
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span class="ti"><span class="ti-d"></span>Computer Engineering</span>
+  <span class="ti"><span class="ti-d"></span>Artificial Intelligence</span>
+  <span class="ti"><span class="ti-d"></span>Machine Learning</span>
+  <span class="ti"><span class="ti-d"></span>NLP Research</span>
+  <span class="ti"><span class="ti-d"></span>CPU Architecture</span>
+  <span class="ti"><span class="ti-d"></span>Neural Networks</span>
+  <span class="ti"><span class="ti-d"></span>Embedded Systems</span>
+  <span class="ti"><span class="ti-d"></span>Digital Logic</span>
+  <span class="ti"><span class="ti-d"></span>Large Language Models</span>
+  <span class="ti"><span class="ti-d"></span>Network Architecture</span>
+  <span class="ti"><span class="ti-d"></span>Signal Processing</span>
+  <span class="ti"><span class="ti-d"></span>Microprocessors</span>
+  <span class="ti"><span class="ti-d"></span>AI Research</span>
+  <span class="ti"><span class="ti-d"></span>Computer Engineering</span>
+  <span class="ti"><span class="ti-d"></span>Artificial Intelligence</span>
+  <span class="ti"><span class="ti-d"></span>Machine Learning</span>
+  <span class="ti"><span class="ti-d"></span>NLP Research</span>
+  <span class="ti"><span class="ti-d"></span>CPU Architecture</span>
+  <span class="ti"><span class="ti-d"></span>Neural Networks</span>
+  <span class="ti"><span class="ti-d"></span>Embedded Systems</span>
+  <span class="ti"><span class="ti-d"></span>Digital Logic</span>
+  <span class="ti"><span class="ti-d"></span>Large Language Models</span>
+  <span class="ti"><span class="ti-d"></span>Network Architecture</span>
+  <span class="ti"><span class="ti-d"></span>Signal Processing</span>
+  <span class="ti"><span class="ti-d"></span>Microprocessors</span>
+  <span class="ti"><span class="ti-d"></span>AI Research</span>
+</div></div>
 
-<!-- ABOUT -->
 <section id="about">
   <p class="s-ey rv">Who I Am</p>
   <h2 class="s-t rv">The person <span class="dim">behind the code</span></h2>
@@ -510,10 +541,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
     </div>
     <div class="rv">
       <div class="edu">
-        <div class="edu-top">
-          <div class="edu-sq">QU</div>
-          <span class="edu-org">Qatar University</span>
-        </div>
+        <div class="edu-top"><div class="edu-sq">QU</div><span class="edu-org">Qatar University</span></div>
         <h3>B.S. in Computer Engineering</h3>
         <p class="edu-loc">Doha, Qatar · College of Engineering</p>
         <div class="pills">
@@ -526,13 +554,9 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="proj-top">
-    <div>
-      <p class="s-ey rv">Portfolio</p>
-      <h2 class="s-t rv" style="margin-bottom:0">Featured <span class="dim">projects</span></h2>
-    </div>
+    <div><p class="s-ey rv">Portfolio</p><h2 class="s-t rv" style="margin-bottom:0">Featured <span class="dim">projects</span></h2></div>
     <div class="pfs rv">
       <button class="pf on" data-f="all">All</button>
       <button class="pf" data-f="ai">AI / ML</button>
@@ -542,128 +566,48 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
       <button class="pf" data-f="upcoming">Upcoming</button>
     </div>
   </div>
-
   <div class="pg2">
-    <div class="pc feat rv" data-c="ai">
-      <div class="pc-top"><span class="pc-num">01 — FEATURED</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">⚖️</div>
-      <h3>Contract Lifecycle Management — Naja7</h3>
-      <p>AI-powered legal document analysis platform automating contract review, clause extraction, and risk flagging using Azure AI, OpenAI GPT, and HuggingFace transformers.</p>
-      <div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI</span><span class="ptag">HuggingFace</span><span class="ptag">NLP</span><span class="ptag">Python</span></div>
-    </div>
-    <div class="pc rv" data-c="hw">
-      <div class="pc-top"><span class="pc-num">02</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">🖥️</div>
-      <h3>Custom CPU Design</h3>
-      <p>Full CPU from scratch in Logisim — ALU, register file, control unit, and complete datapath demonstrating core computer architecture principles.</p>
-      <div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">Architecture</span></div>
-    </div>
-    <div class="pc rv" data-c="net">
-      <div class="pc-top"><span class="pc-num">03</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">🌐</div>
-      <h3>Enterprise Network Design</h3>
-      <p>Fully redundant multi-floor enterprise network — zero single points of failure, VLANs, and fault-tolerant routing configured in Packet Tracer.</p>
-      <div class="ptags"><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">Redundancy</span></div>
-    </div>
-    <div class="pc rv" data-c="sw">
-      <div class="pc-top"><span class="pc-num">04</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">📦</div>
-      <h3>Shipment Management System</h3>
-      <p>Java OOP platform for tracking, reporting, and managing shipments end-to-end using solid design patterns.</p>
-      <div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span></div>
-    </div>
-    <div class="pc rv" data-c="sw">
-      <div class="pc-top"><span class="pc-num">05</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">🎓</div>
-      <h3>Student Records System</h3>
-      <p>Python system for GPA calculation, student registration, and academic reporting with efficient data structures and algorithms.</p>
-      <div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span></div>
-    </div>
+    <div class="pc feat rv" data-c="ai"><div class="pc-top"><span class="pc-num">01 — FEATURED</span><div class="pc-arr">↗</div></div><div class="pc-icon">⚖️</div><h3>Contract Lifecycle Management — Naja7</h3><p>AI-powered legal document analysis platform automating contract review, clause extraction, and risk flagging using Azure AI, OpenAI GPT, and HuggingFace transformers.</p><div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI</span><span class="ptag">HuggingFace</span><span class="ptag">NLP</span><span class="ptag">Python</span></div></div>
+    <div class="pc rv" data-c="hw"><div class="pc-top"><span class="pc-num">02</span><div class="pc-arr">↗</div></div><div class="pc-icon">🖥️</div><h3>Custom CPU Design</h3><p>Full CPU from scratch in Logisim — ALU, register file, control unit, and complete datapath demonstrating core computer architecture principles.</p><div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">Architecture</span></div></div>
+    <div class="pc rv" data-c="net"><div class="pc-top"><span class="pc-num">03</span><div class="pc-arr">↗</div></div><div class="pc-icon">🌐</div><h3>Enterprise Network Design</h3><p>Fully redundant multi-floor enterprise network — zero single points of failure, VLANs, and fault-tolerant routing configured in Packet Tracer.</p><div class="ptags"><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">Redundancy</span></div></div>
+    <div class="pc rv" data-c="sw"><div class="pc-top"><span class="pc-num">04</span><div class="pc-arr">↗</div></div><div class="pc-icon">📦</div><h3>Shipment Management System</h3><p>Java OOP platform for tracking, reporting, and managing shipments end-to-end using solid design patterns.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span></div></div>
+    <div class="pc rv" data-c="sw"><div class="pc-top"><span class="pc-num">05</span><div class="pc-arr">↗</div></div><div class="pc-icon">🎓</div><h3>Student Records System</h3><p>Python system for GPA calculation, student registration, and academic reporting with efficient data structures and algorithms.</p><div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span></div></div>
   </div>
-
-  <!-- UPCOMING PROJECTS -->
   <div class="upcoming-lbl rv">In Progress · Details dropping Summer 2026</div>
   <div class="pg2">
-    <div class="pc upcoming rv" data-c="upcoming">
-      <div class="pc-top"><span class="pc-num">06 — IN PROGRESS</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">🤖</div>
-      <div class="pc-soon">Summer 2026</div>
-      <h3>AI Agent from Machine Learning</h3>
-      <p>An autonomous AI agent built from the ground up using machine learning — capable of reasoning, planning, and executing multi-step tasks. Full details dropping Summer 2026.</p>
-      <div class="ptags"><span class="ptag">AI Agents</span><span class="ptag">Machine Learning</span><span class="ptag">Python</span></div>
-    </div>
-    <div class="pc upcoming rv" data-c="upcoming">
-      <div class="pc-top"><span class="pc-num">07 — IN PROGRESS</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">📡</div>
-      <div class="pc-soon">Summer 2026</div>
-      <h3>Network Communication Project</h3>
-      <p>Advanced network communication system — protocols, data transmission, and real-world networking engineering. Full details dropping Summer 2026.</p>
-      <div class="ptags"><span class="ptag">Networking</span><span class="ptag">Protocols</span><span class="ptag">Systems</span></div>
-    </div>
-    <div class="pc upcoming rv" data-c="upcoming">
-      <div class="pc-top"><span class="pc-num">08 — IN PROGRESS</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">📊</div>
-      <div class="pc-soon">Summer 2026</div>
-      <h3>Digital Signal Processing Project</h3>
-      <p>End-to-end DSP system — signal acquisition, filtering, and analysis applied to real engineering problems. Full details dropping Summer 2026.</p>
-      <div class="ptags"><span class="ptag">DSP</span><span class="ptag">Signal Analysis</span><span class="ptag">MATLAB</span></div>
-    </div>
-    <div class="pc upcoming rv" data-c="upcoming">
-      <div class="pc-top"><span class="pc-num">09 — IN PROGRESS</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">⚙️</div>
-      <div class="pc-soon">Summer 2026</div>
-      <h3>Microprocessor Project</h3>
-      <p>Low-level microprocessor design and programming — architecture, instruction sets, and embedded control. Full details dropping Summer 2026.</p>
-      <div class="ptags"><span class="ptag">Microprocessor</span><span class="ptag">Embedded</span><span class="ptag">Assembly</span></div>
-    </div>
-    <div class="pc upcoming rv" data-c="upcoming">
-      <div class="pc-top"><span class="pc-num">10 — IN PROGRESS</span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">💻</div>
-      <div class="pc-soon">Summer 2026</div>
-      <h3>Computer Practicum Project</h3>
-      <p>Comprehensive capstone project applying core computer engineering skills across hardware and software domains. Full details dropping Summer 2026.</p>
-      <div class="ptags"><span class="ptag">Computer Engineering</span><span class="ptag">Capstone</span><span class="ptag">Systems</span></div>
-    </div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">06 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">🤖</div><div class="pc-soon">Summer 2026</div><h3>AI Agent from Machine Learning</h3><p>An autonomous AI agent built from the ground up using machine learning — capable of reasoning, planning, and executing multi-step tasks.</p><div class="ptags"><span class="ptag">AI Agents</span><span class="ptag">Machine Learning</span><span class="ptag">Python</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">07 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">📡</div><div class="pc-soon">Summer 2026</div><h3>Network Communication Project</h3><p>Advanced network communication system — protocols, data transmission, and real-world networking engineering.</p><div class="ptags"><span class="ptag">Networking</span><span class="ptag">Protocols</span><span class="ptag">Systems</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">08 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">📊</div><div class="pc-soon">Summer 2026</div><h3>Digital Signal Processing Project</h3><p>End-to-end DSP system — signal acquisition, filtering, and analysis applied to real engineering problems.</p><div class="ptags"><span class="ptag">DSP</span><span class="ptag">Signal Analysis</span><span class="ptag">MATLAB</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">09 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">⚙️</div><div class="pc-soon">Summer 2026</div><h3>Microprocessor Project</h3><p>Low-level microprocessor design and programming — architecture, instruction sets, and embedded control.</p><div class="ptags"><span class="ptag">Microprocessor</span><span class="ptag">Embedded</span><span class="ptag">Assembly</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">10 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">💻</div><div class="pc-soon">Summer 2026</div><h3>Computer Practicum Project</h3><p>Comprehensive capstone project applying core computer engineering skills across hardware and software domains.</p><div class="ptags"><span class="ptag">Computer Engineering</span><span class="ptag">Capstone</span><span class="ptag">Systems</span></div></div>
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <p class="s-ey rv">Tech Stack</p>
   <h2 class="s-t rv">Skills &amp; <span class="dim">tools</span></h2>
   <div class="sk-header rv">
-    <div style="max-width:420px">
-      <p style="color:var(--tx2);font-size:.92rem;line-height:1.88;font-weight:400">Every tool here has been applied in real projects — from building CPUs at the gate level to deploying production AI systems using cloud APIs and transformer models.</p>
-    </div>
+    <div style="max-width:420px"><p style="color:var(--tx2);font-size:.92rem;line-height:1.88;font-weight:400">Every tool here has been applied in real projects — from building CPUs at the gate level to deploying production AI systems using cloud APIs and transformer models.</p></div>
     <div class="sk-icons">
-      <div class="sti" title="Python">🐍</div>
-      <div class="sti" title="Java">☕</div>
-      <div class="sti" title="AI/ML">🤖</div>
-      <div class="sti" title="CPU Design">🖥️</div>
-      <div class="sti" title="Networking">🌐</div>
-      <div class="sti" title="Git">🔀</div>
-      <div class="sti" title="Cloud">☁️</div>
-      <div class="sti" title="Research">🔬</div>
-      <div class="sti" title="Circuits">⚡</div>
+      <div class="sti" title="Python">🐍</div><div class="sti" title="Java">☕</div><div class="sti" title="AI/ML">🤖</div>
+      <div class="sti" title="CPU Design">🖥️</div><div class="sti" title="Networking">🌐</div><div class="sti" title="Git">🔀</div>
+      <div class="sti" title="Cloud">☁️</div><div class="sti" title="Research">🔬</div><div class="sti" title="Circuits">⚡</div>
     </div>
   </div>
   <div class="sk-grid">
-    <div class="sg rv">
-      <div class="sg-hd">Languages</div>
+    <div class="sg rv"><div class="sg-hd">Languages</div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Python</span><span class="sk-p">95%</span></div><div class="sk-tr"><div class="sk-b" data-w="95"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Java</span><span class="sk-p">93%</span></div><div class="sk-tr"><div class="sk-b" data-w="93"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">HTML &amp; CSS</span><span class="sk-p">90%</span></div><div class="sk-tr"><div class="sk-b" data-w="90"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">C / C++ Fundamentals</span><span class="sk-p">91%</span></div><div class="sk-tr"><div class="sk-b" data-w="91"></div></div></div>
     </div>
-    <div class="sg rv">
-      <div class="sg-hd">AI / ML / NLP</div>
+    <div class="sg rv"><div class="sg-hd">AI / ML / NLP</div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Machine Learning</span><span class="sk-p">93%</span></div><div class="sk-tr"><div class="sk-b" data-w="93"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">NLP / LLMs</span><span class="sk-p">91%</span></div><div class="sk-tr"><div class="sk-b" data-w="91"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Azure AI / OpenAI</span><span class="sk-p">90%</span></div><div class="sk-tr"><div class="sk-b" data-w="90"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">HuggingFace Transformers</span><span class="sk-p">90%</span></div><div class="sk-tr"><div class="sk-b" data-w="90"></div></div></div>
     </div>
-    <div class="sg rv">
-      <div class="sg-hd">Hardware &amp; Systems</div>
+    <div class="sg rv"><div class="sg-hd">Hardware &amp; Systems</div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Logisim / CPU Design</span><span class="sk-p">94%</span></div><div class="sk-tr"><div class="sk-b" data-w="94"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Multisim / Circuit Design</span><span class="sk-p">91%</span></div><div class="sk-tr"><div class="sk-b" data-w="91"></div></div></div>
       <div class="sk"><div class="sk-row"><span class="sk-n">Digital Logic Design</span><span class="sk-p">95%</span></div><div class="sk-tr"><div class="sk-b" data-w="95"></div></div></div>
@@ -672,140 +616,75 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <p class="s-ey rv">Career</p>
   <h2 class="s-t rv">Experience <span class="dim">&amp; roles</span></h2>
   <div class="exp-wrap rv">
     <div class="exp-topline"></div>
     <div class="exp-grid">
-      <div class="ei">
-        <div class="ei-num">01 / CO-FOUNDER</div>
-        <div class="ei-dot"></div>
-        <h3>Co-Founder &amp; Systems Engineer</h3>
-        <div class="ei-org">VORA</div>
-        <p>Leading hardware and software development — system architecture, embedded design, and full-stack integration from day one.</p>
-        <span class="ei-badge ei-a">Active</span>
-      </div>
-      <div class="ei">
-        <div class="ei-num">02 / INSTRUCTOR</div>
-        <div class="ei-dot"></div>
-        <h3>Instructor &amp; Engineering Tutor</h3>
-        <div class="ei-org">AZER</div>
-        <p>Completed advanced technical training and transitioned to instructor. Tutoring engineering and CS students while building advanced courses.</p>
-        <span class="ei-badge ei-a">Active</span>
-      </div>
-      <div class="ei">
-        <div class="ei-num">03 / TEACHING ASSISTANT</div>
-        <div class="ei-dot"></div>
-        <h3>Teaching Assistant</h3>
-        <div class="ei-org">Qatar University — Engineering</div>
-        <p>TA in Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student outcomes.</p>
-        <span class="ei-badge ei-a">Active</span>
-      </div>
-      <div class="ei">
-        <div class="ei-num">04 / EVENT MANAGEMENT</div>
-        <div class="ei-dot"></div>
-        <h3>Trainer Assistant &amp; Organizer</h3>
-        <div class="ei-org">Sports &amp; Events Complex</div>
-        <p>Organized multiple large-scale events managing logistics, team coordination, and execution at high-attendance scale.</p>
-        <span class="ei-badge ei-p">Past</span>
-      </div>
+      <div class="ei"><div class="ei-num">01 / CO-FOUNDER</div><div class="ei-dot"></div><h3>Co-Founder &amp; Systems Engineer</h3><div class="ei-org">VORA</div><p>Leading hardware and software development — system architecture, embedded design, and full-stack integration from day one.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">02 / INSTRUCTOR</div><div class="ei-dot"></div><h3>Instructor &amp; Engineering Tutor</h3><div class="ei-org">AZER</div><p>Completed advanced technical training and transitioned to instructor. Tutoring engineering and CS students while building advanced courses.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">03 / TEACHING ASSISTANT</div><div class="ei-dot"></div><h3>Teaching Assistant</h3><div class="ei-org">Qatar University — Engineering</div><p>TA in Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student outcomes.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">04 / EVENT MANAGEMENT</div><div class="ei-dot"></div><h3>Trainer Assistant &amp; Organizer</h3><div class="ei-org">Sports &amp; Events Complex</div><p>Organized multiple large-scale events managing logistics, team coordination, and execution at high-attendance scale.</p><span class="ei-badge ei-p">Past</span></div>
     </div>
   </div>
 </section>
 
-<!-- RESEARCH -->
 <section id="research">
   <p class="s-ey rv">Academic</p>
   <h2 class="s-t rv">Research <span class="dim">&amp; publications</span></h2>
   <div class="res-grid">
-    <div class="rc rv">
-      <div class="rc-hd">
-        <div class="rc-icon">🔬</div>
-        <div><div class="rc-tag">Second Author · Conference Paper</div></div>
-      </div>
-      <h3>"Measuring Political Stance and Consistency in Large Language Models"</h3>
-      <p>Submitted to one of the top-ranked Information Retrieval conferences worldwide. Investigates how LLMs form and maintain political positions — key contributions to AI fairness and alignment research. Extending in a follow-up paper.</p>
-    </div>
-    <div class="rc rv">
-      <div class="rc-hd">
-        <div class="rc-icon">⚖️</div>
-        <div><div class="rc-tag">Active Project · NLP</div></div>
-      </div>
-      <h3>Legal Document Summarization with Large Language Models</h3>
-      <p>Applying transformer-based LLMs to automated legal document summarization — bridging cutting-edge NLP research with practical legal technology to dramatically reduce manual review time and cost.</p>
-    </div>
+    <div class="rc rv"><div class="rc-hd"><div class="rc-icon">🔬</div><div><div class="rc-tag">Second Author · Conference Paper</div></div></div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to one of the top-ranked Information Retrieval conferences worldwide. Investigates how LLMs form and maintain political positions — key contributions to AI fairness and alignment research. Extending in a follow-up paper.</p></div>
+    <div class="rc rv"><div class="rc-hd"><div class="rc-icon">⚖️</div><div><div class="rc-tag">Active Project · NLP</div></div></div><h3>Legal Document Summarization with Large Language Models</h3><p>Applying transformer-based LLMs to automated legal document summarization — bridging cutting-edge NLP research with practical legal technology to dramatically reduce manual review time and cost.</p></div>
   </div>
 </section>
 
-<!-- EVENTS -->
 <section id="events">
   <p class="s-ey rv">Community</p>
   <h2 class="s-t rv">Events &amp; <span class="dim">hackathons</span></h2>
   <div class="ev-grid">
-    <div class="ev rv">
-      <div class="ev-img"><img src="assets/hackp1.png" alt="AIX Hackathon"><div class="ev-grad"></div><span class="ev-badge">Hackathon</span></div>
-      <div class="ev-body"><h3>AIX Hackathon — QSTP</h3><p>Built AI-driven solutions under real-world constraints and tight deadlines alongside top university talent in Qatar.</p></div>
-    </div>
-    <div class="ev rv">
-      <div class="ev-img"><img src="assets/hackp2.png" alt="Team collaboration"><div class="ev-grad"></div><span class="ev-badge">Competition</span></div>
-      <div class="ev-body"><h3>Team Innovation Sprint</h3><p>Collaborative competition focused on rapid prototyping, innovation, and cross-disciplinary engineering problem-solving.</p></div>
-    </div>
-    <div class="ev rv">
-      <div class="ev-img"><img src="assets/events.png" alt="Event organization"><div class="ev-grad"></div><span class="ev-badge">Leadership</span></div>
-      <div class="ev-body"><h3>Large-Scale Event Management</h3><p>Organized and managed multiple high-attendance events — logistics, coordination, and operations at professional scale.</p></div>
-    </div>
+    <div class="ev rv"><div class="ev-img"><img src="assets/hackp1.png" alt="AIX Hackathon"><div class="ev-grad"></div><span class="ev-badge">Hackathon</span></div><div class="ev-body"><h3>AIX Hackathon — QSTP</h3><p>Built AI-driven solutions under real-world constraints and tight deadlines alongside top university talent in Qatar.</p></div></div>
+    <div class="ev rv"><div class="ev-img"><img src="assets/hackp2.png" alt="Team collaboration"><div class="ev-grad"></div><span class="ev-badge">Competition</span></div><div class="ev-body"><h3>Team Innovation Sprint</h3><p>Collaborative competition focused on rapid prototyping, innovation, and cross-disciplinary engineering problem-solving.</p></div></div>
+    <div class="ev rv"><div class="ev-img"><img src="assets/events.png" alt="Event organization"><div class="ev-grad"></div><span class="ev-badge">Leadership</span></div><div class="ev-body"><h3>Large-Scale Event Management</h3><p>Organized and managed multiple high-attendance events — logistics, coordination, and operations at professional scale.</p></div></div>
   </div>
 </section>
 
-<!-- CERTIFICATES -->
 <section id="certificates">
   <p class="s-ey rv">Credentials</p>
   <h2 class="s-t rv">Certificates &amp; <span class="dim">volunteering</span></h2>
   <div class="cert-g rv" id="cgrid">
     <div class="ct"><img src="assets/pic11.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c1.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c2.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c3.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c4.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c5.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c6.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c7.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c8.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c9.png"   alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c10.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c11.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c12.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c13.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c14.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c15.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c16.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c17.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c18.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c19.png"  alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c1.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c2.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c3.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c4.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c5.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c6.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c7.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c8.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c9.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c10.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c11.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c12.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c13.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c14.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c15.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c16.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c17.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c18.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c19.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="contact">
   <div class="ft-glow"></div>
   <div class="ft-badge rv">● Open to Work</div>
-  <h2 class="rv">Let's <span style="background:linear-gradient(120deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">build</span><br>something.</h2>
+  <h2 class="rv">Let's <span class="anim-build">build</span><br>something.</h2>
   <p class="ft-sub rv">Open to internships, research collaborations, and exciting engineering challenges. Based in Doha, Qatar.</p>
   <div class="c-links rv">
-    <a href="mailto:mm2308642@qu.edu.qa" class="cl">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-      mm2308642@qu.edu.qa
-    </a>
-    <a href="https://github.com/Mohammad-Maasfeh" target="_blank" rel="noopener" class="cl">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-      github.com/Mohammad-Maasfeh
-    </a>
-    <a href="assets/cv.pdf" download class="cl">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download CV
-    </a>
+    <a href="mailto:mm2308642@qu.edu.qa" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>mm2308642@qu.edu.qa</a>
+    <a href="https://github.com/Mohammad-Maasfeh" target="_blank" rel="noopener" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>github.com/Mohammad-Maasfeh</a>
+    <a href="assets/cv.pdf" download class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV</a>
   </div>
   <div class="ft-sep"></div>
   <p class="ft-copy rv">© 2025 Mohammad M. Maasfeh · Computer Engineer · Qatar University</p>
@@ -815,214 +694,272 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 /* CURSOR */
 var DOT=document.getElementById('dot'),RING=document.getElementById('ring');
 var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
-document.addEventListener('mousedown',function(){document.body.classList.add('clk')});
-document.addEventListener('mouseup',function(){document.body.classList.remove('clk')});
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+document.addEventListener('mousedown',function(){document.body.classList.add('clk');});
+document.addEventListener('mouseup',function(){document.body.classList.remove('clk');});
 document.querySelectorAll('a,button,.ct,.pc,.pf,.lb-nav,#lb-x,#btt,.hbg,.hs,.ev,.rc,.sti').forEach(function(el){
-  el.addEventListener('mouseenter',function(){document.body.classList.add('hov')});
-  el.addEventListener('mouseleave',function(){document.body.classList.remove('hov')});
+  el.addEventListener('mouseenter',function(){document.body.classList.add('hov');});
+  el.addEventListener('mouseleave',function(){document.body.classList.remove('hov');});
 });
-(function loop(){
-  DOT.style.left=mx+'px';DOT.style.top=my+'px';
-  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-  RING.style.left=rx+'px';RING.style.top=ry+'px';
-  requestAnimationFrame(loop);
-})();
+(function loop(){DOT.style.left=mx+'px';DOT.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;RING.style.left=rx+'px';RING.style.top=ry+'px';requestAnimationFrame(loop);})();
 
-/* CIRCUIT BOARD CANVAS */
-(function(){
-  var cv=document.getElementById('cv-circuit'),ctx=cv.getContext('2d');
-  var W,H,nodes=[],signals=[];
-  function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight}
-  function build(){
-    nodes=[];
-    var cols=Math.ceil(W/80),rows=Math.ceil(H/80);
-    for(var r=0;r<=rows;r++) for(var c=0;c<=cols;c++){
-      nodes.push({x:c*80+Math.random()*20-10,y:r*80+Math.random()*20-10,pulse:Math.random(),speed:.003+Math.random()*.006,conn:[]});
-    }
-    nodes.forEach(function(n,i){nodes.forEach(function(m,j){
-      if(i===j)return;
-      if(Math.hypot(n.x-m.x,n.y-m.y)<120&&Math.random()>.55)n.conn.push(j);
-    })});
-  }
-  sz();build();
-  window.addEventListener('resize',function(){sz();build()});
-  setInterval(function(){
-    if(signals.length>=28||!nodes.length)return;
-    var n=nodes[Math.floor(Math.random()*nodes.length)];
-    if(!n.conn.length)return;
-    var ti=n.conn[Math.floor(Math.random()*n.conn.length)],m=nodes[ti];
-    signals.push({fx:n.x,fy:n.y,tx:m.x,ty:m.y,t:0,spd:.012+Math.random()*.018,col:Math.random()>.5?'56,232,185':'91,127,255'});
-  },120);
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    nodes.forEach(function(n){
-      n.pulse+=n.speed;
-      n.conn.forEach(function(j){
-        var m=nodes[j],a=.03+.02*Math.sin(n.pulse);
-        ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,n.y);ctx.lineTo(m.x,m.y);
-        ctx.strokeStyle='rgba(56,232,185,'+a+')';ctx.lineWidth=.8;ctx.stroke();
-      });
-      var g=.4+.3*Math.sin(n.pulse);
-      ctx.beginPath();ctx.arc(n.x,n.y,1.5,0,Math.PI*2);
-      ctx.fillStyle='rgba(56,232,185,'+(g*.5)+')';ctx.fill();
-    });
-    for(var i=signals.length-1;i>=0;i--){
-      var s=signals[i];s.t+=s.spd;
-      if(s.t>1){signals.splice(i,1);continue}
-      var px,py;
-      if(s.t<.5){px=s.fx+(s.tx-s.fx)*(s.t*2);py=s.fy}
-      else{px=s.tx;py=s.fy+(s.ty-s.fy)*((s.t-.5)*2)}
-      ctx.beginPath();ctx.arc(px,py,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+s.col+',.9)';ctx.fill();
-      ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle='rgba('+s.col+',.15)';ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
+/* CIRCUIT */
+(function(){var cv=document.getElementById('cv-circuit'),ctx=cv.getContext('2d');var W,H,nodes=[],signals=[];function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;}function build(){nodes=[];var cols=Math.ceil(W/80),rows=Math.ceil(H/80);for(var r=0;r<=rows;r++)for(var c=0;c<=cols;c++){nodes.push({x:c*80+Math.random()*20-10,y:r*80+Math.random()*20-10,pulse:Math.random(),speed:.003+Math.random()*.006,conn:[]});}nodes.forEach(function(n,i){nodes.forEach(function(m,j){if(i===j)return;if(Math.hypot(n.x-m.x,n.y-m.y)<120&&Math.random()>.55)n.conn.push(j);});});}sz();build();window.addEventListener('resize',function(){sz();build();});setInterval(function(){if(signals.length>=28||!nodes.length)return;var n=nodes[Math.floor(Math.random()*nodes.length)];if(!n.conn.length)return;var ti=n.conn[Math.floor(Math.random()*n.conn.length)],m=nodes[ti];signals.push({fx:n.x,fy:n.y,tx:m.x,ty:m.y,t:0,spd:.012+Math.random()*.018,col:Math.random()>.5?'56,232,185':'91,127,255'});},120);function draw(){ctx.clearRect(0,0,W,H);nodes.forEach(function(n){n.pulse+=n.speed;n.conn.forEach(function(j){var m=nodes[j],a=.03+.02*Math.sin(n.pulse);ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,n.y);ctx.lineTo(m.x,m.y);ctx.strokeStyle='rgba(56,232,185,'+a+')';ctx.lineWidth=.8;ctx.stroke();});var g=.4+.3*Math.sin(n.pulse);ctx.beginPath();ctx.arc(n.x,n.y,1.5,0,Math.PI*2);ctx.fillStyle='rgba(56,232,185,'+(g*.5)+')';ctx.fill();});for(var i=signals.length-1;i>=0;i--){var s=signals[i];s.t+=s.spd;if(s.t>1){signals.splice(i,1);continue;}var px,py;if(s.t<.5){px=s.fx+(s.tx-s.fx)*(s.t*2);py=s.fy;}else{px=s.tx;py=s.fy+(s.ty-s.fy)*((s.t-.5)*2);}ctx.beginPath();ctx.arc(px,py,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+s.col+',.9)';ctx.fill();ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle='rgba('+s.col+',.15)';ctx.fill();}requestAnimationFrame(draw);}draw();})();
 
-/* MATRIX RAIN CANVAS */
-(function(){
-  var cv=document.getElementById('cv-matrix'),ctx=cv.getContext('2d');
-  var W,H,cols,drops=[];
-  var chars='01アイウエオ∑λ∇⟨⟩01アイウエオ01';
-  function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.ceil(W/18);drops=[];for(var i=0;i<cols;i++)drops.push(Math.random()*-H)}
-  sz();window.addEventListener('resize',sz);
-  function draw(){
-    ctx.fillStyle='rgba(3,6,13,.04)';ctx.fillRect(0,0,W,H);
-    ctx.font='12px monospace';
-    drops.forEach(function(y,i){
-      var ch=chars[Math.floor(Math.random()*chars.length)];
-      ctx.fillStyle='rgba(56,232,185,'+(Math.random()>.97?1:.35)+')';
-      ctx.fillText(ch,i*18,y);
-      drops[i]+=12;
-      if(drops[i]>H)drops[i]=Math.random()*-400;
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
+/* MATRIX */
+(function(){var cv=document.getElementById('cv-matrix'),ctx=cv.getContext('2d');var W,H,cols,drops=[];var chars='01アイウエオ∑λ∇⟨⟩01アイウエオ01';function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.ceil(W/18);drops=[];for(var i=0;i<cols;i++)drops.push(Math.random()*-H);}sz();window.addEventListener('resize',sz);function draw(){ctx.fillStyle='rgba(3,6,13,.04)';ctx.fillRect(0,0,W,H);ctx.font='12px monospace';drops.forEach(function(y,i){var ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillStyle='rgba(56,232,185,'+(Math.random()>.97?1:.35)+')';ctx.fillText(ch,i*18,y);drops[i]+=12;if(drops[i]>H)drops[i]=Math.random()*-400;});requestAnimationFrame(draw);}draw();})();
 
-/* TYPED TEXT */
+/* TYPED */
 var ROLES=['Computer Engineer','AI Researcher','Hardware Designer','NLP Researcher','Co-Founder @ VORA','TA @ Qatar University'];
 var ri=0,ci=0,del=false,tel=document.getElementById('typed');
-function typeIt(){
-  var w=ROLES[ri];tel.textContent=del?w.slice(0,ci--):w.slice(0,ci++);
-  if(!del&&ci>w.length){del=true;setTimeout(typeIt,1800);return}
-  if(del&&ci<0){del=false;ri=(ri+1)%ROLES.length;ci=0}
-  setTimeout(typeIt,del?45:75);
-}
+function typeIt(){var w=ROLES[ri];tel.textContent=del?w.slice(0,ci--):w.slice(0,ci++);if(!del&&ci>w.length){del=true;setTimeout(typeIt,1800);return;}if(del&&ci<0){del=false;ri=(ri+1)%ROLES.length;ci=0;}setTimeout(typeIt,del?45:75);}
 typeIt();
 
 /* SCROLL */
 var NAV=document.getElementById('nav');
-window.addEventListener('scroll',function(){
-  var sy=scrollY;
-  NAV.classList.toggle('stuck',sy>60);
-  document.getElementById('btt').classList.toggle('show',sy>500);
-  document.getElementById('pgb').style.width=(sy/(document.body.scrollHeight-innerHeight)*100)+'%';
-  document.querySelectorAll('section[id]').forEach(function(sec){
-    if(sy>=sec.offsetTop-150&&sy<sec.offsetTop+sec.offsetHeight-150)
-      document.querySelectorAll('.nav-ul a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+sec.id)});
-  });
-},{passive:true});
+window.addEventListener('scroll',function(){var sy=scrollY;NAV.classList.toggle('stuck',sy>60);document.getElementById('btt').classList.toggle('show',sy>500);document.getElementById('pgb').style.width=(sy/(document.body.scrollHeight-innerHeight)*100)+'%';document.querySelectorAll('section[id]').forEach(function(sec){if(sy>=sec.offsetTop-150&&sy<sec.offsetTop+sec.offsetHeight-150)document.querySelectorAll('.nav-ul a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+sec.id);});});},{passive:true});
 
 /* REVEAL */
-var ro=new IntersectionObserver(function(es){
-  es.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('on')},(i%6)*70)});
-},{threshold:.08});
-document.querySelectorAll('.rv,.rvl').forEach(function(el){ro.observe(el)});
+var ro=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('on');},(i%6)*70);});},{threshold:.08});
+document.querySelectorAll('.rv,.rvl').forEach(function(el){ro.observe(el);});
 
 /* SKILL BARS */
-var bo=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.sk-b').forEach(function(b){b.style.width=b.dataset.w+'%';setTimeout(function(){b.classList.add('done')},950)});
-      bo.unobserve(e.target);
-    }
-  });
-},{threshold:.25});
-document.querySelectorAll('.sg').forEach(function(g){bo.observe(g)});
+var bo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.sk-b').forEach(function(b){b.style.width=b.dataset.w+'%';setTimeout(function(){b.classList.add('done');},950);});bo.unobserve(e.target);}});},{threshold:.25});
+document.querySelectorAll('.sg').forEach(function(g){bo.observe(g);});
 
-/* COUNTERS — fixed to show correct values with suffix */
-var co=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.hs-n[data-to]').forEach(function(el){
-        var to=parseFloat(el.dataset.to),
-            dec=parseInt(el.dataset.dec||0),
-            suf=el.dataset.suf||'',
-            v=0,
-            step=to/60;
-        var t=setInterval(function(){
-          v=Math.min(v+step,to);
-          var display=dec?v.toFixed(dec):Math.round(v);
-          el.textContent=display+suf;
-          if(v>=to){
-            el.textContent=(dec?to.toFixed(dec):Math.round(to))+suf;
-            clearInterval(t);
-          }
-        },18);
-      });
-      co.unobserve(e.target);
-    }
-  });
-},{threshold:.5});
-document.querySelectorAll('.hero-stats').forEach(function(el){co.observe(el)});
+/* COUNTERS */
+var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.hs-n[data-to]').forEach(function(el){var to=parseFloat(el.dataset.to),dec=parseInt(el.dataset.dec||'0'),suf=el.dataset.suf||'',frames=60,frame=0;var t=setInterval(function(){frame++;if(frame>=frames){el.textContent=(dec>0?to.toFixed(dec):Math.round(to))+suf;clearInterval(t);return;}var cur=to*(frame/frames);el.textContent=(dec>0?cur.toFixed(dec):Math.round(cur))+suf;},16);});co.unobserve(e.target);}});},{threshold:.3});
+document.querySelectorAll('.hero-stats').forEach(function(el){co.observe(el);});
 
 /* PROJECT GLOW */
-document.querySelectorAll('.pc').forEach(function(c){
-  c.addEventListener('mousemove',function(e){
-    var r=c.getBoundingClientRect();
-    c.style.setProperty('--px',((e.clientX-r.left)/r.width*100)+'%');
-    c.style.setProperty('--py',((e.clientY-r.top)/r.height*100)+'%');
-  });
-});
+document.querySelectorAll('.pc').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--px',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--py',((e.clientY-r.top)/r.height*100)+'%');});});
 
 /* PROJECT FILTER */
-document.querySelectorAll('.pf').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.querySelectorAll('.pf').forEach(function(x){x.classList.remove('on')});
-    b.classList.add('on');
-    var f=b.dataset.f;
-    document.querySelectorAll('.pc').forEach(function(c){
-      var show=f==='all'||c.dataset.c===f;
-      c.style.opacity=show?'1':'0.12';
-      c.style.transform=show?'':'scale(.97)';
-      c.style.pointerEvents=show?'':'none';
-      c.style.transition='opacity .35s,transform .35s';
-    });
-  });
-});
+document.querySelectorAll('.pf').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.pf').forEach(function(x){x.classList.remove('on');});b.classList.add('on');var f=b.dataset.f;document.querySelectorAll('.pc').forEach(function(c){var show=f==='all'||c.dataset.c===f;c.style.opacity=show?'1':'0.12';c.style.transform=show?'':'scale(.97)';c.style.pointerEvents=show?'':'none';c.style.transition='opacity .35s,transform .35s';});});});
 
 /* HAMBURGER */
 var HBG=document.getElementById('hbg'),MN=document.getElementById('mobnav');
-HBG.addEventListener('click',function(){HBG.classList.toggle('x');MN.classList.toggle('on')});
-function cm(){HBG.classList.remove('x');MN.classList.remove('on')}
+HBG.addEventListener('click',function(){HBG.classList.toggle('x');MN.classList.toggle('on');});
+function cm(){HBG.classList.remove('x');MN.classList.remove('on');}
 
-/* BACK TO TOP */
-document.getElementById('btt').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+/* BTT */
+document.getElementById('btt').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
 /* LIGHTBOX */
 var LB=document.getElementById('lb'),LBIMG=document.getElementById('lb-img'),LBCTR=document.getElementById('lb-ctr');
 var tiles=[].slice.call(document.querySelectorAll('.ct img')),lbi=0;
-function lbOpen(i){lbi=i;LBIMG.src=tiles[i].src;LBCTR.textContent=(i+1)+' / '+tiles.length;LB.classList.add('open');document.body.style.overflow='hidden'}
-function lbClose(){LB.classList.remove('open');document.body.style.overflow=''}
-function lbGo(d){lbi=(lbi+d+tiles.length)%tiles.length;LBIMG.src=tiles[lbi].src;LBCTR.textContent=(lbi+1)+' / '+tiles.length}
-tiles.forEach(function(img,i){img.parentElement.addEventListener('click',function(){lbOpen(i)})});
+function lbOpen(i){lbi=i;LBIMG.src=tiles[i].src;LBCTR.textContent=(i+1)+' / '+tiles.length;LB.classList.add('open');document.body.style.overflow='hidden';}
+function lbClose(){LB.classList.remove('open');document.body.style.overflow='';}
+function lbGo(d){lbi=(lbi+d+tiles.length)%tiles.length;LBIMG.src=tiles[lbi].src;LBCTR.textContent=(lbi+1)+' / '+tiles.length;}
+tiles.forEach(function(img,i){img.parentElement.addEventListener('click',function(){lbOpen(i);});});
 document.getElementById('lb-x').addEventListener('click',lbClose);
-document.getElementById('lb-prev').addEventListener('click',function(){lbGo(-1)});
-document.getElementById('lb-next').addEventListener('click',function(){lbGo(1)});
-LB.addEventListener('click',function(e){if(e.target===LB)lbClose()});
-document.addEventListener('keydown',function(e){
-  if(!LB.classList.contains('open'))return;
-  if(e.key==='Escape')lbClose();
-  if(e.key==='ArrowLeft')lbGo(-1);
-  if(e.key==='ArrowRight')lbGo(1);
-});
+document.getElementById('lb-prev').addEventListener('click',function(){lbGo(-1);});
+document.getElementById('lb-next').addEventListener('click',function(){lbGo(1);});
+LB.addEventListener('click',function(e){if(e.target===LB)lbClose();});
+document.addEventListener('keydown',function(e){if(!LB.classList.contains('open'))return;if(e.key==='Escape')lbClose();if(e.key==='ArrowLeft')lbGo(-1);if(e.key==='ArrowRight')lbGo(1);});
 var tx=0;
-LB.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
-LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].clientX)>50)lbGo(tx>e.changedTouches[0].clientX?1:-1)});
+LB.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].clientX)>50)lbGo(tx>e.changedTouches[0].clientX?1:-1);});
+
+/* ══════════════════════════════════
+   3D ROBOT — Three.js r128
+══════════════════════════════════ */
+(function(){
+  var s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  s.onload=initRobot;
+  document.head.appendChild(s);
+
+  function initRobot(){
+    var wrap=document.getElementById('robot-wrap');
+    if(!wrap)return;
+
+    var W=500, H=580;
+    wrap.style.width=W+'px';
+    wrap.style.height=H+'px';
+
+    var scene=new THREE.Scene();
+    var cam=new THREE.PerspectiveCamera(50,W/H,0.1,100);
+    cam.position.set(0,0.2,8.2);
+    cam.lookAt(0,0.2,0);
+
+    var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+    renderer.setSize(W,H);
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.shadowMap.enabled=true;
+    wrap.appendChild(renderer.domElement);
+
+    /* LIGHTS */
+    scene.add(new THREE.AmbientLight(0x1a4a66,3.5));
+    var key=new THREE.DirectionalLight(0x38e8b9,6.0);
+    key.position.set(3,6,4);key.castShadow=true;scene.add(key);
+    var fill=new THREE.DirectionalLight(0x5b7fff,3.5);
+    fill.position.set(-4,2,-2);scene.add(fill);
+    var rim=new THREE.DirectionalLight(0xaaffee,2.2);
+    rim.position.set(0,5,-5);scene.add(rim);
+    var front=new THREE.DirectionalLight(0x38e8b9,2.5);
+    front.position.set(0,1,7);scene.add(front);
+    var under=new THREE.DirectionalLight(0x5b7fff,1.5);
+    under.position.set(0,-3,2);scene.add(under);
+
+    /* MATERIALS */
+    var mBody =new THREE.MeshStandardMaterial({color:0x07111f,metalness:0.92,roughness:0.12});
+    var mDark =new THREE.MeshStandardMaterial({color:0x030810,metalness:0.95,roughness:0.08});
+    var mJoint=new THREE.MeshStandardMaterial({color:0x0d1c30,metalness:0.85,roughness:0.18});
+    var mAccent=new THREE.MeshStandardMaterial({color:0x38e8b9,emissive:0x38e8b9,emissiveIntensity:1.8,roughness:0.2,metalness:0.2});
+    var mEye  =new THREE.MeshStandardMaterial({color:0x38e8b9,emissive:0x38e8b9,emissiveIntensity:5.0,roughness:0,metalness:0});
+    var mBlue =new THREE.MeshStandardMaterial({color:0x5b7fff,emissive:0x5b7fff,emissiveIntensity:3.5,roughness:0,metalness:0});
+
+    var robot=new THREE.Group();
+    robot.scale.set(1.18,1.18,1.18);
+    scene.add(robot);
+
+    function box(w,h,d,mat,x,y,z){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x||0,y||0,z||0);m.castShadow=true;return m;}
+    function sph(r,mat,x,y,z){var m=new THREE.Mesh(new THREE.SphereGeometry(r,24,24),mat);m.position.set(x||0,y||0,z||0);m.castShadow=true;return m;}
+    function cyl(rt,rb,h,mat,x,y,z,rz){var m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,16),mat);m.position.set(x||0,y||0,z||0);if(rz)m.rotation.z=rz;m.castShadow=true;return m;}
+
+    /* HEAD */
+    var head=new THREE.Group();
+    head.position.set(0,2.05,0);
+    robot.add(head);
+    head.add(sph(0.68,mBody));
+    var visor=new THREE.Mesh(
+      new THREE.SphereGeometry(0.695,24,24,0,Math.PI*2,0,Math.PI*0.55),
+      new THREE.MeshStandardMaterial({color:0x010812,metalness:0.05,roughness:0,transparent:true,opacity:0.82})
+    );
+    visor.rotation.x=Math.PI*0.22;
+    head.add(visor);
+    head.add(new THREE.Mesh(new THREE.TorusGeometry(0.74,0.022,10,60),mAccent));
+
+    /* EYES — clean flat oval lenses, tight controlled glow, no bleed */
+    var eyeMat=new THREE.MeshStandardMaterial({color:0xaaeeff,emissive:0x38e8b9,emissiveIntensity:4.0,roughness:0,metalness:0});
+    var eyeRimMat=new THREE.MeshStandardMaterial({color:0x38e8b9,emissive:0x38e8b9,emissiveIntensity:1.4,transparent:true,opacity:0.35,roughness:0,metalness:0});
+    var eyeSocketMat=new THREE.MeshStandardMaterial({color:0x010a14,roughness:1,metalness:0});
+
+    function makeEye(group){
+      /* dark socket recessed into head */
+      var socket=new THREE.Mesh(new THREE.CircleGeometry(0.185,32),eyeSocketMat);
+      socket.position.z=0.005;
+      group.add(socket);
+      /* flat oval bright lens */
+      var lens=new THREE.Mesh(new THREE.CircleGeometry(0.155,32),eyeMat);
+      lens.position.z=0.012;
+      group.add(lens);
+      /* single tight rim ring — contained, no sphere bleed */
+      var rim=new THREE.Mesh(new THREE.RingGeometry(0.158,0.195,32),eyeRimMat);
+      rim.position.z=0.01;
+      group.add(rim);
+    }
+
+    var leftEye=new THREE.Group();
+    leftEye.position.set(-0.265,0.1,0.672);
+    leftEye.rotation.y=-0.18;
+    head.add(leftEye);
+    makeEye(leftEye);
+
+    var rightEye=new THREE.Group();
+    rightEye.position.set(0.265,0.1,0.672);
+    rightEye.rotation.y=0.18;
+    head.add(rightEye);
+    makeEye(rightEye);
+
+    /* ANTENNA */
+    head.add(cyl(0.03,0.04,0.28,mJoint,0,0.84,0));
+    var antBall=sph(0.075,mEye,0,1.06,0);
+    head.add(antBall);
+
+    /* NECK */
+    robot.add(cyl(0.13,0.17,0.22,mJoint,0,1.32,0));
+
+    /* TORSO */
+    var torso=new THREE.Group();torso.position.set(0,0.58,0);robot.add(torso);
+    torso.add(box(0.82,0.72,0.52,mBody));
+    torso.add(box(0.78,0.018,0.54,mAccent,0,0.12,0));
+    torso.add(box(0.44,0.3,0.06,mDark,0,0.04,0.27));
+    torso.add(sph(0.045,mEye,-0.13,0.06,0.31));
+    torso.add(sph(0.045,mBlue,0,0.06,0.31));
+    torso.add(sph(0.045,mEye,0.13,0.06,0.31));
+    torso.add(sph(0.19,mJoint,-0.48,0.28,0));
+    torso.add(sph(0.19,mJoint,0.48,0.28,0));
+
+    /* WAIST */
+    robot.add(cyl(0.26,0.3,0.14,mJoint,0,0.17,0));
+    robot.add(cyl(0.3,0.27,0.18,mBody,0,-0.03,0));
+
+    /* ARMS */
+    var leftArm=new THREE.Group();leftArm.position.set(-0.5,0.7,0);leftArm.rotation.z=0.2;robot.add(leftArm);
+    leftArm.add(cyl(0.1,0.09,0.4,mBody,0,-0.24,0));
+    leftArm.add(sph(0.11,mJoint,0,-0.46,0));
+    leftArm.add(cyl(0.085,0.075,0.36,mBody,0,-0.68,0));
+    leftArm.add(sph(0.1,mDark,0,-0.88,0));
+
+    var rightArm=new THREE.Group();rightArm.position.set(0.5,0.7,0);rightArm.rotation.z=-0.2;robot.add(rightArm);
+    rightArm.add(cyl(0.1,0.09,0.4,mBody,0,-0.24,0));
+    rightArm.add(sph(0.11,mJoint,0,-0.46,0));
+    rightArm.add(cyl(0.085,0.075,0.36,mBody,0,-0.68,0));
+    rightArm.add(sph(0.1,mDark,0,-0.88,0));
+
+    /* LEGS */
+    var leftLeg=new THREE.Group();leftLeg.position.set(-0.21,-0.15,0);robot.add(leftLeg);
+    leftLeg.add(cyl(0.125,0.11,0.44,mBody,0,-0.22,0));
+    leftLeg.add(sph(0.12,mJoint,0,-0.46,0));
+    leftLeg.add(cyl(0.1,0.09,0.4,mBody,0,-0.7,0));
+    leftLeg.add(box(0.2,0.1,0.3,mDark,-0.01,-0.95,0.02));
+
+    var rightLeg=new THREE.Group();rightLeg.position.set(0.21,-0.15,0);robot.add(rightLeg);
+    rightLeg.add(cyl(0.125,0.11,0.44,mBody,0,-0.22,0));
+    rightLeg.add(sph(0.12,mJoint,0,-0.46,0));
+    rightLeg.add(cyl(0.1,0.09,0.4,mBody,0,-0.7,0));
+    rightLeg.add(box(0.2,0.1,0.3,mDark,0.01,-0.95,0.02));
+
+    /* GROUND SHADOW */
+    var ground=new THREE.Mesh(
+      new THREE.CircleGeometry(1.2,32),
+      new THREE.MeshStandardMaterial({color:0x050e1a,transparent:true,opacity:0.3,roughness:1})
+    );
+    ground.rotation.x=-Math.PI/2;
+    ground.position.y=-1.12;
+    ground.receiveShadow=true;
+    scene.add(ground);
+
+    /* MOUSE TRACKING */
+    var mx2=0,my2=0;
+    wrap.addEventListener('mousemove',function(e){
+      var r=wrap.getBoundingClientRect();
+      mx2=((e.clientX-r.left)/r.width-0.5)*2;
+      my2=((e.clientY-r.top)/r.height-0.5)*2;
+    });
+    wrap.addEventListener('mouseleave',function(){mx2=0;my2=0;});
+
+    /* ANIMATE */
+    var clock=new THREE.Clock();
+    var rotY=0;
+    function animate(){
+      requestAnimationFrame(animate);
+      var t=clock.getElapsedTime();
+      robot.position.y=Math.sin(t*1.3)*0.05;
+      leftArm.rotation.x=Math.sin(t*1.3)*0.2;
+      rightArm.rotation.x=Math.sin(t*1.3+Math.PI)*0.2;
+      leftLeg.rotation.x=Math.sin(t*1.3+Math.PI)*0.12;
+      rightLeg.rotation.x=Math.sin(t*1.3)*0.12;
+      head.rotation.y=Math.sin(t*0.6)*0.22+mx2*0.28;
+      head.rotation.x=Math.sin(t*0.45)*0.08-my2*0.14;
+      antBall.position.y=1.06+Math.abs(Math.sin(t*2.8))*0.07;
+      eyeMat.emissiveIntensity=3.2+Math.sin(t*1.8)*0.8;
+      eyeRimMat.emissiveIntensity=1.0+Math.sin(t*1.8)*0.4;
+      mAccent.emissiveIntensity=1.4+Math.sin(t*2.2)*0.5;
+      rotY+=(mx2*0.35-rotY)*0.05;
+      robot.rotation.y=rotY+Math.sin(t*0.28)*0.04;
+      renderer.render(scene,cam);
+    }
+    animate();
+
+    window.addEventListener('resize',function(){
+      var nw=wrap.clientWidth,nh=wrap.clientHeight;
+      if(nw>0){renderer.setSize(nw,nh);cam.aspect=nw/nh;cam.updateProjectionMatrix();}
+    });
+  }
+})();
 </script>
 </body>
 </html>
