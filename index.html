@@ -389,10 +389,97 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 }
 @media(max-width:480px){.cert-g{columns:1}.hero-name{letter-spacing:-2px}}
 .anim-build{background:linear-gradient(125deg,var(--g1),var(--g2) 50%,var(--g5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:sh 5s linear infinite;}
+
+/* ══ GLITCH ══ */
+.hero-name{position:relative}
+.glitch{animation:fi .8s .1s ease both;position:relative}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;font-family:var(--fD);font-size:clamp(2.8rem,5vw,5.2rem);font-weight:800;line-height:.95;letter-spacing:-3px;background:var(--bg)}
+.glitch::before{left:3px;text-shadow:-2px 0 #ff5f7e;clip-path:polygon(0 15%,100% 15%,100% 35%,0 35%);animation:glitch1 4s infinite linear;color:var(--tx)}
+.glitch::after{left:-3px;text-shadow:2px 0 #38e8b9;clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);animation:glitch2 4s infinite linear;color:var(--tx)}
+@keyframes glitch1{0%,90%,100%{transform:none;opacity:0}91%{transform:translate(-3px,1px) skew(-1deg);opacity:1}93%{transform:translate(3px,-1px) skew(1deg);opacity:1}95%{transform:translate(-2px,2px);opacity:0.8}97%{transform:none;opacity:0}}
+@keyframes glitch2{0%,90%,100%{transform:none;opacity:0}92%{transform:translate(3px,-2px) skew(2deg);opacity:1}94%{transform:translate(-3px,1px) skew(-1deg);opacity:1}96%{transform:translate(2px,-1px);opacity:0.7}98%{transform:none;opacity:0}}
+
+/* ══ SPOTLIGHT ══ */
+#spotlight{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle 280px at -999px -999px,rgba(56,232,185,.07) 0%,rgba(56,232,185,.03) 40%,transparent 70%);transition:background 0.05s}
+
+/* ══ PARTICLES ══ */
+#particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.85}
+
+/* ══ MAGNETIC ══ */
+.btn-p,.btn-g,.nav-cv{transition:transform .2s var(--ease),box-shadow .2s,border-color .2s,color .2s!important}
+
+
+
+/* ══ TILT CARDS ══ */
+.pc{transform-style:preserve-3d;will-change:transform}
+.pc .tilt-shine{position:absolute;inset:0;border-radius:18px;background:radial-gradient(circle at var(--sx,50%) var(--sy,50%),rgba(56,232,185,.18) 0%,rgba(91,127,255,.08) 40%,transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:3}
+.pc:hover .tilt-shine{opacity:1}
+
+/* ══ ROBOT SPEECH BUBBLE ══ */
+#speech-bubble{
+  position:absolute;
+  bottom:calc(100% + 18px);
+  left:50%;
+  transform:translateX(-50%) scale(0);
+  transform-origin:bottom center;
+  background:rgba(8,20,38,.95);
+  border:1px solid rgba(56,232,185,.4);
+  border-radius:16px;
+  padding:12px 20px;
+  white-space:nowrap;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--g1);
+  letter-spacing:.5px;
+  z-index:10;
+  pointer-events:none;
+  box-shadow:0 0 24px rgba(56,232,185,.15),0 8px 32px rgba(0,0,0,.5);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+#speech-bubble::after{
+  content:'';
+  position:absolute;
+  top:100%;left:50%;
+  transform:translateX(-50%);
+  border:8px solid transparent;
+  border-top-color:rgba(56,232,185,.4);
+}
+#speech-bubble.show{transform:translateX(-50%) scale(1)}
+#speech-typed{display:inline}
+#speech-cursor{color:var(--g1);animation:bl .7s step-end infinite}
+
+/* ══ KONAMI OVERLAY ══ */
+#konami-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:99990;
+  pointer-events:none;
+  overflow:hidden;
+}
+#konami-overlay.active{display:block}
+.konfetti{position:absolute;width:8px;height:8px;border-radius:2px;animation:konfalldown linear forwards}
+@keyframes konfalldown{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+#konami-msg{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  z-index:99991;pointer-events:none;
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;
+  background:linear-gradient(125deg,var(--g1),var(--g2),var(--g5));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-align:center;line-height:1.2;
+  animation:none;
+  filter:drop-shadow(0 0 30px rgba(56,232,185,.5));
+}
+#konami-msg.pop{animation:konamipop .6s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes konamipop{0%{transform:translate(-50%,-50%) scale(0)}60%{transform:translate(-50%,-50%) scale(1.1)}100%{transform:translate(-50%,-50%) scale(1)}}
+
 </style>
 </head>
 <body>
 
+<canvas id="particles-canvas"></canvas>
+<div id="spotlight"></div>
 <div id="dot"></div><div id="ring"></div><div id="pgb"></div>
 <canvas id="cv-circuit"></canvas><canvas id="cv-matrix"></canvas>
 <div class="grid-bg"></div>
@@ -450,6 +537,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
       <div class="hrs-ring hrs-ring1"></div>
       <div class="hrs-ring hrs-ring2"></div>
       <div class="hrs-spin"></div>
+      <div id="speech-bubble"><span id="speech-typed"></span><span id="speech-cursor">|</span></div>
       <div id="robot-wrap"></div>
     </div>
   </div>
@@ -567,19 +655,19 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
     </div>
   </div>
   <div class="pg2">
-    <div class="pc feat rv" data-c="ai"><div class="pc-top"><span class="pc-num">01 — FEATURED</span><div class="pc-arr">↗</div></div><div class="pc-icon">⚖️</div><h3>Contract Lifecycle Management — Naja7</h3><p>AI-powered legal document analysis platform automating contract review, clause extraction, and risk flagging using Azure AI, OpenAI GPT, and HuggingFace transformers.</p><div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI</span><span class="ptag">HuggingFace</span><span class="ptag">NLP</span><span class="ptag">Python</span></div></div>
-    <div class="pc rv" data-c="hw"><div class="pc-top"><span class="pc-num">02</span><div class="pc-arr">↗</div></div><div class="pc-icon">🖥️</div><h3>Custom CPU Design</h3><p>Full CPU from scratch in Logisim — ALU, register file, control unit, and complete datapath demonstrating core computer architecture principles.</p><div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">Architecture</span></div></div>
-    <div class="pc rv" data-c="net"><div class="pc-top"><span class="pc-num">03</span><div class="pc-arr">↗</div></div><div class="pc-icon">🌐</div><h3>Enterprise Network Design</h3><p>Fully redundant multi-floor enterprise network — zero single points of failure, VLANs, and fault-tolerant routing configured in Packet Tracer.</p><div class="ptags"><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">Redundancy</span></div></div>
-    <div class="pc rv" data-c="sw"><div class="pc-top"><span class="pc-num">04</span><div class="pc-arr">↗</div></div><div class="pc-icon">📦</div><h3>Shipment Management System</h3><p>Java OOP platform for tracking, reporting, and managing shipments end-to-end using solid design patterns.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span></div></div>
-    <div class="pc rv" data-c="sw"><div class="pc-top"><span class="pc-num">05</span><div class="pc-arr">↗</div></div><div class="pc-icon">🎓</div><h3>Student Records System</h3><p>Python system for GPA calculation, student registration, and academic reporting with efficient data structures and algorithms.</p><div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span></div></div>
+    <div class="pc feat rv" data-c="ai"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">01 — FEATURED</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>⚖️</div><h3>Contract Lifecycle Management — Naja7</h3><p>AI-powered legal document analysis platform automating contract review, clause extraction, and risk flagging using Azure AI, OpenAI GPT, and HuggingFace transformers.</p><div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI</span><span class="ptag">HuggingFace</span><span class="ptag">NLP</span><span class="ptag">Python</span></div></div>
+    <div class="pc rv" data-c="hw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">02</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🖥️</div><h3>Custom CPU Design</h3><p>Full CPU from scratch in Logisim — ALU, register file, control unit, and complete datapath demonstrating core computer architecture principles.</p><div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">Architecture</span></div></div>
+    <div class="pc rv" data-c="net"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">03</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🌐</div><h3>Enterprise Network Design</h3><p>Fully redundant multi-floor enterprise network — zero single points of failure, VLANs, and fault-tolerant routing configured in Packet Tracer.</p><div class="ptags"><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">Redundancy</span></div></div>
+    <div class="pc rv" data-c="sw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">04</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>📦</div><h3>Shipment Management System</h3><p>Java OOP platform for tracking, reporting, and managing shipments end-to-end using solid design patterns.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span></div></div>
+    <div class="pc rv" data-c="sw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">05</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🎓</div><h3>Student Records System</h3><p>Python system for GPA calculation, student registration, and academic reporting with efficient data structures and algorithms.</p><div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span></div></div>
   </div>
   <div class="upcoming-lbl rv">In Progress · Details dropping Summer 2026</div>
   <div class="pg2">
-    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">06 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">🤖</div><div class="pc-soon">Summer 2026</div><h3>AI Agent from Machine Learning</h3><p>An autonomous AI agent built from the ground up using machine learning — capable of reasoning, planning, and executing multi-step tasks.</p><div class="ptags"><span class="ptag">AI Agents</span><span class="ptag">Machine Learning</span><span class="ptag">Python</span></div></div>
-    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">07 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">📡</div><div class="pc-soon">Summer 2026</div><h3>Network Communication Project</h3><p>Advanced network communication system — protocols, data transmission, and real-world networking engineering.</p><div class="ptags"><span class="ptag">Networking</span><span class="ptag">Protocols</span><span class="ptag">Systems</span></div></div>
-    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">08 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">📊</div><div class="pc-soon">Summer 2026</div><h3>Digital Signal Processing Project</h3><p>End-to-end DSP system — signal acquisition, filtering, and analysis applied to real engineering problems.</p><div class="ptags"><span class="ptag">DSP</span><span class="ptag">Signal Analysis</span><span class="ptag">MATLAB</span></div></div>
-    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">09 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">⚙️</div><div class="pc-soon">Summer 2026</div><h3>Microprocessor Project</h3><p>Low-level microprocessor design and programming — architecture, instruction sets, and embedded control.</p><div class="ptags"><span class="ptag">Microprocessor</span><span class="ptag">Embedded</span><span class="ptag">Assembly</span></div></div>
-    <div class="pc upcoming rv" data-c="upcoming"><div class="pc-top"><span class="pc-num">10 — IN PROGRESS</span><div class="pc-arr">↗</div></div><div class="pc-icon">💻</div><div class="pc-soon">Summer 2026</div><h3>Computer Practicum Project</h3><p>Comprehensive capstone project applying core computer engineering skills across hardware and software domains.</p><div class="ptags"><span class="ptag">Computer Engineering</span><span class="ptag">Capstone</span><span class="ptag">Systems</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">06 — IN PROGRESS</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🤖</div><div class="pc-soon"><div class="tilt-shine"></div>Summer 2026</div><h3>AI Agent from Machine Learning</h3><p>An autonomous AI agent built from the ground up using machine learning — capable of reasoning, planning, and executing multi-step tasks.</p><div class="ptags"><span class="ptag">AI Agents</span><span class="ptag">Machine Learning</span><span class="ptag">Python</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">07 — IN PROGRESS</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>📡</div><div class="pc-soon"><div class="tilt-shine"></div>Summer 2026</div><h3>Network Communication Project</h3><p>Advanced network communication system — protocols, data transmission, and real-world networking engineering.</p><div class="ptags"><span class="ptag">Networking</span><span class="ptag">Protocols</span><span class="ptag">Systems</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">08 — IN PROGRESS</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>📊</div><div class="pc-soon"><div class="tilt-shine"></div>Summer 2026</div><h3>Digital Signal Processing Project</h3><p>End-to-end DSP system — signal acquisition, filtering, and analysis applied to real engineering problems.</p><div class="ptags"><span class="ptag">DSP</span><span class="ptag">Signal Analysis</span><span class="ptag">MATLAB</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">09 — IN PROGRESS</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>⚙️</div><div class="pc-soon"><div class="tilt-shine"></div>Summer 2026</div><h3>Microprocessor Project</h3><p>Low-level microprocessor design and programming — architecture, instruction sets, and embedded control.</p><div class="ptags"><span class="ptag">Microprocessor</span><span class="ptag">Embedded</span><span class="ptag">Assembly</span></div></div>
+    <div class="pc upcoming rv" data-c="upcoming"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">10 — IN PROGRESS</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>💻</div><div class="pc-soon"><div class="tilt-shine"></div>Summer 2026</div><h3>Computer Practicum Project</h3><p>Comprehensive capstone project applying core computer engineering skills across hardware and software domains.</p><div class="ptags"><span class="ptag">Computer Engineering</span><span class="ptag">Capstone</span><span class="ptag">Systems</span></div></div>
   </div>
 </section>
 
@@ -682,7 +770,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <h2 class="rv">Let's <span class="anim-build">build</span><br>something.</h2>
   <p class="ft-sub rv">Open to internships, research collaborations, and exciting engineering challenges. Based in Doha, Qatar.</p>
   <div class="c-links rv">
-    <a href="mailto:mm2308642@qu.edu.qa" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>mm2308642@qu.edu.qa</a>
+    <span class="cl" style="cursor:default"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>mm2308642@qu.edu.qa</span>
     <a href="https://github.com/Mohammad-Maasfeh" target="_blank" rel="noopener" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>github.com/Mohammad-Maasfeh</a>
     <a href="assets/cv.pdf" download class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV</a>
   </div>
@@ -691,6 +779,125 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 </footer>
 
 <script>
+
+/* ══ SPOTLIGHT ══ */
+var spotlight=document.getElementById('spotlight');
+document.addEventListener('mousemove',function(e){
+  spotlight.style.background='radial-gradient(circle 320px at '+e.clientX+'px '+e.clientY+'px,rgba(56,232,185,.09) 0%,rgba(91,127,255,.04) 40%,transparent 70%)';
+});
+
+/* ══ GLITCH — set data-text on Mohammad ══ */
+(function(){
+  var h=document.querySelector('.hero-name');
+  if(!h)return;
+  h.classList.add('glitch');
+  // data-text = visible text content (just "Mohammad")
+  h.setAttribute('data-text','Mohammad');
+})();
+
+/* ══ FLOATING SKILL PARTICLES ══ */
+(function(){
+  var cv=document.getElementById('particles-canvas');
+  var ctx=cv.getContext('2d');
+  var W,H;
+  function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  sz();window.addEventListener('resize',sz);
+
+  var words=['Python','AI','NLP','ML','FPGA','LLM','Java','CPU','VORA','C++','Azure','Git','DSP','IEEE','GPU','API','VHDL','RTL'];
+  var colors=['#38e8b9','#5b7fff','#a855f7','#ffbe4f','#38e8b9','#5b7fff'];
+
+  var particles=words.map(function(w,i){
+    return{
+      word:w,
+      x:Math.random()*innerWidth,
+      y:Math.random()*innerHeight,
+      vx:(Math.random()-.5)*0.45,
+      vy:(Math.random()-.5)*0.35,
+      size:10+Math.random()*8,
+      color:colors[i%colors.length],
+      alpha:0.12+Math.random()*0.22,
+      targetAlpha:0.12+Math.random()*0.22,
+      phase:Math.random()*Math.PI*2
+    };
+  });
+
+  // Add more small dot particles
+  for(var i=0;i<30;i++){
+    particles.push({
+      word:'',
+      x:Math.random()*innerWidth,
+      y:Math.random()*innerHeight,
+      vx:(Math.random()-.5)*0.5,
+      vy:(Math.random()-.5)*0.4,
+      size:2+Math.random()*3,
+      color:colors[i%colors.length],
+      alpha:0.08+Math.random()*0.18,
+      targetAlpha:0.08+Math.random()*0.18,
+      phase:Math.random()*Math.PI*2,
+      isDot:true,
+      r:1.5+Math.random()*2
+    });
+  }
+
+  var t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=0.012;
+    particles.forEach(function(p){
+      p.x+=p.vx;
+      p.y+=p.vy;
+      if(p.x<-100)p.x=W+50;
+      if(p.x>W+100)p.x=-50;
+      if(p.y<-50)p.y=H+30;
+      if(p.y>H+50)p.y=-30;
+      var a=p.alpha*(0.7+0.3*Math.sin(t+p.phase));
+      ctx.globalAlpha=a;
+      if(p.isDot){
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=p.color;
+        ctx.fill();
+        // glow
+        ctx.globalAlpha=a*0.3;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
+        ctx.fillStyle=p.color;
+        ctx.fill();
+      } else {
+        ctx.font='600 '+p.size+'px "JetBrains Mono",monospace';
+        ctx.fillStyle=p.color;
+        ctx.fillText(p.word,p.x,p.y);
+      }
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ══ MAGNETIC BUTTONS ══ */
+(function(){
+  document.querySelectorAll('.btn-p,.btn-g,.nav-cv').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){
+      var r=btn.getBoundingClientRect();
+      var cx=r.left+r.width/2, cy=r.top+r.height/2;
+      var dx=e.clientX-cx, dy=e.clientY-cy;
+      var dist=Math.sqrt(dx*dx+dy*dy);
+      var maxDist=90;
+      if(dist<maxDist){
+        var pull=1-(dist/maxDist);
+        var mx=dx*pull*0.45;
+        var my=dy*pull*0.45;
+        btn.style.transform='translate('+mx+'px,'+my+'px) scale(1.06)';
+      }
+    });
+    btn.addEventListener('mouseleave',function(){
+      btn.style.transform='translate(0,0) scale(1)';
+    });
+  });
+})();
+
+
 /* CURSOR */
 var DOT=document.getElementById('dot'),RING=document.getElementById('ring');
 var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
@@ -761,9 +968,7 @@ var tx=0;
 LB.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
 LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].clientX)>50)lbGo(tx>e.changedTouches[0].clientX?1:-1);});
 
-/* ══════════════════════════════════
-   3D ROBOT — Three.js r128
-══════════════════════════════════ */
+/* 3D ROBOT — Three.js r128 */
 (function(){
   var s=document.createElement('script');
   s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
@@ -960,6 +1165,82 @@ LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].cl
     });
   }
 })();
+
+/* == TILT CARDS 3D == */
+(function(){
+  document.querySelectorAll('.pc').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width;
+      var y=(e.clientY-r.top)/r.height;
+      var rx=(y-0.5)*-16, ry=(x-0.5)*20;
+      card.style.transform='perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-8px) scale(1.02)';
+      card.style.transition='transform 0.08s ease';
+      var shine=card.querySelector('.tilt-shine');
+      if(shine){shine.style.setProperty('--sx',(x*100)+'%');shine.style.setProperty('--sy',(y*100)+'%');}
+    });
+    card.addEventListener('mouseleave',function(){
+      card.style.transform='perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+      card.style.transition='transform 0.55s cubic-bezier(.16,1,.3,1)';
+    });
+  });
+})();
+
+/* == ROBOT SPEECH BUBBLE == */
+(function(){
+  var bubble=document.getElementById('speech-bubble');
+  var typedEl=document.getElementById('speech-typed');
+  if(!bubble||!typedEl)return;
+  var messages=["Hello there!","Nice to meet you!","Welcome!","Hello there!"];
+  var mi=0,ci2=0,deleting=false;
+  function showBubble(){bubble.classList.add('show');typeTick();}
+  function typeTick(){
+    var msg=messages[mi];
+    if(!deleting){
+      typedEl.textContent=msg.slice(0,ci2++);
+      if(ci2>msg.length){setTimeout(function(){deleting=true;typeTick();},2200);return;}
+    } else {
+      typedEl.textContent=msg.slice(0,ci2--);
+      if(ci2<0){ci2=0;deleting=false;mi=(mi+1)%messages.length;setTimeout(typeTick,400);return;}
+    }
+    setTimeout(typeTick,deleting?35:70);
+  }
+  setTimeout(showBubble,1500);
+})();
+
+/* == KONAMI CODE EASTER EGG == */
+(function(){
+  var code=[38,38,40,40,37,39,37,39,66,65],pos=0;
+  var kColors=['#38e8b9','#5b7fff','#a855f7','#ff5f7e','#ffbe4f','#fff'];
+  var kMsgs=['VORA ACTIVATED!','SYSTEM UNLOCKED!','YOU FOUND IT!','MOHAMMAD MODE!','AI ENGINEER!'];
+  document.addEventListener('keydown',function(e){
+    pos=(e.keyCode===code[pos])?pos+1:0;
+    if(pos===code.length){pos=0;fire();}
+  });
+  function fire(){
+    var ov=document.getElementById('konami-overlay');
+    var msg=document.getElementById('konami-msg');
+    if(!ov||!msg)return;
+    msg.textContent=kMsgs[Math.floor(Math.random()*kMsgs.length)];
+    msg.className='pop';
+    ov.className='active';
+    var frag=document.createDocumentFragment();
+    for(var i=0;i<140;i++){
+      (function(){
+        var el=document.createElement('div');
+        el.className='konfetti';
+        var col=kColors[Math.floor(Math.random()*kColors.length)];
+        var size=5+Math.random()*10;
+        el.style.cssText='left:'+Math.random()*100+'vw;top:-20px;width:'+size+'px;height:'+size+'px;background:'+col+';border-radius:'+(Math.random()>.5?'50%':'2px')+';animation-duration:'+(1.5+Math.random()*2)+'s;animation-delay:'+(Math.random()*1.2)+'s;box-shadow:0 0 6px '+col;
+        frag.appendChild(el);
+      })();
+    }
+    ov.appendChild(frag);
+    setTimeout(function(){ov.className='';ov.innerHTML='';msg.className='';},4200);
+  }
+})();
 </script>
+<div id="konami-overlay"></div>
+<div id="konami-msg"></div>
 </body>
 </html>
