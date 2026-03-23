@@ -474,16 +474,12 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 #konami-msg.pop{animation:konamipop .6s cubic-bezier(.34,1.56,.64,1) forwards}
 @keyframes konamipop{0%{transform:translate(-50%,-50%) scale(0)}60%{transform:translate(-50%,-50%) scale(1.1)}100%{transform:translate(-50%,-50%) scale(1)}}
 
-/* == 3D MINI ROBOTS == */
-#mini-robots-stage{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
-#mini-robots-stage canvas{position:absolute;top:0;left:0;width:100%;height:100%;}
 </style>
 </head>
 <body>
 
 <canvas id="particles-canvas"></canvas>
 <div id="spotlight"></div>
-<div id="mini-robots-stage"></div>
 <div id="dot"></div><div id="ring"></div><div id="pgb"></div>
 <canvas id="cv-circuit"></canvas><canvas id="cv-matrix"></canvas>
 <div class="grid-bg"></div>
@@ -1245,176 +1241,6 @@ LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].cl
 })();
 
 
-/* == 3D MINI ROBOTS (Three.js) == */
-(function(){
-  /* Wait for Three.js to be loaded by the main robot script */
-  function tryInit(){
-    if(typeof THREE==='undefined'){setTimeout(tryInit,200);return;}
-    initMiniRobots();
-  }
-  setTimeout(tryInit,800);
-
-  function initMiniRobots(){
-    var stage=document.getElementById('mini-robots-stage');
-    if(!stage)return;
-
-    var W=window.innerWidth, H=window.innerHeight;
-    var scene=new THREE.Scene();
-    var cam=new THREE.PerspectiveCamera(60,W/H,0.1,500);
-    cam.position.set(0,0,18);
-    cam.lookAt(0,0,0);
-
-    var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
-    renderer.setSize(W,H);
-    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-    renderer.setClearColor(0x000000,0);
-    stage.appendChild(renderer.domElement);
-
-    /* Lights */
-    scene.add(new THREE.AmbientLight(0x223344,3));
-    var kl=new THREE.DirectionalLight(0x38e8b9,4);kl.position.set(5,10,8);scene.add(kl);
-    var fl=new THREE.DirectionalLight(0x5b7fff,2);fl.position.set(-5,3,-3);scene.add(fl);
-
-    var COLORS=[0x38e8b9,0x5b7fff,0xa855f7,0xffbe4f];
-    var ROBOT_COUNT=6;
-    var robots=[];
-
-    function makeMat(col,emissive,ei){
-      return new THREE.MeshStandardMaterial({color:col,emissive:emissive||col,emissiveIntensity:ei||0,metalness:0.85,roughness:0.15});
-    }
-
-    function buildMiniRobot(accentColor){
-      var g=new THREE.Group();
-      var body=makeMat(0x07111f,0x000000,0);
-      var dark=makeMat(0x030810,0x000000,0);
-      var joint=makeMat(0x0d1c30,0x000000,0);
-      var glow=new THREE.MeshStandardMaterial({color:accentColor,emissive:accentColor,emissiveIntensity:3,roughness:0,metalness:0});
-      var accent=new THREE.MeshStandardMaterial({color:accentColor,emissive:accentColor,emissiveIntensity:0.8,roughness:0.3,metalness:0.2});
-
-      function b(w,h,d,m,x,y,z){var mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);mesh.position.set(x||0,y||0,z||0);return mesh;}
-      function s(r,m,x,y,z){var mesh=new THREE.Mesh(new THREE.SphereGeometry(r,16,16),m);mesh.position.set(x||0,y||0,z||0);return mesh;}
-      function cy(rt,rb,h,m,x,y,z){var mesh=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,10),m);mesh.position.set(x||0,y||0,z||0);return mesh;}
-
-      /* Head */
-      var head=new THREE.Group();head.position.set(0,0.62,0);g.add(head);
-      head.add(s(0.2,body));
-      head.add(new THREE.Mesh(new THREE.TorusGeometry(0.22,0.012,8,32),accent));
-      /* Eyes */
-      head.add(s(0.055,glow,-0.08,0.03,0.18));
-      head.add(s(0.055,glow,0.08,0.03,0.18));
-      /* eye halos */
-      var haloMat=new THREE.MeshStandardMaterial({color:accentColor,emissive:accentColor,emissiveIntensity:0.5,transparent:true,opacity:0.18});
-      head.add(s(0.09,haloMat,-0.08,0.03,0.18));
-      head.add(s(0.09,haloMat,0.08,0.03,0.18));
-      /* Antenna */
-      head.add(cy(0.008,0.01,0.14,joint,0,0.26,0));
-      var antBall=s(0.025,glow,0,0.35,0);head.add(antBall);
-
-      /* Neck */
-      g.add(cy(0.04,0.055,0.08,joint,0,0.39,0));
-
-      /* Torso */
-      var torso=new THREE.Group();torso.position.set(0,0.14,0);g.add(torso);
-      torso.add(b(0.28,0.26,0.18,body));
-      torso.add(b(0.24,0.006,0.19,accent,0,0.06,0));
-      /* chest dots */
-      torso.add(s(0.018,glow,-0.05,0,0.1));
-      torso.add(s(0.018,glow,0,0,0.1));
-      torso.add(s(0.018,glow,0.05,0,0.1));
-      /* shoulders */
-      torso.add(s(0.065,joint,-0.155,0.09,0));
-      torso.add(s(0.065,joint,0.155,0.09,0));
-
-      /* Arms */
-      var lArm=new THREE.Group();lArm.position.set(-0.165,0.18,0);lArm.rotation.z=0.2;torso.add(lArm);
-      lArm.add(cy(0.032,0.028,0.14,body,0,-0.08,0));
-      lArm.add(s(0.036,joint,0,-0.16,0));
-      lArm.add(cy(0.026,0.022,0.12,body,0,-0.24,0));
-      lArm.add(s(0.032,dark,0,-0.31,0));
-
-      var rArm=new THREE.Group();rArm.position.set(0.165,0.18,0);rArm.rotation.z=-0.2;torso.add(rArm);
-      rArm.add(cy(0.032,0.028,0.14,body,0,-0.08,0));
-      rArm.add(s(0.036,joint,0,-0.16,0));
-      rArm.add(cy(0.026,0.022,0.12,body,0,-0.24,0));
-      rArm.add(s(0.032,dark,0,-0.31,0));
-
-      /* Waist */
-      g.add(cy(0.08,0.09,0.05,joint,0,0.0,0));
-
-      /* Legs */
-      var lLeg=new THREE.Group();lLeg.position.set(-0.07,-0.06,0);g.add(lLeg);
-      lLeg.add(cy(0.042,0.036,0.16,body,0,-0.08,0));
-      lLeg.add(s(0.04,joint,0,-0.17,0));
-      lLeg.add(cy(0.034,0.03,0.14,body,0,-0.26,0));
-      lLeg.add(b(0.07,0.04,0.1,dark,0,-0.35,0.01));
-
-      var rLeg=new THREE.Group();rLeg.position.set(0.07,-0.06,0);g.add(rLeg);
-      rLeg.add(cy(0.042,0.036,0.16,body,0,-0.08,0));
-      rLeg.add(s(0.04,joint,0,-0.17,0));
-      rLeg.add(cy(0.034,0.03,0.14,body,0,-0.26,0));
-      rLeg.add(b(0.07,0.04,0.1,dark,0,-0.35,0.01));
-
-      return {group:g,head:head,lArm:lArm,rArm:rArm,lLeg:lLeg,rLeg:rLeg,antBall:antBall,glow:glow,accent:accent};
-    }
-
-    /* Spawn robots at different X positions and heights */
-    var spread=22;
-    for(var i=0;i<ROBOT_COUNT;i++){
-      var col=COLORS[i%COLORS.length];
-      var rb=buildMiniRobot(col);
-      var startX=(Math.random()>0.5)?(spread/2+Math.random()*8):(-spread/2-Math.random()*8);
-      rb.group.position.set(startX,-2+Math.random()*1.2,Math.random()*2-1);
-      rb.group.scale.setScalar(0.55+Math.random()*0.3);
-      var speed=(0.012+Math.random()*0.014)*(startX>0?-1:1);
-      rb.speed=speed;
-      rb.phase=Math.random()*Math.PI*2;
-      rb.group.rotation.y=speed<0?0:Math.PI;
-      scene.add(rb.group);
-      robots.push(rb);
-    }
-
-    var clock=new THREE.Clock();
-    function animate(){
-      requestAnimationFrame(animate);
-      var t=clock.getElapsedTime();
-      robots.forEach(function(rb){
-        /* Walk */
-        rb.group.position.x+=rb.speed;
-        /* Bob */
-        rb.group.position.y+=(Math.sin(t*5+rb.phase)*0.003);
-        /* Leg swing */
-        rb.lLeg.rotation.x=Math.sin(t*5+rb.phase)*0.35;
-        rb.rLeg.rotation.x=-Math.sin(t*5+rb.phase)*0.35;
-        /* Arm swing opposite to legs */
-        rb.lArm.rotation.x=-Math.sin(t*5+rb.phase)*0.3;
-        rb.rArm.rotation.x=Math.sin(t*5+rb.phase)*0.3;
-        /* Head slight look */
-        rb.head.rotation.y=Math.sin(t*1.2+rb.phase)*0.15;
-        /* Eye pulse */
-        rb.glow.emissiveIntensity=2.5+Math.sin(t*2+rb.phase)*1.0;
-        /* Antenna bob */
-        rb.antBall.position.y=0.35+Math.abs(Math.sin(t*4+rb.phase))*0.04;
-        /* Wrap around screen edges */
-        if(rb.speed<0 && rb.group.position.x<-spread){
-          rb.group.position.x=spread;
-          rb.group.position.y=-2+Math.random()*1.2;
-        }
-        if(rb.speed>0 && rb.group.position.x>spread){
-          rb.group.position.x=-spread;
-          rb.group.position.y=-2+Math.random()*1.2;
-        }
-      });
-      renderer.render(scene,cam);
-    }
-    animate();
-
-    window.addEventListener('resize',function(){
-      W=window.innerWidth;H=window.innerHeight;
-      cam.aspect=W/H;cam.updateProjectionMatrix();
-      renderer.setSize(W,H);
-    });
-  }
-})();
 
 </script>
 <div id="konami-overlay"></div>
