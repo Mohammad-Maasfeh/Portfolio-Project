@@ -189,8 +189,8 @@ nav.stuck{padding:12px 6%;background:rgba(3,6,13,.94);backdrop-filter:blur(32px)
 
 /* SECTIONS */
 section{padding:110px 6%;position:relative;z-index:1}
-.s-ey{font-family:var(--fM);font-size:.66rem;letter-spacing:3px;text-transform:uppercase;color:var(--g1);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px;font-weight:400}
-.s-ey::before{content:'//';color:var(--tx3)}
+.s-ey{font-family:var(--fM);font-size:.63rem;letter-spacing:4px;text-transform:uppercase;color:var(--g1);margin-bottom:14px;display:inline-flex;align-items:center;gap:10px;font-weight:500}
+.s-ey::before{content:'';display:inline-block;width:22px;height:1.5px;background:linear-gradient(90deg,var(--g1),var(--g2));border-radius:2px;opacity:.9}
 .s-t{font-family:var(--fD);font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:64px;color:var(--tx)}
 .s-t .dim{color:var(--tx2);font-weight:600}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -299,7 +299,11 @@ section{padding:110px 6%;position:relative;z-index:1}
 .ei-p{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--tx3)}
 
 /* RESEARCH */
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch}
+.res-mid{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;backdrop-filter:blur(16px);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
+.res-mid:hover{transform:translateY(-7px) scale(1.01);border-color:rgba(56,232,185,.18);box-shadow:0 32px 70px rgba(0,0,0,.4)}
+.res-pic{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.85);transition:filter .5s,transform .6s}
+.res-mid:hover .res-pic{filter:brightness(.98) saturate(1.1);transform:scale(1.05)}
 .rc{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:34px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .4s var(--ease)}
 .rc:hover{border-color:rgba(91,127,255,.28);box-shadow:0 40px 80px rgba(91,127,255,.09);transform:translateY(-5px)}
 .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g2),transparent)}
@@ -374,6 +378,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .about-g{grid-template-columns:1fr;gap:40px}
   .sk-grid{grid-template-columns:1fr 1fr}
   .res-grid{grid-template-columns:1fr}
+  .res-mid{min-height:220px!important}
   .cert-g{columns:2}
 }
 @media(max-width:720px){
@@ -723,6 +728,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <h2 class="s-t rv">Research <span class="dim">&amp; publications</span></h2>
   <div class="res-grid">
     <div class="rc rv"><div class="rc-hd"><div class="rc-icon">🔬</div><div><div class="rc-tag">Second Author · Conference Paper</div></div></div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to one of the top-ranked Information Retrieval conferences worldwide. Investigates how LLMs form and maintain political positions — key contributions to AI fairness and alignment research. Extending in a follow-up paper.</p></div>
+    <div class="res-mid rv" style="min-height:260px"><img src="assets/researchpic.png" alt="Research" class="res-pic"></div>
     <div class="rc rv"><div class="rc-hd"><div class="rc-icon">⚖️</div><div><div class="rc-tag">Active Project · NLP</div></div></div><h3>Legal Document Summarization with Large Language Models</h3><p>Applying transformer-based LLMs to automated legal document summarization — bridging cutting-edge NLP research with practical legal technology to dramatically reduce manual review time and cost.</p></div>
   </div>
 </section>
