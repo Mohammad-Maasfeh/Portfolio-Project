@@ -427,7 +427,25 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .chips{grid-template-columns:1fr}
   .sk-header{flex-direction:column}
 }
-@media(max-width:480px){.cert-g{columns:1}.hero-name{letter-spacing:-2px}}
+@media(max-width:480px){
+  .cert-g{columns:1}
+  .hero-name{letter-spacing:-2px}
+  section{padding:64px 5%}
+  .vora-spot{padding:22px 18px}
+  .vora-h3{font-size:1rem}
+  .vora-sub{font-size:.8rem}
+  .ei{padding:24px 20px}
+  .ei-pic{height:150px}
+  .pc{padding:22px}
+  .pc-photo-img{min-height:200px}
+  .pfs{gap:6px}
+  .pf{padding:6px 11px;font-size:.6rem}
+  footer{padding:64px 5% 36px}
+}
+/* Touch devices: restore native pointer instead of cursor:none */
+@media (hover: none), (pointer: coarse){
+  *,body,a,button,.hbg,.pf,.ct,.pc,.ev,.rc,.sti,.lb-nav,#lb-x,#btt{cursor:auto!important}
+}
 .anim-build{background:linear-gradient(125deg,var(--g1),var(--g2) 50%,var(--g5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:sh 5s linear infinite;}
 
 /* ══ GLITCH ══ */
