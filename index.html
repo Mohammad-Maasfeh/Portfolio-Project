@@ -297,11 +297,35 @@ section{padding:110px 6%;position:relative;z-index:1}
 .ei-badge{display:inline-block;margin-top:12px;font-family:var(--fM);font-size:.58rem;letter-spacing:1px;padding:3px 10px;border-radius:20px;font-weight:400}
 .ei-a{background:rgba(56,232,185,.12);border:1px solid rgba(56,232,185,.25);color:var(--g1)}
 .ei-p{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--tx3)}
+.ei-pic{height:170px;border-radius:11px;overflow:hidden;margin-bottom:14px;border:1px solid rgba(255,255,255,.08);position:relative;background:rgba(0,0,0,.35)}
+.ei-pic img{width:100%;height:100%;object-fit:contain;transition:transform .5s;display:block}
+.ei:hover .ei-pic img{transform:scale(1.04)}
+
+/* VORA SPOTLIGHT */
+.vora-spot{margin-top:28px;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:34px;backdrop-filter:blur(16px);position:relative;overflow:hidden}
+.vora-spot::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent)}
+.vora-hd{margin-bottom:22px}
+.vora-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(56,232,185,.08);border:1px solid rgba(56,232,185,.18);color:var(--g1);font-family:var(--fM);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;padding:5px 13px;border-radius:40px;margin-bottom:14px;font-weight:400}
+.vora-h3{font-family:var(--fD);font-size:1.15rem;font-weight:700;letter-spacing:-.4px;line-height:1.35;margin-bottom:9px;color:var(--tx)}
+.vora-sub{color:var(--tx2);font-size:.85rem;line-height:1.78;font-weight:400;max-width:780px}
+.vora-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.vp{position:relative;height:200px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
+.vp:hover{transform:translateY(-5px) scale(1.01);border-color:rgba(56,232,185,.22);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.vp img{width:100%;height:100%;object-fit:cover;filter:brightness(.85) saturate(.85);transition:filter .5s,transform .6s}
+.vp:hover img{filter:brightness(1) saturate(1.05);transform:scale(1.06)}
+.vora-wins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.vw{background:rgba(56,232,185,.04);border:1px solid rgba(56,232,185,.14);border-radius:13px;padding:16px 18px;transition:border-color .3s,background .3s}
+.vw:hover{border-color:rgba(56,232,185,.32);background:rgba(56,232,185,.07)}
+.vw-num{font-family:var(--fD);font-size:1rem;font-weight:700;color:var(--g1);letter-spacing:-.3px;margin-bottom:5px;line-height:1.2}
+.vw-lbl{font-family:var(--fM);font-size:.65rem;letter-spacing:.5px;color:var(--tx2);line-height:1.55;font-weight:400}
 
 /* RESEARCH */
 .res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch}
 .res-mid{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;backdrop-filter:blur(16px);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
 .res-mid:hover{transform:translateY(-7px) scale(1.01);border-color:rgba(56,232,185,.18);box-shadow:0 32px 70px rgba(0,0,0,.4)}
+.res-stack{display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0}
+.res-stack .res-pic{border-right:1px solid rgba(255,255,255,.06)}
+.res-stack .res-pic:last-child{border-right:none}
 .res-pic{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.85);transition:filter .5s,transform .6s}
 .res-mid:hover .res-pic{filter:brightness(.98) saturate(1.1);transform:scale(1.05)}
 .rc{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:34px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .4s var(--ease)}
@@ -380,6 +404,8 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .res-grid{grid-template-columns:1fr}
   .res-mid{min-height:220px!important}
   .cert-g{columns:2}
+  .vora-photos{grid-template-columns:1fr 1fr}
+  .vora-wins{grid-template-columns:1fr 1fr}
 }
 @media(max-width:720px){
   .nav-ul{display:none}.hbg{display:flex}
@@ -387,6 +413,8 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .pg2{grid-template-columns:1fr}
   .ev-grid{grid-template-columns:1fr}
   .exp-grid{grid-template-columns:1fr}
+  .vora-photos{grid-template-columns:1fr}
+  .vora-wins{grid-template-columns:1fr}
   .ei{border-right:none!important;border-top:1px solid rgba(255,255,255,.06)}.ei:first-child{border-top:none}
   .sk-grid{grid-template-columns:1fr}
   .chips{grid-template-columns:1fr}
@@ -622,7 +650,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
     <div class="about-t rvl">
       <p>I'm a <strong>Computer Engineering student at Qatar University</strong> with a 3.71 GPA — at the intersection of AI research, hardware design, and software engineering.</p>
       <p>From designing CPUs from scratch in Logisim to co-authoring research papers on LLM behavior — I bring both <strong>deep technical depth and breadth</strong>. I thrive where hardware meets intelligence.</p>
-      <p>As co-founder of VORA, I lead hardware and software development. As TA and instructor at QU and AZER, I shape the next generation of engineers.</p>
+      <p>As founder of VORA, I lead hardware and software development. As TA and instructor at QU and AZER, I shape the next generation of engineers.</p>
       <div class="chips">
         <div class="chip rv">🤖 Artificial Intelligence</div>
         <div class="chip rv">⚙️ Embedded Systems</div>
@@ -715,10 +743,31 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <div class="exp-wrap rv">
     <div class="exp-topline"></div>
     <div class="exp-grid">
-      <div class="ei"><div class="ei-num">01 / CO-FOUNDER</div><div class="ei-dot"></div><h3>Co-Founder &amp; Systems Engineer</h3><div class="ei-org">VORA</div><p>Leading hardware and software development — system architecture, embedded design, and full-stack integration from day one.</p><span class="ei-badge ei-a">Active</span></div>
-      <div class="ei"><div class="ei-num">02 / INSTRUCTOR</div><div class="ei-dot"></div><h3>Instructor &amp; Engineering Tutor</h3><div class="ei-org">AZER</div><p>Completed advanced technical training and transitioned to instructor. Tutoring engineering and CS students while building advanced courses.</p><span class="ei-badge ei-a">Active</span></div>
-      <div class="ei"><div class="ei-num">03 / TEACHING ASSISTANT</div><div class="ei-dot"></div><h3>Teaching Assistant</h3><div class="ei-org">Qatar University — Engineering</div><p>TA in Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student outcomes.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">01 / FOUNDER</div><div class="ei-dot"></div><h3>Founder &amp; Systems Engineer</h3><div class="ei-org">VORA</div><p>Leading hardware and software development — system architecture, embedded design, and full-stack integration from day one.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">02 / INSTRUCTOR</div><div class="ei-pic"><img src="assets/azer.png" alt="AZER"></div><div class="ei-dot"></div><h3>Instructor &amp; Engineering Tutor</h3><div class="ei-org">AZER</div><p>Completed advanced technical training and transitioned to instructor. Tutoring engineering and CS students while building advanced courses.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">03 / TEACHING ASSISTANT</div><div class="ei-pic"><img src="assets/tutor.png" alt="Teaching Assistant at Qatar University"></div><div class="ei-dot"></div><h3>Teaching Assistant</h3><div class="ei-org">Qatar University — Engineering</div><p>TA in Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student outcomes.</p><span class="ei-badge ei-a">Active</span></div>
       <div class="ei"><div class="ei-num">04 / EVENT MANAGEMENT</div><div class="ei-dot"></div><h3>Trainer Assistant &amp; Organizer</h3><div class="ei-org">Sports &amp; Events Complex</div><p>Organized multiple large-scale events managing logistics, team coordination, and execution at high-attendance scale.</p><span class="ei-badge ei-p">Past</span></div>
+    </div>
+  </div>
+
+  <div class="vora-spot rv">
+    <div class="vora-hd">
+      <div class="vora-tag">● VORA · Spotlight</div>
+      <h3 class="vora-h3">An AI-powered retrofit cutting GCC cooling bills by ~30%.</h3>
+      <p class="vora-sub">VORA is a smart device + app that upgrades millions of legacy split &amp; window ACs across the Gulf — optimizing comfort, predicting failures, and lowering electricity bills without replacing the unit. 5-minute setup, no wiring, no installers.</p>
+    </div>
+    <div class="vora-photos">
+      <div class="vp"><img src="assets/vora1.png" alt="VORA"></div>
+      <div class="vp"><img src="assets/vora2.png" alt="VORA"></div>
+      <div class="vp"><img src="assets/vora3.png" alt="VORA"></div>
+    </div>
+    <div class="vora-wins">
+      <div class="vw"><div class="vw-num">20,000 QAR Award</div><div class="vw-lbl">Qatar's Ministry of Environment &amp; Climate Change</div></div>
+      <div class="vw"><div class="vw-num">1st Place Winner</div><div class="vw-lbl">Qatar Innovation Program 2025</div></div>
+      <div class="vw"><div class="vw-num">Nationals Winner</div><div class="vw-lbl">Huawei Innovation Competition 2026</div></div>
+      <div class="vw"><div class="vw-num">2nd Place · 15,000 QAR</div><div class="vw-lbl">Al Fikra National Entrepreneurship Competition · QU</div></div>
+      <div class="vw"><div class="vw-num">Incubated at QSTP</div><div class="vw-lbl">Qatar Science &amp; Technology Park · Qatar Foundation</div></div>
+      <div class="vw"><div class="vw-num">150+ Signups</div><div class="vw-lbl">B2C waitlist · vora.qa</div></div>
     </div>
   </div>
 </section>
@@ -728,7 +777,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <h2 class="s-t rv">Research <span class="dim">&amp; publications</span></h2>
   <div class="res-grid">
     <div class="rc rv"><div class="rc-hd"><div class="rc-icon">🔬</div><div><div class="rc-tag">Second Author · Conference Paper</div></div></div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to one of the top-ranked Information Retrieval conferences worldwide. Investigates how LLMs form and maintain political positions — key contributions to AI fairness and alignment research. Extending in a follow-up paper.</p></div>
-    <div class="res-mid rv" style="min-height:260px"><img src="assets/researchpic.png" alt="Research" class="res-pic"></div>
+    <div class="res-mid rv" style="min-height:260px"><div class="res-stack"><img src="assets/researchpic.png" alt="Research" class="res-pic"><img src="assets/research.png" alt="Research presentation" class="res-pic"></div></div>
     <div class="rc rv"><div class="rc-hd"><div class="rc-icon">⚖️</div><div><div class="rc-tag">Active Project · NLP</div></div></div><h3>Legal Document Summarization with Large Language Models</h3><p>Applying transformer-based LLMs to automated legal document summarization — bridging cutting-edge NLP research with practical legal technology to dramatically reduce manual review time and cost.</p></div>
   </div>
 </section>
@@ -923,7 +972,7 @@ document.querySelectorAll('a,button,.ct,.pc,.pf,.lb-nav,#lb-x,#btt,.hbg,.hs,.ev,
 (function(){var cv=document.getElementById('cv-matrix'),ctx=cv.getContext('2d');var W,H,cols,drops=[];var chars='01アイウエオ∑λ∇⟨⟩01アイウエオ01';function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.ceil(W/18);drops=[];for(var i=0;i<cols;i++)drops.push(Math.random()*-H);}sz();window.addEventListener('resize',sz);function draw(){ctx.fillStyle='rgba(3,6,13,.04)';ctx.fillRect(0,0,W,H);ctx.font='12px monospace';drops.forEach(function(y,i){var ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillStyle='rgba(56,232,185,'+(Math.random()>.97?1:.35)+')';ctx.fillText(ch,i*18,y);drops[i]+=12;if(drops[i]>H)drops[i]=Math.random()*-400;});requestAnimationFrame(draw);}draw();})();
 
 /* TYPED */
-var ROLES=['Computer Engineer','AI Researcher','Hardware Designer','Software Developer','Co-Founder @ VORA','TA @ Qatar University'];
+var ROLES=['Computer Engineer','AI Researcher','Hardware Designer','Software Developer','Founder @ VORA','TA @ Qatar University'];
 var ri=0,ci=0,del=false,tel=document.getElementById('typed');
 function typeIt(){var w=ROLES[ri];tel.textContent=del?w.slice(0,ci--):w.slice(0,ci++);if(!del&&ci>w.length){del=true;setTimeout(typeIt,1800);return;}if(del&&ci<0){del=false;ri=(ri+1)%ROLES.length;ci=0;}setTimeout(typeIt,del?45:75);}
 typeIt();
