@@ -702,7 +702,7 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
   <div class="about-g">
     <div class="about-t rvl">
       <p><strong>Computer Engineering at Qatar University</strong> (3.71 GPA), working at the boundary of <strong>AI, embedded systems, and scalable software</strong>. I build systems end to end -from gate-level CPU datapaths in Logisim to production NLP pipelines on Azure, OpenAI, and HuggingFace, to redundant enterprise networks and embedded firmware.</p>
-      <p>Currently <strong>founder @ vora</strong> -a hardware + software retrofit upgrading legacy GCC air-conditioners with intelligent control. National innovation winner. Incubated at <strong>QSTP</strong>. Alongside, I co-author <strong>NLP research on LLM political stance and alignment</strong>, TA computer engineering and CS courses at QU, and mentor engineers at AZER.</p>
+      <p>Currently <strong>founder @ vora</strong> -a hardware + software retrofit upgrading legacy GCC air-conditioners with intelligent control. National innovation winner. Incubated at <strong>QSTP</strong>. Alongside, I co-author <strong>NLP research on LLM political stance and alignment</strong>, tutor computer engineering and CS courses at QU, and teach engineers at AZER.</p>
       <p>I optimize for <strong>systems that ship</strong>: rigorous architecture, deterministic behavior under real load, and engineering decisions that survive contact with users and incidents.</p>
       <div class="chips">
         <div class="chip rv">AI / ML Systems</div>
@@ -882,6 +882,22 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
       <div class="ptags"><span class="ptag">Embedded</span><span class="ptag">MCU</span><span class="ptag">Sensors</span><span class="ptag">Motor Control</span><span class="ptag">Robotics</span><span class="ptag">HW / SW Integration</span><span class="ptag">Capstone</span></div>
     </div>
 
+    <div class="pc rv" data-c="sw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">11<span class="pc-num-dom">SOFTWARE · DATA STRUCTURES</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🗂️</div>
+      <h3>University Course Registration System</h3>
+      <p>Java course-registration platform showing how a Hash Table, Binary Search Tree, and Linked Queue collaborate to manage courses, enrollment, and waiting lists - with full object serialization so state survives between runs.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Problem</span><span class="pc-meta-v">Model real university registration - O(1) course lookup by CRN, ordered student rosters per course, fair FIFO waiting lists when sections fill, and durable state across sessions - without leaning on a library or a database.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> -data structure design, deletion semantics, persistence, and the CLI driver.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Architecture</span><span class="pc-meta-v">Open-addressed <strong>Hash Table</strong> (linear probing, <code>hash = crn % size</code>) with a <em>defunct</em> sentinel for lazy/tombstone deletion stores every <code>Course</code>. Each course owns a generic <strong>Binary Search Tree</strong> of enrolled students keyed by Student ID - supporting insert, search, full delete (including the two-child in-order-successor case), and pre/in/post-order traversal. Each course also owns a <strong>FIFO queue</strong> backed by a singly linked list with head/tail pointers for O(1) enqueue/dequeue, used as the waiting list. Dropping a student auto-promotes the head of the queue into the freed seat; raising capacity drains the queue until full.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Persistence</span><span class="pc-meta-v">Every entity (<code>TreeHashTable</code>, <code>Course</code>, <code>Student</code>, BST nodes, queue nodes) implements <code>java.io.Serializable</code>. The full hash table → courses → BSTs + queues graph round-trips through <code>details.dat</code> via <code>ObjectInputStream</code> / <code>ObjectOutputStream</code> on launch and exit.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Interactive console with 8 operations: add course, enroll student (auto-queue when full), drop (auto-promote from waitlist), raise capacity (drain waitlist), in-order roster display, cross-course student lookup, per-course Enrolled vs. WaitingList status, and a serialized save-on-exit. Defensive input validation throughout.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Java</span><span class="ptag">Data Structures</span><span class="ptag">Hash Table</span><span class="ptag">Linear Probing</span><span class="ptag">Binary Search Tree</span><span class="ptag">Linked List</span><span class="ptag">Queue</span><span class="ptag">Serialization</span><span class="ptag">OOP</span><span class="ptag">CLI</span></div>
+    </div>
+
     <div class="pc pc-photo rv" data-c="hw"><div class="pc-photo-img"><img src="assets/bestproject.png" alt="Faculty recognition -Best Project award" loading="lazy" decoding="async"></div><div class="pc-photo-meta"><span class="pc-photo-tag">● Best Project · Faculty Recognition</span><h3>Honored among the top engineering projects in the cohort</h3></div></div>
   </div>
 </section>
@@ -927,7 +943,7 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
     <div class="exp-grid">
       <div class="ei"><div class="ei-num">01 / FOUNDER</div><div class="ei-dot"></div><h3>founder @ vora · Systems Engineer</h3><div class="ei-org">vora</div><p>Lead hardware and software end to end -system architecture, embedded firmware, cloud control plane, and product integration. Owner of the technical roadmap.</p><span class="ei-badge ei-a">Active</span></div>
       <div class="ei"><div class="ei-num">02 / INSTRUCTOR</div><div class="ei-pic"><img src="assets/azer.png" alt="AZER engineering training" loading="lazy" decoding="async"></div><div class="ei-dot"></div><h3>Engineering Instructor</h3><div class="ei-org">AZER</div><p>Promoted from advanced trainee to instructor. Teaching engineering and CS students, building course material, and running technical sessions.</p><span class="ei-badge ei-a">Active</span></div>
-      <div class="ei"><div class="ei-num">03 / TEACHING ASSISTANT</div><div class="ei-pic"><img src="assets/tutor.png" alt="Teaching Assistant at Qatar University" loading="lazy" decoding="async"></div><div class="ei-dot"></div><h3>Teaching Assistant</h3><div class="ei-org">Qatar University · College of Engineering</div><p>TA across Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student grades and conceptual depth.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">03 / TUTOR</div><div class="ei-pic"><img src="assets/tutor.png" alt="Tutor at Qatar University" loading="lazy" decoding="async"></div><div class="ei-dot"></div><h3>Tutor</h3><div class="ei-org">Qatar University · College of Engineering</div><p>Tutor across Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student grades and conceptual depth.</p><span class="ei-badge ei-a">Active</span></div>
       <div class="ei"><div class="ei-num">04 / OPERATIONS</div><div class="ei-dot"></div><h3>Operations &amp; Event Lead</h3><div class="ei-org">Sports &amp; Events Complex</div><p>Ran logistics, team coordination, and on-the-ground execution for multiple high-attendance events.</p><span class="ei-badge ei-p">Past</span></div>
     </div>
   </div>
@@ -1157,7 +1173,7 @@ document.querySelectorAll('a,button,.ct,.pc,.pf,.lb-nav,#lb-x,#btt,.hbg,.hs,.ev,
 (function(){var cv=document.getElementById('cv-matrix'),ctx=cv.getContext('2d');var W,H,cols,drops=[];var chars='01アイウエオ∑λ∇⟨⟩01アイウエオ01';function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.ceil(W/18);drops=[];for(var i=0;i<cols;i++)drops.push(Math.random()*-H);}sz();window.addEventListener('resize',sz);function draw(){ctx.fillStyle='rgba(3,6,13,.04)';ctx.fillRect(0,0,W,H);ctx.font='12px monospace';drops.forEach(function(y,i){var ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillStyle='rgba(56,232,185,'+(Math.random()>.97?1:.35)+')';ctx.fillText(ch,i*18,y);drops[i]+=12;if(drops[i]>H)drops[i]=Math.random()*-400;});requestAnimationFrame(draw);}draw();})();
 
 /* TYPED */
-var ROLES=['Computer Engineer','AI Researcher','Embedded Engineer','Software Developer','founder @ vora','TA @ Qatar University'];
+var ROLES=['Computer Engineer','AI Researcher','Embedded Engineer','Software Developer','founder @ vora','Tutor @ Qatar University'];
 var ri=0,ci=0,del=false,tel=document.getElementById('typed');
 function typeIt(){var w=ROLES[ri];tel.textContent=del?w.slice(0,ci--):w.slice(0,ci++);if(!del&&ci>w.length){del=true;setTimeout(typeIt,1800);return;}if(del&&ci<0){del=false;ri=(ri+1)%ROLES.length;ci=0;}setTimeout(typeIt,del?45:75);}
 typeIt();
