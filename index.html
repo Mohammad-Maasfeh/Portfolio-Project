@@ -114,8 +114,8 @@ nav.stuck{padding:12px 6%;background:rgba(3,6,13,.94);backdrop-filter:blur(32px)
 }
 .hero-robot-stage{
   position:relative;
-  width:540px;
-  height:560px;
+  width:720px;
+  height:740px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -126,8 +126,8 @@ nav.stuck{padding:12px 6%;background:rgba(3,6,13,.94);backdrop-filter:blur(32px)
 .hrs-spin{position:absolute;inset:18px;border-radius:50%;border:1.5px dashed rgba(56,232,185,.15);animation:sp 22s linear infinite}
 .hrs-spin::after{content:'';position:absolute;top:8px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--g1);box-shadow:0 0 16px var(--g1);transform:translateX(-50%)}
 #robot-wrap{
-  width:500px;
-  height:540px;
+  width:680px;
+  height:720px;
   position:relative;
   z-index:2;
   flex-shrink:0;
@@ -1476,7 +1476,7 @@ LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].cl
   var bubble=document.getElementById('speech-bubble');
   var typedEl=document.getElementById('speech-typed');
   if(!bubble||!typedEl)return;
-  var messages=["Hello -I build systems.","Currently shipping at vora.","Open to opportunities.","Welcome."];
+  var messages=["Welcome!","Hello!","Hi there!","Open to opportunities!"];
   var mi=0,ci2=0,deleting=false;
   function showBubble(){bubble.classList.add('show');typeTick();}
   function typeTick(){
