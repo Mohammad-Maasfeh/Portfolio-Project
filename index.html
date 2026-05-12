@@ -146,8 +146,8 @@ nav.stuck{padding:12px 6%;background:rgba(3,6,13,.94);backdrop-filter:blur(32px)
 
 /* Profile photo circle */
 .hr{display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
-.pw{position:relative;width:290px;height:290px;display:flex;align-items:center;justify-content:center}
-.pp{width:240px;height:240px;border-radius:50%;object-fit:cover;object-position:top;position:relative;z-index:2;border:3px solid rgba(56,232,185,.25);box-shadow:0 0 60px rgba(56,232,185,.12);transition:border-color .4s,box-shadow .4s}
+.pw{position:relative;width:420px;height:420px;display:flex;align-items:center;justify-content:center}
+.pp{width:360px;height:360px;border-radius:50%;object-fit:cover;object-position:top;position:relative;z-index:2;border:3px solid rgba(56,232,185,.25);box-shadow:0 0 60px rgba(56,232,185,.12);transition:border-color .4s,box-shadow .4s}
 .pw:hover .pp{border-color:rgba(56,232,185,.5);box-shadow:0 0 90px rgba(56,232,185,.22)}
 .pr{position:absolute;border-radius:50%;border:1px solid;animation:prp 4s ease-in-out infinite alternate}
 .pr1{inset:-10px;border-color:rgba(56,232,185,.12);animation-delay:0s}
@@ -268,6 +268,15 @@ section{padding:110px 6%;position:relative;z-index:1}
 .pc-meta-v strong{color:var(--tx);font-weight:500}
 .pc .pc-num{font-family:var(--fM);font-size:.6rem;color:rgba(56,232,185,.5);letter-spacing:2.4px;font-weight:500}
 .pc .pc-num .pc-num-dom{color:var(--tx3);margin-left:6px;letter-spacing:1.6px}
+.pgal{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:28px -5% 0}
+.pgi{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
+.pgi:hover{transform:translateY(-4px);border-color:rgba(56,232,185,.18);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.pgi-img{height:340px;background:#05080f;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pgi-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;filter:brightness(.94);transition:filter .4s,transform .5s}
+.pgi:hover .pgi-img img{filter:brightness(1.04);transform:scale(1.03)}
+.pgi-meta{padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(56,232,185,.04),transparent)}
+.pgi-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--fM);font-size:.55rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--g1);margin-bottom:5px;font-weight:400}
+.pgi h4{font-family:var(--fD);font-size:.78rem;font-weight:600;color:var(--tx);margin:0;line-height:1.45;letter-spacing:-.2px}
 .pc.upcoming{border-color:rgba(255,190,79,.12);background:linear-gradient(135deg,rgba(8,14,26,.9),rgba(255,190,79,.025))}
 .pc.upcoming::before{background:radial-gradient(circle at var(--px,50%) var(--py,50%),rgba(255,190,79,.06),transparent 60%)}
 .pc.upcoming:hover{border-color:rgba(255,190,79,.25);box-shadow:0 32px 80px rgba(0,0,0,.4),0 0 50px rgba(255,190,79,.07)}
@@ -303,7 +312,7 @@ section{padding:110px 6%;position:relative;z-index:1}
 /* EXPERIENCE */
 .exp-wrap{border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;backdrop-filter:blur(16px);position:relative}
 .exp-topline{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--g1),var(--g2),var(--g5),var(--g1));background-size:200%;animation:pgs 4s linear infinite}
-.exp-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);align-items:stretch}
 .ei{padding:30px 26px;border-right:1px solid rgba(255,255,255,.06);background:var(--card);transition:background .3s;position:relative;overflow:hidden}
 .ei:last-child{border-right:none}
 .ei:hover{background:rgba(56,232,185,.03)}
@@ -318,8 +327,8 @@ section{padding:110px 6%;position:relative;z-index:1}
 .ei-badge{display:inline-block;margin-top:12px;font-family:var(--fM);font-size:.58rem;letter-spacing:1px;padding:3px 10px;border-radius:20px;font-weight:400}
 .ei-a{background:rgba(56,232,185,.12);border:1px solid rgba(56,232,185,.25);color:var(--g1)}
 .ei-p{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--tx3)}
-.ei-pic{height:220px;border-radius:11px;overflow:hidden;margin-bottom:14px;border:1px solid rgba(255,255,255,.08);position:relative;background:rgba(0,0,0,.35)}
-.ei-pic img{width:100%;height:100%;object-fit:contain;transition:transform .5s;display:block}
+.ei-pic{height:240px;border-radius:11px;overflow:hidden;margin-bottom:14px;border:1px solid rgba(255,255,255,.08);position:relative;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+.ei-pic img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;transition:transform .5s;display:block}
 .ei:hover .ei-pic img{transform:scale(1.04)}
 
 /* VORA SPOTLIGHT */
@@ -330,10 +339,10 @@ section{padding:110px 6%;position:relative;z-index:1}
 .vora-h3{font-family:var(--fD);font-size:1.15rem;font-weight:700;letter-spacing:-.4px;line-height:1.35;margin-bottom:9px;color:var(--tx)}
 .vora-sub{color:var(--tx2);font-size:.85rem;line-height:1.78;font-weight:400;max-width:780px}
 .vora-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
-.vp{position:relative;height:200px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
+.vp{position:relative;height:300px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:#05080f;transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
 .vp:hover{transform:translateY(-5px) scale(1.01);border-color:rgba(56,232,185,.22);box-shadow:0 24px 60px rgba(0,0,0,.4)}
-.vp img{width:100%;height:100%;object-fit:cover;filter:brightness(.85) saturate(.85);transition:filter .5s,transform .6s}
-.vp:hover img{filter:brightness(1) saturate(1.05);transform:scale(1.06)}
+.vp img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(.9) saturate(.9);transition:filter .5s,transform .6s}
+.vp:hover img{filter:brightness(1.02) saturate(1.05);transform:scale(1.04)}
 .vora-wins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .vw{background:rgba(56,232,185,.04);border:1px solid rgba(56,232,185,.14);border-radius:13px;padding:16px 18px;transition:border-color .3s,background .3s}
 .vw:hover{border-color:rgba(56,232,185,.32);background:rgba(56,232,185,.07)}
@@ -345,10 +354,10 @@ section{padding:110px 6%;position:relative;z-index:1}
 .res-mid{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;backdrop-filter:blur(16px);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
 .res-mid:hover{transform:translateY(-7px) scale(1.01);border-color:rgba(56,232,185,.18);box-shadow:0 32px 70px rgba(0,0,0,.4)}
 .res-stack{display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0}
-.res-stack .res-pic{border-right:1px solid rgba(255,255,255,.06)}
-.res-stack .res-pic:last-child{border-right:none}
-.res-pic{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(.85);transition:filter .5s,transform .6s}
-.res-mid:hover .res-pic{filter:brightness(.98) saturate(1.1);transform:scale(1.05)}
+.res-stack > div{overflow:hidden;background:#05080f;position:relative}
+.res-stack > div:first-child{border-right:1px solid rgba(255,255,255,.06)}
+.res-pic{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(.92) saturate(.95);transition:filter .5s,transform .6s}
+.res-mid:hover .res-pic{filter:brightness(1.02) saturate(1.1);transform:scale(1.04)}
 .rc{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:34px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .4s var(--ease)}
 .rc:hover{border-color:rgba(91,127,255,.28);box-shadow:0 40px 80px rgba(91,127,255,.09);transform:translateY(-5px)}
 .rc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g2),transparent)}
@@ -362,8 +371,8 @@ section{padding:110px 6%;position:relative;z-index:1}
 .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .ev{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;backdrop-filter:blur(16px);transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
 .ev:hover{transform:translateY(-7px) scale(1.01);border-color:rgba(56,232,185,.18);box-shadow:0 32px 70px rgba(0,0,0,.4)}
-.ev-img{position:relative;height:196px;overflow:hidden}
-.ev-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(.8);transition:filter .5s,transform .6s}
+.ev-img{position:relative;height:260px;overflow:hidden;background:#05080f}
+.ev-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(.9) saturate(.9);transition:filter .5s,transform .6s}
 .ev:hover .ev-img img{filter:brightness(.92) saturate(1.1);transform:scale(1.07)}
 .ev-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--bg2),transparent 55%)}
 .ev-badge{position:absolute;top:14px;left:14px;font-family:var(--fM);font-size:.59rem;letter-spacing:1px;text-transform:uppercase;background:rgba(3,6,13,.85);border:1px solid rgba(255,255,255,.12);color:var(--tx2);padding:4px 10px;border-radius:5px;backdrop-filter:blur(8px);font-weight:400}
@@ -413,6 +422,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 /* RESPONSIVE */
 @media(max-width:1100px){
   .pg2{grid-template-columns:1fr 1fr}.pc.feat{grid-column:span 1}
+  .pgal{grid-template-columns:repeat(3,1fr);margin-left:0;margin-right:0}
   .exp-grid{grid-template-columns:1fr 1fr}
   .ei:nth-child(2){border-right:none}.ei:nth-child(3){border-top:1px solid rgba(255,255,255,.06)}.ei:nth-child(4){border-top:1px solid rgba(255,255,255,.06)}
 }
@@ -434,6 +444,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .nav-ul{display:none}.hbg{display:flex}
   section{padding:80px 5%}
   .pg2{grid-template-columns:1fr}
+  .pgal{grid-template-columns:1fr 1fr;margin-left:0;margin-right:0}
   .ev-grid{grid-template-columns:1fr}
   .exp-grid{grid-template-columns:1fr}
   .vora-photos{grid-template-columns:1fr}
@@ -451,7 +462,6 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   .vora-h3{font-size:1rem}
   .vora-sub{font-size:.8rem}
   .ei{padding:24px 20px}
-  .ei-pic{height:190px}
   .pc{padding:22px}
   .pc-photo-img{min-height:200px}
   .pfs{gap:6px}
@@ -702,8 +712,7 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
   <div class="about-g">
     <div class="about-t rvl">
       <p><strong>Computer Engineering at Qatar University</strong> (3.71 GPA), working at the boundary of <strong>AI, embedded systems, and scalable software</strong>. I build systems end to end -from gate-level CPU datapaths in Logisim to production NLP pipelines on Azure, OpenAI, and HuggingFace, to redundant enterprise networks and embedded firmware.</p>
-      <p>Currently <strong>founder @ vora</strong> -a hardware + software retrofit upgrading legacy GCC air-conditioners with intelligent control. National innovation winner. Incubated at <strong>QSTP</strong>. Alongside, I co-author <strong>NLP research on LLM political stance and alignment</strong>, tutor computer engineering and CS courses at QU, and teach engineers at AZER.</p>
-      <p>I optimize for <strong>systems that ship</strong>: rigorous architecture, deterministic behavior under real load, and engineering decisions that survive contact with users and incidents.</p>
+      <p>Beyond coursework, I build across <strong>embedded systems, AI, and the software glue between them</strong> -firmware, ML pipelines, and full-stack control. <strong>Second author</strong> on an NLP paper covering LLM political stance and alignment, and <strong>co-author</strong> on a separate research paper. I tutor <strong>CS, CE, and EE</strong> courses at QU and teach engineers at AZER.</p>
       <div class="chips">
         <div class="chip rv">AI / ML Systems</div>
         <div class="chip rv">Embedded · Firmware</div>
@@ -898,7 +907,29 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
       <div class="ptags"><span class="ptag">Java</span><span class="ptag">Data Structures</span><span class="ptag">Hash Table</span><span class="ptag">Linear Probing</span><span class="ptag">Binary Search Tree</span><span class="ptag">Linked List</span><span class="ptag">Queue</span><span class="ptag">Serialization</span><span class="ptag">OOP</span><span class="ptag">CLI</span></div>
     </div>
 
-    <div class="pc pc-photo rv" data-c="hw"><div class="pc-photo-img"><img src="assets/bestproject.png" alt="Faculty recognition -Best Project award" loading="lazy" decoding="async"></div><div class="pc-photo-meta"><span class="pc-photo-tag">● Best Project · Faculty Recognition</span><h3>Honored among the top engineering projects in the cohort</h3></div></div>
+  </div>
+
+  <div class="pgal rv">
+    <div class="pgi">
+      <div class="pgi-img"><img src="assets/bestproject.png" alt="Faculty recognition -Best Project award" loading="lazy" decoding="async"></div>
+      <div class="pgi-meta"><span class="pgi-tag">● Best Project · Faculty Recognition</span><h4>Honored among the top engineering projects in the cohort.</h4></div>
+    </div>
+    <div class="pgi">
+      <div class="pgi-img"><img src="assets/pp4.png" alt="Mersal Qatar coverage of Al Fikra National Entrepreneurship Competition 2026" loading="lazy" decoding="async"></div>
+      <div class="pgi-meta"><span class="pgi-tag">● Media Recognition</span><h4>Mersal Qatar covers QU's Al Fikra National Entrepreneurship Competition 2026 -vora on the Hult Prize Demo Day awards stage.</h4></div>
+    </div>
+    <div class="pgi">
+      <div class="pgi-img"><img src="assets/pp1.png" alt="Smart Delivery Mini Car early prototype" loading="lazy" decoding="async"></div>
+      <div class="pgi-meta"><span class="pgi-tag">● Capstone · Early Prototype</span><h4>Smart Delivery Mini Car -early prototype build: MCU control board, sensor wiring, and dual-motor drive on the chassis.</h4></div>
+    </div>
+    <div class="pgi">
+      <div class="pgi-img"><img src="assets/pp2.png" alt="Hardware prototyping and soldering" loading="lazy" decoding="async"></div>
+      <div class="pgi-meta"><span class="pgi-tag">● Hardware Craft</span><h4>Hands-on board bring-up and soldering at the home workbench.</h4></div>
+    </div>
+    <div class="pgi">
+      <div class="pgi-img"><img src="assets/pp3.png" alt="DSP sound-level meter interface" loading="lazy" decoding="async"></div>
+      <div class="pgi-meta"><span class="pgi-tag">● DSP · Live Interface</span><h4>Sound-level meter UI -FIR controls, STFT spectrogram, pole-zero plot, 96.2 dB SPL readout.</h4></div>
+    </div>
   </div>
 </section>
 
@@ -975,7 +1006,7 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
   <h2 class="s-t rv">Publications <span class="dim">&amp; ongoing work</span></h2>
   <div class="res-grid">
     <div class="rc rv"><div class="rc-hd"><div class="rc-icon">🔬</div><div><div class="rc-tag">Second Author · Conference Submission</div></div></div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to a top-tier Information Retrieval venue. Investigates how LLMs form, express, and maintain political positions across prompt variations -contributing to AI fairness and alignment. Currently extending the methodology in a follow-up paper.</p></div>
-    <div class="res-mid rv" style="min-height:260px"><div class="res-stack"><img src="assets/researchpic.png" alt="Research work" class="res-pic" loading="lazy" decoding="async"><img src="assets/research.png" alt="Research presentation" class="res-pic" loading="lazy" decoding="async"></div></div>
+    <div class="res-mid rv" style="min-height:260px"><div class="res-stack"><div><img src="assets/researchpic.png" alt="Research work" class="res-pic" loading="lazy" decoding="async"></div><div><img src="assets/research.png" alt="Research presentation" class="res-pic" loading="lazy" decoding="async"></div></div></div>
     <div class="rc rv"><div class="rc-hd"><div class="rc-icon">⚖️</div><div><div class="rc-tag">Ongoing · NLP / Applied</div></div></div><h3>Legal Document Summarization with LLMs</h3><p>Transformer-based summarization for legal documents -bridging current NLP research with practical legal tech. Focus: reducing manual review time without losing legally material content.</p></div>
   </div>
 </section>
