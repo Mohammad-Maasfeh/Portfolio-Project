@@ -784,15 +784,16 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
 
     <div class="pc rv" data-c="sw">
       <div class="tilt-shine"></div>
-      <div class="pc-top"><span class="pc-num">04<span class="pc-num-dom">SOFTWARE</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-top"><span class="pc-num">04<span class="pc-num-dom">SOFTWARE · OOP</span></span><div class="pc-arr">↗</div></div>
       <div class="pc-icon">📦</div>
       <h3>Shipment Management System</h3>
-      <p>Java OOP system modeling the full shipment lifecycle — encapsulated state, clean class hierarchies, and design patterns (Factory, Strategy, Observer) for routing and status updates.</p>
+      <p>Java OOP platform modeling the full shipment lifecycle — domain-driven design with Factory, Strategy, and Observer patterns powering carrier selection, routing, and status propagation. Built for extension: new carriers and routing policies plug in without touching the core.</p>
       <div class="pc-meta">
-        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — domain model, patterns, and CLI integration.</span></div>
-        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Extensible system supporting multiple carriers and routing strategies without core changes.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Team Lead / Lead Engineer</strong> — architecture, domain modeling, pattern selection, and cross-team coordination of implementation decisions.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Decisions</span><span class="pc-meta-v">UML-first design to lock interfaces before code. Factory for carrier instantiation, Strategy for pluggable routing policies, Observer for status-change propagation. Strict encapsulation across domain, application, and CLI layers.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Extensible, maintainable system — added carriers and routing strategies with zero changes to the core. Clean abstraction boundaries kept the team unblocked through the full build.</span></div>
       </div>
-      <div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span><span class="ptag">UML</span></div>
+      <div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span><span class="ptag">UML</span><span class="ptag">System Architecture</span><span class="ptag">Team Lead</span></div>
     </div>
 
     <div class="pc rv" data-c="sw">
@@ -810,15 +811,17 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
 
     <div class="pc rv" data-c="ai">
       <div class="tilt-shine"></div>
-      <div class="pc-top"><span class="pc-num">06<span class="pc-num-dom">AI / AGENTS</span></span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">🤖</div>
-      <h3>Autonomous AI Agent</h3>
-      <p>Agent built from primitive ML components — perception, planning, and action loops — capable of decomposing high-level goals into multi-step task sequences. End-to-end Python implementation.</p>
+      <div class="pc-top"><span class="pc-num">06<span class="pc-num-dom">ML / GENOMICS</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🧬</div>
+      <h3>TCGA-KICH Cancer Classification Pipeline</h3>
+      <p>End-to-end ML pipeline classifying kidney chromophobe carcinoma (KICH) — tumor vs. normal — from TCGA RNA-seq gene expression data. 91 patients, 43,806 genes (p ≫ n). Rigorous, leak-free sklearn pipeline with a full feature-selection and cross-validation audit.</p>
       <div class="pc-meta">
-        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Solo build</strong> — agent loop, planner, evaluation harness.</span></div>
-        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Agent completes structured multi-step tasks with bounded reasoning depth and deterministic recovery on failure.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Problem</span><span class="pc-meta-v">Cancer transcriptomic data is ultra-high-dimensional and leakage-prone — naive ML pipelines overfit catastrophically and report misleading accuracy.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — EDA, feature engineering, modeling, validation.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Pipeline</span><span class="pc-meta-v">Log₂(x+1) normalization → variance threshold → SelectKBest (ANOVA F-test) → RFE. Stratified split, leak-free sklearn Pipeline, GridSearchCV inside CV, learning-curve diagnostics. PCA + t-SNE for latent structure; Mahalanobis distance for outlier detection.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Near-perfect classification across Logistic Regression, Random Forest, and MLP. Only <strong>5 genes</strong> sufficient for ceiling-level performance — identified biologically discriminative gene signatures and quantified the interpretability vs. complexity tradeoff.</span></div>
       </div>
-      <div class="ptags"><span class="ptag">Python</span><span class="ptag">Machine Learning</span><span class="ptag">AI Agents</span><span class="ptag">Planning</span></div>
+      <div class="ptags"><span class="ptag">Python</span><span class="ptag">Scikit-learn</span><span class="ptag">Neural Networks</span><span class="ptag">Random Forest</span><span class="ptag">PCA</span><span class="ptag">t-SNE</span><span class="ptag">RFE</span><span class="ptag">Feature Selection</span><span class="ptag">Cross Validation</span><span class="ptag">Bioinformatics</span><span class="ptag">Genomics</span></div>
     </div>
 
     <div class="pc rv" data-c="net">
@@ -836,15 +839,18 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
 
     <div class="pc rv" data-c="hw">
       <div class="tilt-shine"></div>
-      <div class="pc-top"><span class="pc-num">08<span class="pc-num-dom">DSP</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-top"><span class="pc-num">08<span class="pc-num-dom">DSP · SYSTEMS</span></span><div class="pc-arr">↗</div></div>
       <div class="pc-icon">📊</div>
-      <h3>Digital Signal Processing Pipeline</h3>
-      <p>End-to-end DSP pipeline in MATLAB — signal acquisition, FIR/IIR filtering, FFT-based spectral analysis, and noise reduction applied to a real signal dataset.</p>
+      <h3>Interactive DSP Sound Analysis System</h3>
+      <p>Full digital sound-level meter pipeline — from analog acquisition chain through FIR filtering, STFT spectrograms, wavelet decomposition, and SPL estimation, exposed through an interactive Python GUI with adjustable controls and live visualization.</p>
       <div class="pc-meta">
-        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — filter design, spectral analysis, evaluation.</span></div>
-        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Measurable SNR improvement after filtering; clean frequency-domain characterization of the input signal.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Problem</span><span class="pc-meta-v">Build a complete DSP analysis chain — from analog front-end theory through real-time time/frequency visualization — that exposes the math behind every block, not a black-box visualizer.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — DSP implementation, hardware-chain analysis, GUI architecture.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Signal Path</span><span class="pc-meta-v">FIR low-pass via Hamming-window design (anti-aliasing aware), convolution pipeline, STFT for time-frequency analysis, Daubechies-4 wavelet decomposition, pole-zero analysis in the Z-plane, and SPL estimation from the filtered signal.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Hardware</span><span class="pc-meta-v">Analog chain modeled around electret microphone → LM358 front-end → ADC range conditioning → Nyquist-respecting sampling and anti-aliasing.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Interactive Python app: adjustable FIR coefficients, multi-chart spectrogram and time/frequency views, CSV signal generation and loading, live SPL readout.</span></div>
       </div>
-      <div class="ptags"><span class="ptag">MATLAB</span><span class="ptag">FFT</span><span class="ptag">FIR / IIR</span><span class="ptag">Signal Analysis</span></div>
+      <div class="ptags"><span class="ptag">Python</span><span class="ptag">scipy.signal</span><span class="ptag">NumPy</span><span class="ptag">matplotlib</span><span class="ptag">PyWavelets</span><span class="ptag">Tkinter</span><span class="ptag">FIR</span><span class="ptag">STFT</span><span class="ptag">Wavelets</span><span class="ptag">Z-Plane</span><span class="ptag">SPL</span></div>
     </div>
 
     <div class="pc rv" data-c="hw">
@@ -862,15 +868,17 @@ a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:foc
 
     <div class="pc rv" data-c="hw">
       <div class="tilt-shine"></div>
-      <div class="pc-top"><span class="pc-num">10<span class="pc-num-dom">HW / SW</span></span><div class="pc-arr">↗</div></div>
-      <div class="pc-icon">💻</div>
-      <h3>Computer Engineering Practicum</h3>
-      <p>Capstone integrating digital logic, microcontroller programming, and software interfacing — designed and built a working hardware/software system end to end, from spec to demo.</p>
+      <div class="pc-top"><span class="pc-num">10<span class="pc-num-dom">EMBEDDED · ROBOTICS</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🚗</div>
+      <h3>Smart Delivery Mini Car</h3>
+      <p>Embedded autonomous mini-vehicle that navigates and delivers items intelligently — full HW/SW co-design integrating microcontroller firmware, sensor fusion, motor control, and decision logic into a single working robot.</p>
       <div class="pc-meta">
-        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Lead</strong> — full HW/SW co-design and integration.</span></div>
-        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Live demo of integrated hardware/software pipeline against the original specification.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Problem</span><span class="pc-meta-v">Design and build a small autonomous vehicle that can sense its environment, decide a delivery action, and execute it reliably end to end.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Lead engineer</strong> — embedded firmware, control loop, sensor integration, and system bring-up.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Decisions</span><span class="pc-meta-v">Microcontroller-driven control loop reading sensor inputs, dispatching motor commands, and arbitrating delivery state. HW/SW interfaces defined upfront so firmware stayed decoupled from peripheral changes.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Working delivery robot demoed end to end — sensing, navigating, and completing deliveries against the original spec.</span></div>
       </div>
-      <div class="ptags"><span class="ptag">HW / SW Integration</span><span class="ptag">Embedded</span><span class="ptag">Capstone</span></div>
+      <div class="ptags"><span class="ptag">Embedded</span><span class="ptag">MCU</span><span class="ptag">Sensors</span><span class="ptag">Motor Control</span><span class="ptag">Robotics</span><span class="ptag">HW / SW Integration</span><span class="ptag">Capstone</span></div>
     </div>
 
     <div class="pc pc-photo rv" data-c="hw"><div class="pc-photo-img"><img src="assets/bestproject.png" alt="Faculty recognition — Best Project award" loading="lazy" decoding="async"></div><div class="pc-photo-meta"><span class="pc-photo-tag">● Best Project · Faculty Recognition</span><h3>Honored among the top engineering projects in the cohort</h3></div></div>
