@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Mohammad Maasfeh - Computer Engineer & AI Researcher</title>
+<title>Mohammad Maasfeh — Computer Engineer · AI / Embedded · founder @ vora</title>
+<meta name="description" content="Computer Engineering student at Qatar University. founder @ vora. Building AI systems, embedded firmware, and scalable software. Co-author on LLM political stance research.">
+<meta name="author" content="Mohammad Maasfeh">
+<meta property="og:title" content="Mohammad Maasfeh — Computer Engineer · AI / Embedded · founder @ vora">
+<meta property="og:description" content="Computer Engineering at QU. AI systems, embedded firmware, NLP research, and a hardware/software product retrofitting GCC air-conditioners.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#03060d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -254,6 +261,13 @@ section{padding:110px 6%;position:relative;z-index:1}
 .pc p{color:var(--tx2);font-size:.85rem;line-height:1.85;margin-bottom:18px;font-weight:400}
 .ptags{display:flex;flex-wrap:wrap;gap:5px}
 .ptag{font-family:var(--fM);font-size:.59rem;letter-spacing:.5px;padding:3px 9px;border-radius:5px;background:rgba(91,127,255,.09);border:1px solid rgba(91,127,255,.18);color:var(--g2);font-weight:400}
+.pc-meta{margin:14px 0 16px;padding:11px 13px;background:rgba(56,232,185,.025);border:1px solid rgba(56,232,185,.08);border-radius:9px;display:flex;flex-direction:column;gap:7px}
+.pc-meta-row{display:flex;gap:12px;align-items:flex-start;line-height:1.55}
+.pc-meta-k{font-family:var(--fM);font-size:.58rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--tx3);min-width:58px;padding-top:2px;font-weight:500;flex-shrink:0}
+.pc-meta-v{color:var(--tx2);font-size:.78rem;font-weight:400;flex:1}
+.pc-meta-v strong{color:var(--tx);font-weight:500}
+.pc .pc-num{font-family:var(--fM);font-size:.6rem;color:rgba(56,232,185,.5);letter-spacing:2.4px;font-weight:500}
+.pc .pc-num .pc-num-dom{color:var(--tx3);margin-left:6px;letter-spacing:1.6px}
 .pc.upcoming{border-color:rgba(255,190,79,.12);background:linear-gradient(135deg,rgba(8,14,26,.9),rgba(255,190,79,.025))}
 .pc.upcoming::before{background:radial-gradient(circle at var(--px,50%) var(--py,50%),rgba(255,190,79,.06),transparent 60%)}
 .pc.upcoming:hover{border-color:rgba(255,190,79,.25);box-shadow:0 32px 80px rgba(0,0,0,.4),0 0 50px rgba(255,190,79,.07)}
@@ -448,6 +462,18 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 @media (hover: none), (pointer: coarse){
   *,body,a,button,.hbg,.pf,.ct,.pc,.ev,.rc,.sti,.lb-nav,#lb-x,#btt{cursor:auto!important}
 }
+
+/* Reduced motion: kill heavy animations and canvases */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  #cv-circuit,#cv-matrix,#particles-canvas,.tf,.orb,#spotlight,#robot-wrap{display:none!important}
+  body{cursor:auto!important}
+  #dot,#ring{display:none!important}
+  .hero-robot-stage{height:auto;min-height:auto}
+}
+
+/* Keyboard focus — visible focus rings (no cursor in custom mode) */
+a:focus-visible,button:focus-visible,.pf:focus-visible,.ct:focus-visible,.cl:focus-visible,.btn-p:focus-visible,.btn-g:focus-visible,.nav-cv:focus-visible{outline:2px solid var(--g1);outline-offset:3px;border-radius:6px}
 .anim-build{background:linear-gradient(125deg,var(--g1),var(--g2) 50%,var(--g5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:sh 5s linear infinite;}
 
 /* ══ GLITCH ══ */
@@ -611,7 +637,7 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
       </div>
       <h1 class="hero-name">Mohammad<br><span class="ln2">Maasfeh</span></h1>
       <p class="hero-role"><span id="typed"></span><span class="tc">|</span></p>
-      <p class="hero-bio"><strong>Computer Engineering student at Qatar University</strong> - building intelligent systems, authoring AI research, and engineering hardware and software products that solve real-world problems.</p>
+      <p class="hero-bio"><strong>Computer Engineering @ Qatar University.</strong> I build end-to-end systems — gate-level CPU datapaths, production NLP on Azure/OpenAI, embedded firmware, and the hardware/software product I'm shipping as founder @ vora. Open to serious engineering internships, AI/embedded roles, and research positions.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn-p">View Projects ↗</a>
         <a href="assets/cv.pdf" class="btn-g" download>Download CV</a>
@@ -671,20 +697,20 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 </div></div>
 
 <section id="about">
-  <p class="s-ey rv">Who I Am</p>
-  <h2 class="s-t rv">The person <span class="dim">behind the code</span></h2>
+  <p class="s-ey rv">About</p>
+  <h2 class="s-t rv">Engineering across <span class="dim">the full stack</span></h2>
   <div class="about-g">
     <div class="about-t rvl">
-      <p>I'm a <strong>Computer Engineering student at Qatar University</strong> with a 3.71 GPA - at the intersection of AI research, hardware design, and software engineering.</p>
-      <p>From designing CPUs from scratch in Logisim to co-authoring research papers on LLM behavior - I bring both <strong>deep technical depth and breadth</strong>. I thrive where hardware meets intelligence.</p>
-      <p>As founder of VORA, I lead hardware and software development. As TA and instructor at QU and AZER, I shape the next generation of engineers.</p>
+      <p><strong>Computer Engineering at Qatar University</strong> (3.71 GPA), working at the boundary of <strong>AI, embedded systems, and scalable software</strong>. I build systems end to end — from gate-level CPU datapaths in Logisim to production NLP pipelines on Azure, OpenAI, and HuggingFace, to redundant enterprise networks and embedded firmware.</p>
+      <p>Currently <strong>founder @ vora</strong> — a hardware + software retrofit upgrading legacy GCC air-conditioners with intelligent control. National innovation winner. Incubated at <strong>QSTP</strong>. Alongside, I co-author <strong>NLP research on LLM political stance and alignment</strong>, TA computer engineering and CS courses at QU, and mentor engineers at AZER.</p>
+      <p>I optimize for <strong>systems that ship</strong>: rigorous architecture, deterministic behavior under real load, and engineering decisions that survive contact with users and incidents.</p>
       <div class="chips">
-        <div class="chip rv">🤖 Artificial Intelligence</div>
-        <div class="chip rv">⚙️ Embedded Systems</div>
-        <div class="chip rv">🔬 NLP Research</div>
-        <div class="chip rv">🖥️ CPU Architecture</div>
-        <div class="chip rv">🌐 Network Design</div>
-        <div class="chip rv">🚀 Startup Building</div>
+        <div class="chip rv">AI / ML Systems</div>
+        <div class="chip rv">Embedded · Firmware</div>
+        <div class="chip rv">NLP / LLM Research</div>
+        <div class="chip rv">CPU Architecture · RTL</div>
+        <div class="chip rv">Network Design</div>
+        <div class="chip rv">HW / SW Integration</div>
       </div>
     </div>
     <div class="rv">
@@ -704,35 +730,158 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 
 <section id="projects">
   <div class="proj-top">
-    <div><p class="s-ey rv">Portfolio</p><h2 class="s-t rv" style="margin-bottom:0">Featured <span class="dim">projects</span></h2></div>
+    <div><p class="s-ey rv">Selected Work</p><h2 class="s-t rv" style="margin-bottom:0">Engineering <span class="dim">projects</span></h2></div>
     <div class="pfs rv">
       <button class="pf on" data-f="all">All</button>
       <button class="pf" data-f="ai">AI / ML</button>
       <button class="pf" data-f="hw">Hardware</button>
       <button class="pf" data-f="sw">Software</button>
-      <button class="pf" data-f="net">Network</button>
+      <button class="pf" data-f="net">Networking</button>
     </div>
   </div>
   <div class="pg2">
-    <div class="pc feat rv" data-c="ai"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">01 - FEATURED</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>⚖️</div><h3>Contract Lifecycle Management - Naja7</h3><p>AI-powered legal document analysis platform automating contract review, clause extraction, and risk flagging using Azure AI, OpenAI GPT, and HuggingFace transformers.</p><div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI</span><span class="ptag">HuggingFace</span><span class="ptag">NLP</span><span class="ptag">Python</span></div></div>
-    <div class="pc rv" data-c="hw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">02</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🖥️</div><h3>Custom CPU Design</h3><p>Full CPU from scratch in Logisim - ALU, register file, control unit, and complete datapath demonstrating core computer architecture principles.</p><div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">Architecture</span></div></div>
-    <div class="pc rv" data-c="net"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">03</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🌐</div><h3>Enterprise Network Design</h3><p>Fully redundant multi-floor enterprise network - zero single points of failure, VLANs, and fault-tolerant routing configured in Packet Tracer.</p><div class="ptags"><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">Redundancy</span></div></div>
-    <div class="pc rv" data-c="sw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">04</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>📦</div><h3>Shipment Management System</h3><p>Java OOP platform for tracking, reporting, and managing shipments end-to-end using solid design patterns.</p><div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span></div></div>
-    <div class="pc rv" data-c="sw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">05</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🎓</div><h3>Student Records System</h3><p>Python system for GPA calculation, student registration, and academic reporting with efficient data structures and algorithms.</p><div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span></div></div>
-    <div class="pc rv" data-c="ai"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">06</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>🤖</div><h3>AI Agent from Machine Learning</h3><p>An autonomous AI agent built from the ground up using machine learning - capable of reasoning, planning, and executing multi-step tasks.</p><div class="ptags"><span class="ptag">AI Agents</span><span class="ptag">Machine Learning</span><span class="ptag">Python</span></div></div>
-    <div class="pc rv" data-c="net"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">07</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>📡</div><h3>Network Communication Project</h3><p>Advanced network communication system - protocols, data transmission, and real-world networking engineering.</p><div class="ptags"><span class="ptag">Networking</span><span class="ptag">Protocols</span><span class="ptag">Systems</span></div></div>
-    <div class="pc rv" data-c="hw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">08</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>📊</div><h3>Digital Signal Processing Project</h3><p>End-to-end DSP system - signal acquisition, filtering, and analysis applied to real engineering problems.</p><div class="ptags"><span class="ptag">DSP</span><span class="ptag">Signal Analysis</span><span class="ptag">MATLAB</span></div></div>
-    <div class="pc rv" data-c="hw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">09</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>⚙️</div><h3>Microprocessor Project</h3><p>Low-level microprocessor design and programming - architecture, instruction sets, and embedded control.</p><div class="ptags"><span class="ptag">Microprocessor</span><span class="ptag">Embedded</span><span class="ptag">Assembly</span></div></div>
-    <div class="pc rv" data-c="hw"><div class="tilt-shine"></div><div class="pc-top"><div class="tilt-shine"></div><span class="pc-num">10</span><div class="pc-arr"><div class="tilt-shine"></div>↗</div></div><div class="pc-icon"><div class="tilt-shine"></div>💻</div><h3>Computer Practicum Project</h3><p>Comprehensive capstone project applying core computer engineering skills across hardware and software domains.</p><div class="ptags"><span class="ptag">Computer Engineering</span><span class="ptag">Capstone</span><span class="ptag">Systems</span></div></div>
-    <div class="pc pc-photo rv" data-c="hw"><div class="pc-photo-img"><img src="assets/bestproject.png" alt="Best Project - Faculty Recognition"></div><div class="pc-photo-meta"><span class="pc-photo-tag">● Best Project · Faculty Recognition</span><h3>Honored among top engineering projects</h3></div></div>
+
+    <div class="pc feat rv" data-c="ai">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">01 · FEATURED<span class="pc-num-dom">AI / NLP</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">⚖️</div>
+      <h3>Naja7 — Contract Lifecycle Management</h3>
+      <p>End-to-end legal AI platform that ingests contracts, extracts clauses, scores risk, and benchmarks against precedent. Production-grade pipeline orchestrating Azure AI Document Intelligence, OpenAI GPT, and fine-tuned HuggingFace transformers behind a structured API.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Problem</span><span class="pc-meta-v">Manual contract review is slow, inconsistent, and expensive — legal teams spend hours per document on clause-level analysis.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Lead engineer</strong> — system architecture, NLP pipeline, prompt &amp; model orchestration.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Decisions</span><span class="pc-meta-v">Hybrid stack: Azure OCR for layout-aware extraction, GPT for semantic clause classification, fine-tuned transformers for risk scoring. Modular so each stage is swappable.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Cut clause-level review time from hours to minutes per contract on internal evaluation set.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Azure AI</span><span class="ptag">OpenAI GPT</span><span class="ptag">HuggingFace</span><span class="ptag">Transformers</span><span class="ptag">Python</span><span class="ptag">NLP</span></div>
+    </div>
+
+    <div class="pc rv" data-c="hw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">02<span class="pc-num-dom">HARDWARE</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🖥️</div>
+      <h3>Custom CPU Design</h3>
+      <p>Working CPU designed at the gate level in Logisim — ALU, register file, control unit, microcoded datapath, and instruction decode. Reinforces the hardware/software boundary I rely on for embedded work.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Solo design &amp; implementation</strong> — ISA, datapath, and verification.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Functional datapath executing a custom instruction set with correct branch, load/store, and arithmetic semantics.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Logisim</span><span class="ptag">Digital Logic</span><span class="ptag">RTL</span><span class="ptag">ISA Design</span></div>
+    </div>
+
+    <div class="pc rv" data-c="net">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">03<span class="pc-num-dom">NETWORK</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🌐</div>
+      <h3>Enterprise Network Design</h3>
+      <p>Multi-floor enterprise topology with zero single points of failure — redundant cores, VLAN segmentation, first-hop redundancy, and verified convergence under simulated link failure.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Network architect</strong> — topology, addressing plan, redundancy strategy.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Fault-tolerant design holding all VLAN traffic during failure injection; clean addressing across floors.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Cisco IOS</span><span class="ptag">Packet Tracer</span><span class="ptag">VLAN</span><span class="ptag">HSRP</span><span class="ptag">Routing</span></div>
+    </div>
+
+    <div class="pc rv" data-c="sw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">04<span class="pc-num-dom">SOFTWARE</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">📦</div>
+      <h3>Shipment Management System</h3>
+      <p>Java OOP system modeling the full shipment lifecycle — encapsulated state, clean class hierarchies, and design patterns (Factory, Strategy, Observer) for routing and status updates.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — domain model, patterns, and CLI integration.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Extensible system supporting multiple carriers and routing strategies without core changes.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">Design Patterns</span><span class="ptag">UML</span></div>
+    </div>
+
+    <div class="pc rv" data-c="sw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">05<span class="pc-num-dom">SOFTWARE</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🎓</div>
+      <h3>Student Records System</h3>
+      <p>Python registrar system — course registration, weighted GPA computation, and academic reporting backed by hash-indexed lookups and ordered structures for transcript ordering.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — data model, algorithms, persistence.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">O(1) student/course lookups, deterministic GPA calculation, batch reporting over the full dataset.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Python</span><span class="ptag">Data Structures</span><span class="ptag">Algorithms</span><span class="ptag">OOP</span></div>
+    </div>
+
+    <div class="pc rv" data-c="ai">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">06<span class="pc-num-dom">AI / AGENTS</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">🤖</div>
+      <h3>Autonomous AI Agent</h3>
+      <p>Agent built from primitive ML components — perception, planning, and action loops — capable of decomposing high-level goals into multi-step task sequences. End-to-end Python implementation.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Solo build</strong> — agent loop, planner, evaluation harness.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Agent completes structured multi-step tasks with bounded reasoning depth and deterministic recovery on failure.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Python</span><span class="ptag">Machine Learning</span><span class="ptag">AI Agents</span><span class="ptag">Planning</span></div>
+    </div>
+
+    <div class="pc rv" data-c="net">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">07<span class="pc-num-dom">NETWORK</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">📡</div>
+      <h3>Network Communication Stack</h3>
+      <p>Low-level networking implementation — socket programming, packet framing, custom protocol handshake, and reliable transfer over a lossy link. Demonstrates working TCP/IP principles from scratch.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — protocol design, retransmission logic, framing.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Reliable transfer maintained under injected packet loss; clean separation between framing and transport layers.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Sockets</span><span class="ptag">TCP/IP</span><span class="ptag">Protocols</span><span class="ptag">Systems</span></div>
+    </div>
+
+    <div class="pc rv" data-c="hw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">08<span class="pc-num-dom">DSP</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">📊</div>
+      <h3>Digital Signal Processing Pipeline</h3>
+      <p>End-to-end DSP pipeline in MATLAB — signal acquisition, FIR/IIR filtering, FFT-based spectral analysis, and noise reduction applied to a real signal dataset.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — filter design, spectral analysis, evaluation.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Measurable SNR improvement after filtering; clean frequency-domain characterization of the input signal.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">MATLAB</span><span class="ptag">FFT</span><span class="ptag">FIR / IIR</span><span class="ptag">Signal Analysis</span></div>
+    </div>
+
+    <div class="pc rv" data-c="hw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">09<span class="pc-num-dom">EMBEDDED</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">⚙️</div>
+      <h3>Microprocessor Programming</h3>
+      <p>Assembly-level microprocessor work — instruction-set programming, register operations, interrupt handling, and embedded I/O control. Foundation for the firmware layer I write at vora.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Sole engineer</strong> — bare-metal programs, interrupts, peripheral control.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Working assembly programs with correct interrupt service routines and timing-sensitive I/O.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">Assembly</span><span class="ptag">Embedded</span><span class="ptag">MCU</span><span class="ptag">I/O</span></div>
+    </div>
+
+    <div class="pc rv" data-c="hw">
+      <div class="tilt-shine"></div>
+      <div class="pc-top"><span class="pc-num">10<span class="pc-num-dom">HW / SW</span></span><div class="pc-arr">↗</div></div>
+      <div class="pc-icon">💻</div>
+      <h3>Computer Engineering Practicum</h3>
+      <p>Capstone integrating digital logic, microcontroller programming, and software interfacing — designed and built a working hardware/software system end to end, from spec to demo.</p>
+      <div class="pc-meta">
+        <div class="pc-meta-row"><span class="pc-meta-k">Role</span><span class="pc-meta-v"><strong>Lead</strong> — full HW/SW co-design and integration.</span></div>
+        <div class="pc-meta-row"><span class="pc-meta-k">Outcome</span><span class="pc-meta-v">Live demo of integrated hardware/software pipeline against the original specification.</span></div>
+      </div>
+      <div class="ptags"><span class="ptag">HW / SW Integration</span><span class="ptag">Embedded</span><span class="ptag">Capstone</span></div>
+    </div>
+
+    <div class="pc pc-photo rv" data-c="hw"><div class="pc-photo-img"><img src="assets/bestproject.png" alt="Faculty recognition — Best Project award" loading="lazy" decoding="async"></div><div class="pc-photo-meta"><span class="pc-photo-tag">● Best Project · Faculty Recognition</span><h3>Honored among the top engineering projects in the cohort</h3></div></div>
   </div>
 </section>
 
 <section id="skills">
-  <p class="s-ey rv">Tech Stack</p>
-  <h2 class="s-t rv">Skills &amp; <span class="dim">tools</span></h2>
+  <p class="s-ey rv">Stack</p>
+  <h2 class="s-t rv">Skills &amp; <span class="dim">tooling</span></h2>
   <div class="sk-header rv">
-    <div style="max-width:420px"><p style="color:var(--tx2);font-size:.92rem;line-height:1.88;font-weight:400">Every tool here has been applied in real projects - from building CPUs at the gate level to deploying production AI systems using cloud APIs and transformer models.</p></div>
+    <div style="max-width:440px"><p style="color:var(--tx2);font-size:.92rem;line-height:1.88;font-weight:400">Each tool below has shipped in a real project — gate-level CPU design, production NLP on Azure/OpenAI, fault-tolerant network topologies, and embedded firmware. No filler.</p></div>
     <div class="sk-icons">
       <div class="sti" title="Python">🐍</div><div class="sti" title="Java">☕</div><div class="sti" title="AI/ML">🤖</div>
       <div class="sti" title="CPU Design">🖥️</div><div class="sti" title="Networking">🌐</div><div class="sti" title="Git">🔀</div>
@@ -767,23 +916,23 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <div class="exp-wrap rv">
     <div class="exp-topline"></div>
     <div class="exp-grid">
-      <div class="ei"><div class="ei-num">01 / FOUNDER</div><div class="ei-dot"></div><h3>Founder &amp; Systems Engineer</h3><div class="ei-org">VORA</div><p>Leading hardware and software development - system architecture, embedded design, and full-stack integration from day one.</p><span class="ei-badge ei-a">Active</span></div>
-      <div class="ei"><div class="ei-num">02 / INSTRUCTOR</div><div class="ei-pic"><img src="assets/azer.png" alt="AZER"></div><div class="ei-dot"></div><h3>Instructor &amp; Engineering Tutor</h3><div class="ei-org">AZER</div><p>Completed advanced technical training and transitioned to instructor. Tutoring engineering and CS students while building advanced courses.</p><span class="ei-badge ei-a">Active</span></div>
-      <div class="ei"><div class="ei-num">03 / TEACHING ASSISTANT</div><div class="ei-pic"><img src="assets/tutor.png" alt="Teaching Assistant at Qatar University"></div><div class="ei-dot"></div><h3>Teaching Assistant</h3><div class="ei-org">Qatar University - Engineering</div><p>TA in Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student outcomes.</p><span class="ei-badge ei-a">Active</span></div>
-      <div class="ei"><div class="ei-num">04 / EVENT MANAGEMENT</div><div class="ei-dot"></div><h3>Trainer Assistant &amp; Organizer</h3><div class="ei-org">Sports &amp; Events Complex</div><p>Organized multiple large-scale events managing logistics, team coordination, and execution at high-attendance scale.</p><span class="ei-badge ei-p">Past</span></div>
+      <div class="ei"><div class="ei-num">01 / FOUNDER</div><div class="ei-dot"></div><h3>founder @ vora · Systems Engineer</h3><div class="ei-org">vora</div><p>Lead hardware and software end to end — system architecture, embedded firmware, cloud control plane, and product integration. Owner of the technical roadmap.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">02 / INSTRUCTOR</div><div class="ei-pic"><img src="assets/azer.png" alt="AZER engineering training" loading="lazy" decoding="async"></div><div class="ei-dot"></div><h3>Engineering Instructor</h3><div class="ei-org">AZER</div><p>Promoted from advanced trainee to instructor. Teaching engineering and CS students, building course material, and running technical sessions.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">03 / TEACHING ASSISTANT</div><div class="ei-pic"><img src="assets/tutor.png" alt="Teaching Assistant at Qatar University" loading="lazy" decoding="async"></div><div class="ei-dot"></div><h3>Teaching Assistant</h3><div class="ei-org">Qatar University · College of Engineering</div><p>TA across Computer Engineering and CS labs. One-on-one tutoring with measurable improvements in student grades and conceptual depth.</p><span class="ei-badge ei-a">Active</span></div>
+      <div class="ei"><div class="ei-num">04 / OPERATIONS</div><div class="ei-dot"></div><h3>Operations &amp; Event Lead</h3><div class="ei-org">Sports &amp; Events Complex</div><p>Ran logistics, team coordination, and on-the-ground execution for multiple high-attendance events.</p><span class="ei-badge ei-p">Past</span></div>
     </div>
   </div>
 
   <div class="vora-spot rv">
     <div class="vora-hd">
-      <div class="vora-tag">● VORA · Spotlight</div>
-      <h3 class="vora-h3">An AI-powered retrofit cutting GCC cooling bills by ~30%.</h3>
-      <p class="vora-sub">VORA is a smart device + app that upgrades millions of legacy split &amp; window ACs across the Gulf - optimizing comfort, predicting failures, and lowering electricity bills without replacing the unit. 5-minute setup, no wiring, no installers.</p>
+      <div class="vora-tag">● vora · spotlight</div>
+      <h3 class="vora-h3">AI-powered retrofit cutting GCC cooling bills by ~30%.</h3>
+      <p class="vora-sub">vora is a smart device + app that upgrades millions of legacy split &amp; window ACs across the Gulf — optimizing comfort, predicting failures, and lowering electricity bills without replacing the unit. 5-minute setup. No wiring. No installers. Embedded firmware, cloud control plane, and a mobile app — all engineered in-house.</p>
     </div>
     <div class="vora-photos">
-      <div class="vp"><img src="assets/vora1.png" alt="VORA"></div>
-      <div class="vp"><img src="assets/vora2.png" alt="VORA"></div>
-      <div class="vp"><img src="assets/vora3.png" alt="VORA"></div>
+      <div class="vp"><img src="assets/vora1.png" alt="vora hardware prototype" loading="lazy" decoding="async"></div>
+      <div class="vp"><img src="assets/vora2.png" alt="vora installation context" loading="lazy" decoding="async"></div>
+      <div class="vp"><img src="assets/vora3.png" alt="vora product shot" loading="lazy" decoding="async"></div>
     </div>
     <div class="vora-wins">
       <div class="vw"><div class="vw-num">20,000 QAR Award</div><div class="vw-lbl">Qatar's Ministry of Environment &amp; Climate Change</div></div>
@@ -797,12 +946,12 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
 </section>
 
 <section id="research">
-  <p class="s-ey rv">Academic</p>
-  <h2 class="s-t rv">Research <span class="dim">&amp; publications</span></h2>
+  <p class="s-ey rv">Research</p>
+  <h2 class="s-t rv">Publications <span class="dim">&amp; ongoing work</span></h2>
   <div class="res-grid">
-    <div class="rc rv"><div class="rc-hd"><div class="rc-icon">🔬</div><div><div class="rc-tag">Second Author · Conference Paper</div></div></div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to one of the top-ranked Information Retrieval conferences worldwide. Investigates how LLMs form and maintain political positions - key contributions to AI fairness and alignment research. Extending in a follow-up paper.</p></div>
-    <div class="res-mid rv" style="min-height:260px"><div class="res-stack"><img src="assets/researchpic.png" alt="Research" class="res-pic"><img src="assets/research.png" alt="Research presentation" class="res-pic"></div></div>
-    <div class="rc rv"><div class="rc-hd"><div class="rc-icon">⚖️</div><div><div class="rc-tag">Active Project · NLP</div></div></div><h3>Legal Document Summarization with Large Language Models</h3><p>Applying transformer-based LLMs to automated legal document summarization - bridging cutting-edge NLP research with practical legal technology to dramatically reduce manual review time and cost.</p></div>
+    <div class="rc rv"><div class="rc-hd"><div class="rc-icon">🔬</div><div><div class="rc-tag">Second Author · Conference Submission</div></div></div><h3>"Measuring Political Stance and Consistency in Large Language Models"</h3><p>Submitted to a top-tier Information Retrieval venue. Investigates how LLMs form, express, and maintain political positions across prompt variations — contributing to AI fairness and alignment. Currently extending the methodology in a follow-up paper.</p></div>
+    <div class="res-mid rv" style="min-height:260px"><div class="res-stack"><img src="assets/researchpic.png" alt="Research work" class="res-pic" loading="lazy" decoding="async"><img src="assets/research.png" alt="Research presentation" class="res-pic" loading="lazy" decoding="async"></div></div>
+    <div class="rc rv"><div class="rc-hd"><div class="rc-icon">⚖️</div><div><div class="rc-tag">Ongoing · NLP / Applied</div></div></div><h3>Legal Document Summarization with LLMs</h3><p>Transformer-based summarization for legal documents — bridging current NLP research with practical legal tech. Focus: reducing manual review time without losing legally material content.</p></div>
   </div>
 </section>
 
@@ -810,9 +959,9 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <p class="s-ey rv">Community</p>
   <h2 class="s-t rv">Events &amp; <span class="dim">hackathons</span></h2>
   <div class="ev-grid">
-    <div class="ev rv"><div class="ev-img"><img src="assets/hackp1.png" alt="AIX Hackathon"><div class="ev-grad"></div><span class="ev-badge">Hackathon</span></div><div class="ev-body"><h3>AIX Hackathon - QSTP</h3><p>Built AI-driven solutions under real-world constraints and tight deadlines alongside top university talent in Qatar.</p></div></div>
-    <div class="ev rv"><div class="ev-img"><img src="assets/hackp2.png" alt="Team collaboration"><div class="ev-grad"></div><span class="ev-badge">Competition</span></div><div class="ev-body"><h3>Team Innovation Sprint</h3><p>Collaborative competition focused on rapid prototyping, innovation, and cross-disciplinary engineering problem-solving.</p></div></div>
-    <div class="ev rv"><div class="ev-img"><img src="assets/events.png" alt="Event organization"><div class="ev-grad"></div><span class="ev-badge">Leadership</span></div><div class="ev-body"><h3>Large-Scale Event Management</h3><p>Organized and managed multiple high-attendance events - logistics, coordination, and operations at professional scale.</p></div></div>
+    <div class="ev rv"><div class="ev-img"><img src="assets/hackp1.png" alt="AIX Hackathon at QSTP" loading="lazy" decoding="async"><div class="ev-grad"></div><span class="ev-badge">Hackathon</span></div><div class="ev-body"><h3>AIX Hackathon · QSTP</h3><p>Built and shipped an AI solution under hard deadlines alongside top university engineering talent in Qatar.</p></div></div>
+    <div class="ev rv"><div class="ev-img"><img src="assets/hackp2.png" alt="Innovation sprint team" loading="lazy" decoding="async"><div class="ev-grad"></div><span class="ev-badge">Competition</span></div><div class="ev-body"><h3>Team Innovation Sprint</h3><p>Rapid prototyping competition — cross-disciplinary problem-solving with delivery under fixed time and resource constraints.</p></div></div>
+    <div class="ev rv"><div class="ev-img"><img src="assets/events.png" alt="Large-scale event operations" loading="lazy" decoding="async"><div class="ev-grad"></div><span class="ev-badge">Leadership</span></div><div class="ev-body"><h3>Large-Scale Event Operations</h3><p>Logistics, coordination, and on-the-ground operations for multiple high-attendance events.</p></div></div>
   </div>
 </section>
 
@@ -820,36 +969,36 @@ footer h2{font-family:var(--fD);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:8
   <p class="s-ey rv">Credentials</p>
   <h2 class="s-t rv">Certificates &amp; <span class="dim">volunteering</span></h2>
   <div class="cert-g rv" id="cgrid">
-    <div class="ct"><img src="assets/pic11.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c1.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c2.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c3.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c4.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c5.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c6.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c7.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c8.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c9.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c10.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c11.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c12.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c13.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c14.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c15.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c16.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c17.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c18.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c19.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct"><img src="assets/c31.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
-    <div class="ct ct-big"><img src="assets/c32.png" alt="Certificate"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/pic11.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c1.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c2.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c3.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c4.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c5.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c6.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c7.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c8.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c9.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c10.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c11.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c12.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c13.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c14.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c15.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c16.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c17.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c18.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c19.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct"><img src="assets/c31.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
+    <div class="ct ct-big"><img src="assets/c32.png" alt="Certificate" loading="lazy" decoding="async"><div class="ct-ov">🔍</div></div>
   </div>
 </section>
 
 <footer id="contact">
   <div class="ft-glow"></div>
-  <div class="ft-badge rv">● Open to Work</div>
+  <div class="ft-badge rv">● Open to opportunities</div>
   <h2 class="rv">Let's <span class="anim-build">build</span><br>something.</h2>
-  <p class="ft-sub rv">Open to internships, research collaborations, and exciting engineering challenges. Based in Doha, Qatar.</p>
+  <p class="ft-sub rv">Open to engineering internships, AI / embedded roles, and research positions. Currently based in Doha, Qatar.</p>
   <div class="c-links rv">
     <span class="cl" style="cursor:default"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><a href="mailto:mm2308642@qu.edu.qa">mm2308642@qu.edu.qa</a></span>
     <a href="https://github.com/Mohammad-Maasfeh" target="_blank" rel="noopener" class="cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>github.com/Mohammad-Maasfeh</a>
@@ -999,7 +1148,7 @@ document.querySelectorAll('a,button,.ct,.pc,.pf,.lb-nav,#lb-x,#btt,.hbg,.hs,.ev,
 (function(){var cv=document.getElementById('cv-matrix'),ctx=cv.getContext('2d');var W,H,cols,drops=[];var chars='01アイウエオ∑λ∇⟨⟩01アイウエオ01';function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.ceil(W/18);drops=[];for(var i=0;i<cols;i++)drops.push(Math.random()*-H);}sz();window.addEventListener('resize',sz);function draw(){ctx.fillStyle='rgba(3,6,13,.04)';ctx.fillRect(0,0,W,H);ctx.font='12px monospace';drops.forEach(function(y,i){var ch=chars[Math.floor(Math.random()*chars.length)];ctx.fillStyle='rgba(56,232,185,'+(Math.random()>.97?1:.35)+')';ctx.fillText(ch,i*18,y);drops[i]+=12;if(drops[i]>H)drops[i]=Math.random()*-400;});requestAnimationFrame(draw);}draw();})();
 
 /* TYPED */
-var ROLES=['Computer Engineer','AI Researcher','Hardware Designer','Software Developer','Founder @ VORA','TA @ Qatar University'];
+var ROLES=['Computer Engineer','AI Researcher','Embedded Engineer','Software Developer','founder @ vora','TA @ Qatar University'];
 var ri=0,ci=0,del=false,tel=document.getElementById('typed');
 function typeIt(){var w=ROLES[ri];tel.textContent=del?w.slice(0,ci--):w.slice(0,ci++);if(!del&&ci>w.length){del=true;setTimeout(typeIt,1800);return;}if(del&&ci<0){del=false;ri=(ri+1)%ROLES.length;ci=0;}setTimeout(typeIt,del?45:75);}
 typeIt();
@@ -1273,7 +1422,7 @@ LB.addEventListener('touchend',function(e){if(Math.abs(tx-e.changedTouches[0].cl
   var bubble=document.getElementById('speech-bubble');
   var typedEl=document.getElementById('speech-typed');
   if(!bubble||!typedEl)return;
-  var messages=["Hello there!","Nice to meet you!","Welcome!","Hello there!"];
+  var messages=["Hello — I build systems.","Currently shipping at vora.","Open to opportunities.","Welcome."];
   var mi=0,ci2=0,deleting=false;
   function showBubble(){bubble.classList.add('show');typeTick();}
   function typeTick(){
